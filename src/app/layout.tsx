@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={cn('relative h-full antialiased', inter.className)}>
         <main className="relative flex min-h-screen flex-col">
           <Header />
-          <div className="flex-1 flex-grow">{children}</div>
+          <div className="flex-1 flex-grow bg-gray-100">{children}</div>
         </main>
       </body>
     </html>

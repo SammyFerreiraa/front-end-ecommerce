@@ -69,7 +69,7 @@ const Header = () => {
         </div>
 
         {/* Nav Desktop  */}
-        <div className="hidden flex-row items-center gap-4 lg:flex ">
+        <div className="hidden flex-row items-center gap-4 lg:flex">
           <div className="flex cursor-pointer flex-col items-center justify-center gap-1 hover:opacity-70">
             <UserIcon fill="#8B96A5" />
             <p className="text-xs text-gray-400">Profile</p>
