@@ -1,3 +1,11 @@
+import { MaxWidthWrapper } from '@/components'
+
 export default function Home() {
-  return <main></main>
+  return (
+    <>
+      <MaxWidthWrapper>
+        <div>Hello</div>
+      </MaxWidthWrapper>
+    </>
+  )
 }
