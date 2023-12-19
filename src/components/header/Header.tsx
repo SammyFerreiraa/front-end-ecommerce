@@ -47,11 +47,11 @@ const Header = async () => {
           <div className="hidden w-full flex-row md:flex">
             <input
               type="text"
-              className="h-10 w-full rounded-l-md border-y-2 border-l-2 border-blue-600 bg-transparent px-4 py-2 text-black outline-none placeholder:text-gray-400 xl:min-w-[350px] 2xl:min-w-[410px]"
+              className="h-10 w-full rounded-l-md border-y-2 border-l-2 border-blue-600 bg-transparent px-4 py-2 text-black outline-none placeholder:text-gray-400"
               placeholder="Search"
             />
             <Select>
-              <SelectTrigger className="m-0 h-full w-fit rounded-none border-0 border-y-2 border-l-2 border-blue-600 pb-[9px] lg:min-w-[145px]">
+              <SelectTrigger className="m-0 h-full w-fit rounded-none border-0 border-y-2 border-l-2 border-blue-600 pb-[9px] lg:min-w-[120px]">
                 <SelectValue placeholder="Categorias" />
               </SelectTrigger>
               <SelectContent>
@@ -60,11 +60,7 @@ const Header = async () => {
                 <SelectItem value="acessorios">Acessórios</SelectItem>
               </SelectContent>
             </Select>
-            <button
-              className={
-                'w-fit rounded-r-md bg-blue-600 px-3 text-white hover:bg-blue-500 lg:min-w-[100px]'
-              }
-            >
+            <button className="w-fit rounded-r-md bg-blue-600 px-3 text-white hover:bg-blue-500 lg:min-w-[80px]">
               Search
             </button>
           </div>
