@@ -58,7 +58,7 @@ export default function Home() {
             </div>
           </div>
           {/* right */}
-          <div className="hidden h-auto max-w-[200px] flex-col items-center justify-between md:flex md:text-sm">
+          <div className="hidden h-auto max-w-[200px] flex-col items-center justify-between md:flex md:gap-2 md:text-sm xl:gap-0">
             <div className="flex w-full flex-col justify-between gap-2 rounded-md bg-sky-100 p-3 text-sm">
               <div className="flex w-full flex-row items-center justify-center gap-2">
                 <img
