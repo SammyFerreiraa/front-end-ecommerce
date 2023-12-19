@@ -23,8 +23,8 @@ import { ChevronDownIcon } from '@radix-ui/react-icons'
 
 const Header = () => {
   return (
-    <MaxWidthWrapper className="px-4 py-4 text-sm md:px-[50px] md:py-5 lg:py-6">
-      <div className="flex items-center justify-between gap-10">
+    <MaxWidthWrapper className="px-4 text-sm md:px-[50px]">
+      <div className="flex items-center justify-between gap-10  border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6">
         <div
           className="min-w-7xl flex items-center gap-4 md:gap-11 2xl:gap-24
     "
@@ -39,7 +39,7 @@ const Header = () => {
           <div className="hidden w-full flex-row md:flex">
             <input
               type="text"
-              className="h-10 w-full rounded-l-md border-y-2 border-l-2 border-blue-600 bg-transparent px-4 py-2 text-gray-400 outline-none xl:min-w-[350px] 2xl:min-w-[410px]"
+              className="h-10 w-full rounded-l-md border-y-2 border-l-2 border-blue-600 bg-transparent px-4 py-2 text-black outline-none placeholder:text-gray-400 xl:min-w-[350px] 2xl:min-w-[410px]"
               placeholder="Search"
             />
             <Select>
@@ -99,7 +99,7 @@ const Header = () => {
       </div>
 
       {/* SubBar Desktop  */}
-      <div className="hidden justify-between py-5 text-xs md:flex lg:text-sm">
+      <div className="hidden justify-between border-b-2 border-zinc-300 py-5 text-xs md:flex xl:text-sm">
         <div className="flex items-center justify-center gap-6">
           <div className="flex cursor-pointer items-center justify-center gap-1">
             <IoMenu />
