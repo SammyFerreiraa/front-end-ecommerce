@@ -3,7 +3,7 @@ import { Button } from '../ui/button'
 
 const HomepageBanner = () => {
   return (
-    <div className="flex w-full max-w-[1180px] flex-row justify-center gap-6 rounded-md border-2 border-zinc-300 bg-white md:mt-5 md:px-5 md:py-4">
+    <div className="mb-3 flex w-full max-w-[1180px] flex-row justify-center gap-6 rounded-md border-2 border-zinc-300 bg-white md:mb-8 md:mt-5 md:px-5 md:py-4">
       <div className="flex w-full items-center justify-evenly gap-6 ">
         {/* left */}
         <div className="hidden flex-col justify-between text-sm  lg:flex lg:min-w-[200px] xl:min-w-[250px]">

@@ -1,4 +1,5 @@
-import { cn } from '@/lib/utils'
+'use client'
+
 import {
   Select,
   SelectTrigger,
@@ -18,10 +19,17 @@ import {
   EuaIcon,
   SearchIcon,
 } from '../icons'
-import { buttonVariants } from '../ui/button'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-const Header = () => {
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+
+// import required modules
+import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
+
+const Header = async () => {
   return (
     <MaxWidthWrapper className="px-4 text-sm md:px-[50px]">
       <div className="flex items-center justify-between gap-10  border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6">
@@ -54,8 +62,7 @@ const Header = () => {
             </Select>
             <button
               className={
-                (cn(buttonVariants),
-                'w-fit rounded-r-md bg-blue-600 px-3 text-white hover:bg-blue-500 lg:min-w-[100px]')
+                'w-fit rounded-r-md bg-blue-600 px-3 text-white hover:bg-blue-500 lg:min-w-[100px]'
               }
             >
               Search
@@ -89,13 +96,70 @@ const Header = () => {
         </div>
       </div>
       {/* Search Mobile */}
-      <div className="mt-4 flex h-10 w-full flex-row items-center gap-2 rounded-md bg-gray-100 px-2 md:hidden">
-        <SearchIcon />
-        <input
-          type="text"
-          placeholder="Search"
-          className="w-full appearance-none bg-transparent focus:outline-none focus:ring-0"
-        />
+      <div className="mb-5 px-2 md:hidden">
+        <div className="flex h-10 w-full flex-row items-center gap-2 rounded-md bg-gray-100 px-2">
+          <SearchIcon />
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-full appearance-none bg-transparent focus:outline-none focus:ring-0"
+          />
+        </div>
+        <>
+          <Swiper
+            slidesPerView={3.1}
+            direction={'horizontal'}
+            mousewheel={true}
+            freeMode={true}
+            spaceBetween={4}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[FreeMode, Mousewheel, Navigation]}
+            className="mySwiper mt-4"
+          >
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">All category</p>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">Gadgets</p>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">Accessory</p>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">All category</p>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">Tablets</p>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">Phones</p>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">iPads</p>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="h-fit">
+              <div className="h-fit rounded-md bg-gray-100 p-2">
+                <p className="h-fit text-center text-blue-600">iPods</p>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+        </>
       </div>
 
       {/* SubBar Desktop  */}
