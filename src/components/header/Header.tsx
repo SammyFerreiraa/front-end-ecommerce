@@ -18,6 +18,8 @@ import {
   HeartIcon,
   EuaIcon,
   SearchIcon,
+  HamburgerIcon,
+  MobileCartIcon,
 } from '../icons'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -28,6 +30,7 @@ import 'swiper/css/navigation'
 
 // import required modules
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
+import MobileUserIcon from '../icons/MobileUserIcon'
 
 const Header = async () => {
   return (
@@ -37,7 +40,7 @@ const Header = async () => {
           className="min-w-7xl flex items-center gap-4 md:gap-11 2xl:gap-24
     "
         >
-          <IoMenu className="h-6 w-6 cursor-pointer md:hidden" />
+          <HamburgerIcon />
           <img
             src="./assets/logo-colored.png"
             alt="Logo"
@@ -67,8 +70,8 @@ const Header = async () => {
         </div>
         {/* Nav Mobile  */}
         <div className="flex flex-row items-center gap-5 lg:hidden">
-          <FiShoppingCart className="h-6 w-6 cursor-pointer" />
-          <FiUser className="h-6 w-6 cursor-pointer" />
+          <MobileCartIcon />
+          <MobileUserIcon />
         </div>
 
         {/* Nav Desktop  */}
