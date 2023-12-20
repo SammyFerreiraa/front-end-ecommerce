@@ -6,7 +6,7 @@ import { Requests } from '@/components/requests'
 export default function Home() {
   return (
     <>
-      <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11">
+      <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px]">
         <HomepageBanner />
         <Offers />
         <Requests />
