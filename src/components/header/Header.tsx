@@ -8,7 +8,6 @@ import {
   SelectItem,
 } from '@/components/ui/select'
 import React from 'react'
-import { FiShoppingCart, FiUser } from 'react-icons/fi'
 import { IoMenu } from 'react-icons/io5'
 import { MaxWidthWrapper } from '..'
 import {
@@ -18,7 +17,6 @@ import {
   HeartIcon,
   EuaIcon,
   SearchIcon,
-  HamburgerIcon,
   MobileCartIcon,
 } from '../icons'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
@@ -31,6 +29,7 @@ import 'swiper/css/navigation'
 // import required modules
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import MobileUserIcon from '../icons/MobileUserIcon'
+import MobileMenu from '../menu-mobile/MobileMenu'
 
 const Header = async () => {
   return (
@@ -40,7 +39,8 @@ const Header = async () => {
           className="min-w-7xl flex items-center gap-4 md:gap-11 2xl:gap-24
     "
         >
-          <HamburgerIcon />
+          <MobileMenu />
+
           <img
             src="./assets/logo-colored.png"
             alt="Logo"
