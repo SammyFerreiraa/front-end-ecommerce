@@ -1,7 +1,7 @@
 import React from 'react'
 import SwiperOffers from './SwiperOffers'
 
-const Offers = () => {
+const Offers = async () => {
   return (
     <div className="flex w-full flex-col rounded-md border-gray-300 bg-white md:border-[1px] lg:flex-row">
       <div className="flex w-full justify-between py-3 pl-4 pr-3 lg:w-fit lg:flex-col lg:justify-start lg:gap-4 lg:p-5">

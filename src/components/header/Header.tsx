@@ -31,7 +31,7 @@ import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import MobileUserIcon from '../icons/MobileUserIcon'
 import MobileMenu from '../menu-mobile/MobileMenu'
 
-const Header = async () => {
+const Header = () => {
   return (
     <MaxWidthWrapper className="px-4 text-sm md:px-[50px]">
       <div className="flex items-center justify-between gap-6  border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6">
