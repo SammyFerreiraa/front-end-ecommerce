@@ -1,6 +1,6 @@
 import { MaxWidthWrapper } from '@/components'
 import HomepageBanner from '@/components/banner-homepage/HomepageBanner'
-import Offers from '@/components/offers/Offers'
+import { Offers } from '@/components/offers'
 import { RecommendedItems } from '@/components/recommended-items'
 import { Requests } from '@/components/requests'
 
