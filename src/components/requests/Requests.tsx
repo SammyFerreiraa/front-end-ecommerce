@@ -15,12 +15,12 @@ const Requests = () => {
     <div className="w-full rounded-md bg-opacity-5 bg-[url('/assets/bg-estoque.png')] bg-cover bg-center bg-no-repeat">
       <div className="relative flex h-full w-full items-start justify-between gap-5 rounded-md bg-blue-500 bg-opacity-70 from-blue-500 to-cyan-400 pb-9 pl-6 pr-6 pt-7 lg:flex-row">
         <div className="flex h-full w-full flex-col items-start justify-center gap-5 opacity-100 lg:mt-3 lg:max-w-[390px]">
-          <p className="text-lg font-semibold text-white lg:text-[32px]">
+          <p className="text-lg font-semibold text-white lg:text-3xl">
             Uma maneira fácil de enviar solicitações a todos os fornecedores
           </p>
           <p className="hidden text-white lg:flex">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt
+            Informe qual o produto e mais informações para enviar uma
+            solicitação e receber uma cotação dos fornecedores
           </p>
           <Button className="rounded-md bg-gradient-to-b from-blue-600 to-blue-500 px-3 py-2 text-[13px] text-white hover:from-blue-600 hover:to-blue-600 lg:hidden">
             Enviar consulta
