@@ -34,9 +34,9 @@ import MobileMenu from '../menu-mobile/MobileMenu'
 const Header = async () => {
   return (
     <MaxWidthWrapper className="px-4 text-sm md:px-[50px]">
-      <div className="flex items-center justify-between gap-10  border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6">
+      <div className="flex items-center justify-between gap-6  border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6">
         <div
-          className="min-w-7xl flex items-center gap-4 md:gap-11 2xl:gap-24
+          className="min-w-7xl flex items-center gap-4 md:gap-7 2xl:gap-11
     "
         >
           <MobileMenu />
@@ -75,22 +75,22 @@ const Header = async () => {
         </div>
 
         {/* Nav Desktop  */}
-        <div className="hidden flex-row items-center gap-4 lg:flex">
-          <div className="flex cursor-pointer flex-col items-center justify-center gap-1 hover:opacity-70">
+        <div className="hidden flex-row items-center gap-4 md:flex">
+          <div className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70">
             <UserIcon fill="#8B96A5" />
-            <p className="text-xs text-gray-400">Profile</p>
+            <p className="text-xs text-gray-400">Perfil</p>
           </div>
-          <div className="flex cursor-pointer flex-col items-center justify-center gap-1 hover:opacity-70">
+          <div className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70">
             <MessageIcon fill="#8B96A5" />
-            <p className="text-xs text-gray-400">Message</p>
+            <p className="text-xs text-gray-400">Mensagem</p>
           </div>
-          <div className="flex cursor-pointer flex-col items-center justify-center gap-1 hover:opacity-70">
+          <div className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70">
             <HeartIcon fill="#8B96A5" />
-            <p className="text-xs text-gray-400">Orders</p>
+            <p className="text-xs text-gray-400">Pedidos</p>
           </div>
-          <div className="flex cursor-pointer flex-col items-center justify-center gap-1 hover:opacity-70">
+          <div className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70">
             <CartIcon fill="#8B96A5" />
-            <p className="text-xs text-gray-400">MyCart</p>
+            <p className="text-xs text-gray-400 ">Carrinho</p>
           </div>
         </div>
       </div>
