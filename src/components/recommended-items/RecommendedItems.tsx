@@ -4,7 +4,7 @@ const RecommendedItems = () => {
   return (
     <div className="flex w-full flex-col items-start justify-center gap-3 px-3 py-5">
       <h1 className="text-xl font-semibold text-zinc-900 lg:text-2xl lg:leading-loose">
-        Recommended items
+        Produtos Recomendados
       </h1>
       <div
         className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5

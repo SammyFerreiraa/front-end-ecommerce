@@ -60,7 +60,7 @@ const Header = () => {
               <SelectContent>
                 <SelectItem value="roupas">Roupas</SelectItem>
                 <SelectItem value="tecnologia">Tecnologia</SelectItem>
-                <SelectItem value="acessorios">Acessórios</SelectItem>
+                <SelectItem value="Livros">Livros</SelectItem>
               </SelectContent>
             </Select>
             <button className="w-fit rounded-r-md bg-blue-600 px-3 text-white hover:bg-blue-500 lg:min-w-[80px]">
@@ -100,7 +100,7 @@ const Header = () => {
           <SearchIcon />
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Procurar"
             className="w-full appearance-none bg-transparent focus:outline-none focus:ring-0"
           />
         </div>
@@ -119,22 +119,17 @@ const Header = () => {
           >
             <SwiperSlide className="h-fit">
               <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">All category</p>
+                <p className="h-fit text-center text-blue-600">Categorias</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
               <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">Gadgets</p>
+                <p className="h-fit text-center text-blue-600">Acessorios</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
               <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">Accessory</p>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">All category</p>
+                <p className="h-fit text-center text-blue-600">Joias</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
@@ -144,7 +139,7 @@ const Header = () => {
             </SwiperSlide>
             <SwiperSlide className="h-fit">
               <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">Phones</p>
+                <p className="h-fit text-center text-blue-600">Celulares</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
@@ -166,32 +161,32 @@ const Header = () => {
         <div className="flex items-center justify-center gap-6">
           <div className="flex cursor-pointer items-center justify-center gap-1">
             <IoMenu />
-            <p>All Category</p>
+            <p>Categorias</p>
           </div>
           <div className="flex cursor-pointer items-center justify-center gap-1">
-            <p>Hot offers</p>
+            <p>Ofertas</p>
           </div>
           <div className=" cursor-pointer gap-1">
-            <p>Gift Boxes</p>
+            <p>Presentes</p>
           </div>
           <div className="flex cursor-pointer items-center justify-center gap-1">
-            <p>Projects</p>
+            <p>Projetos</p>
           </div>
           <div className="flex cursor-pointer items-center justify-center gap-1">
-            <p>Menu item</p>
+            <p>Menu</p>
           </div>
           <div className="flex cursor-pointer items-center justify-center gap-1">
-            <p>Help</p>
+            <p>Ajuda</p>
             <ChevronDownIcon />
           </div>
         </div>
         <div className="flex items-center justify-between gap-6">
           <div className="flex cursor-pointer items-center justify-center">
-            <p>Portuguese, BRL</p>
+            <p>Português, BRL</p>
             <ChevronDownIcon />
           </div>
           <div className="flex cursor-pointer items-center justify-center">
-            <p className="mr-2">Ship to</p>
+            <p className="mr-2">Comprar para</p>
             <EuaIcon />
             <ChevronDownIcon className="ml-1" />
           </div>
