@@ -1,7 +1,12 @@
 import { ProductProps } from '@/@types'
 import { create } from 'zustand'
 
-export const useProducts = create((set) => ({
+interface UseProductsProps {
+  products: ProductProps[]
+  setProducts: (products: ProductProps[]) => void
+}
+
+export const useProducts = create<UseProductsProps>((set) => ({
   products: [],
-  setProducts: (products: ProductProps[]) => set({ products }),
+  setProducts: (products) => set({ products }),
 }))

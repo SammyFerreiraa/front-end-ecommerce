@@ -13,8 +13,7 @@ import { useProducts } from '@/hooks/useProducts'
 import { ProductProps } from '@/@types'
 
 const SwiperOffers = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [products, setProducts] = useProducts((state: any) => [
+  const [products, setProducts] = useProducts((state) => [
     state.products,
     state.setProducts,
   ])
