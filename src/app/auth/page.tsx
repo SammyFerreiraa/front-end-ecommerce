@@ -39,11 +39,11 @@ const Home = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="px-6 py-12">
-        <div className="">
-          <div>
+      <div className="flex items-center justify-center px-6 py-12">
+        <div className="w-full max-w-[400px] md:max-w-[400px] lg:max-w-[500px] xl:max-w-[600px]">
+          <div className="w-full">
             {/* Cabeçalho */}
-            <div className="mb-7 flex flex-col items-start justify-center">
+            <div className="mb-7 flex w-full flex-col items-start justify-center">
               <p className="text-base font-medium text-gray-900">
                 {variant === 'login' ? 'Bem vindo de volta' : 'Bem vindo'}
               </p>
@@ -140,11 +140,11 @@ const Home = () => {
             </div>
             <Button
               onClick={login}
-              className="mb-6 h-auto w-full bg-blue-500 px-8 py-3"
+              className="mb-6 h-auto w-full bg-blue-500 px-8 py-3 hover:bg-blue-600"
             >
               {variant === 'login' ? 'Entrar' : 'Cadastrar'}
             </Button>
-            <Button className=" mb-10 flex h-auto w-full flex-row gap-3 bg-gray-900 px-8 py-3">
+            <Button className=" mb-10 flex h-auto w-full flex-row gap-3 bg-gray-900 px-8 py-3 hover:bg-gray-950">
               <img
                 src="/assets/googleicon.png"
                 className="h-6 w-6"
