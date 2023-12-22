@@ -18,13 +18,18 @@ const RightSide = ({ name }: RightSideProps) => {
         </div>
         <Button
           onClick={() => {
-            window.location.href = '/login'
+            window.location.href = '/auth'
           }}
           className="w-full bg-blue-600 text-white hover:bg-blue-500"
         >
           Entrar
         </Button>
-        <Button className="w-full rounded-md bg-white py-2 text-blue-600 hover:bg-gray-100">
+        <Button
+          onClick={() => {
+            window.location.href = '/auth'
+          }}
+          className="w-full rounded-md bg-white py-2 text-blue-600 hover:bg-gray-100"
+        >
           Registrar
         </Button>
       </div>

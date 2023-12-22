@@ -40,14 +40,12 @@ const nextAuthOption: NextAuthOptions = {
         token.user = user
       }
 
-      console.log(token)
       return token
     },
 
     async session({ session, token }) {
       session.user = token.user as userProps
       session = { ...session, ...session.user }
-      console.log(session)
       return session
     },
   },

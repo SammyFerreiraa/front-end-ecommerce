@@ -42,6 +42,7 @@ const Header = () => {
           <MobileMenu />
 
           <img
+            onClick={() => (window.location.href = '/')}
             src="./assets/logo-colored.png"
             alt="Logo"
             className="w-[116px] cursor-pointer"
