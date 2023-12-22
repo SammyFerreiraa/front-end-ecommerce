@@ -33,7 +33,7 @@ import MobileMenu from '../menu-mobile/MobileMenu'
 
 const Header = () => {
   return (
-    <MaxWidthWrapper className="px-4 text-sm md:px-[50px]">
+    <MaxWidthWrapper className="px-4 text-sm md:px-[50px] lg:px-12 xl:px-0">
       <div className="flex items-center justify-between gap-6  border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6">
         <div
           className="min-w-7xl flex items-center gap-4 md:gap-7 2xl:gap-11

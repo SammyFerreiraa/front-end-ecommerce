@@ -9,7 +9,7 @@ const ItemsRecommended = () => {
   const products: ProductProps[] = useProducts((state) => state.products)
   if (products.length > 1) {
     return (
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         {products &&
           products
             ?.filter((product: ProductProps) => product.featured === true)
@@ -27,7 +27,7 @@ const ItemsRecommended = () => {
 
   if (products.length === 0) {
     return (
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className=" grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         <div className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3">
           <div className="mb-2 flex h-[147.2px] w-[147.2px] items-center justify-center rounded-md bg-gray-300 p-3"></div>
           <div className="flex flex-col gap-1">

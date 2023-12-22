@@ -43,8 +43,8 @@ const HomepageBanner = async () => {
           <div className="relative flex items-center justify-center">
             <img
               src="/assets/banner.png"
-              className="w-full max-w-[664px] lg:min-w-[400]"
-              alt=""
+              className="w-full max-w-[664px]"
+              alt="tech"
             />
             <div className="absolute left-[10%] top-[10%] flex flex-col gap-5">
               <div className="flex flex-col gap-0">
