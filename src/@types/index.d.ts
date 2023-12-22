@@ -22,3 +22,9 @@ export interface OffersItemProps {
   discount: string
   image: string
 }
+
+export type ItemRecommendedProps = {
+  name: string
+  image: string
+  price: string
+}
