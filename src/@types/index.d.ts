@@ -28,3 +28,13 @@ export type ItemRecommendedProps = {
   image: string
   price: string
 }
+
+export type userProps = {
+  id: string
+  name: string
+  email: string
+  cart: {
+    id: string
+    products: ProductProps[]
+  }
+}

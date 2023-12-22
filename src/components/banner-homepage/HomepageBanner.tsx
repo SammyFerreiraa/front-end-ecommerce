@@ -1,7 +1,10 @@
 import React from 'react'
 import { Button } from '../ui/button'
+import { getServerSession } from 'next-auth'
+import { nextAuthOption } from '@/app/api/auth/[...nextauth]/route'
 
-const HomepageBanner = () => {
+const HomepageBanner = async () => {
+  const session = await getServerSession(nextAuthOption)
   return (
     <div className="flex w-full max-w-[1180px] flex-row justify-center gap-6 rounded-md border-2 border-zinc-300 bg-white md:mt-5 md:px-5 md:py-4">
       <div className="flex w-full items-center justify-evenly gap-6 ">
@@ -63,10 +66,8 @@ const HomepageBanner = () => {
         <div className="flex w-full flex-col justify-between gap-2 rounded-md bg-sky-100 p-3 text-sm">
           <div className="flex w-full flex-row items-center justify-center gap-2">
             <img src="/assets/Avatar.png" className="h-10 w-10" alt="Avatar" />
-            <p>
-              Oi, Usuario, <br />
-              vamos começar
-            </p>
+            <p className="text">{session?.user?.name}</p>
+            {!session?.user?.name && <p className="text">Oi, vamos começar </p>}
           </div>
           <Button className="w-full bg-blue-600 text-white hover:bg-blue-500">
             Entrar
