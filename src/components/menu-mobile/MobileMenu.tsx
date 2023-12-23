@@ -2,8 +2,13 @@ import React from 'react'
 import { Sheet, SheetTrigger, SheetContent, SheetHeader } from '../ui/sheet'
 import { Separator } from '../ui/separator'
 import { HamburgerIcon } from '../icons'
+import { getSession } from 'next-auth/react'
+import AuthMobileMenu from './AuthMobileMenu'
+import { Button } from '../ui/button'
+import LogoutButtonMobile from './LogoutButtonMobile'
 
-const MobileMenu = () => {
+const MobileMenu = async () => {
+  const session = await getSession()
   return (
     <Sheet>
       <SheetTrigger>
@@ -12,11 +17,14 @@ const MobileMenu = () => {
       <SheetContent className="max-w-[280px] p-0" side="left">
         <SheetHeader className="flex w-full flex-col gap-3 bg-gray-200 p-5">
           <img src="/assets/Avatar.png" alt="avatar" className="h-11 w-11" />
-          <div className="flex flex-row items-center justify-start gap-1 text-zinc-900">
-            <p className="cursor-pointer">Sign in</p>
-            <p>|</p>
-            <p className="cursor-pointer">Register</p>
-          </div>
+          {!session?.user?.name && <AuthMobileMenu />}
+
+          {session?.user?.name && (
+            <div className="flex flex-col items-start justify-start gap-1 text-zinc-900">
+              <p>{session?.user?.name}</p>
+              <LogoutButtonMobile />
+            </div>
+          )}
         </SheetHeader>
         <div className="flex w-full flex-col items-center justify-center p-3 text-zinc-900">
           <div className="flex w-full cursor-pointer items-center justify-start gap-4 p-3">
