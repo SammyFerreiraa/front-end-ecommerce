@@ -4,7 +4,6 @@ import { Separator } from '../ui/separator'
 import { HamburgerIcon } from '../icons'
 import { getSession } from 'next-auth/react'
 import AuthMobileMenu from './AuthMobileMenu'
-import { Button } from '../ui/button'
 import LogoutButtonMobile from './LogoutButtonMobile'
 
 const MobileMenu = async () => {
