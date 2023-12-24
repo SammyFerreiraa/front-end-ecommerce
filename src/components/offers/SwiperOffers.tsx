@@ -109,6 +109,33 @@ const SwiperOffers = () => {
               </div>
             </div>
           </SwiperSlide>
+          <SwiperSlide className="h-fit max-w-[140px]">
+            <div className="flex h-fit max-w-[140px] flex-col gap-2 border-y-[1px] border-r-[1px] border-gray-300 bg-white px-3 pb-4 pt-2 lg:border-y-0 lg:border-l-[1px] lg:border-r-0">
+              <div className="h-[119px] w-[115px] rounded-md bg-gray-300 p-[7.4px]"></div>
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="h-[19.5px] w-[98.5px] truncate rounded-md bg-gray-300 text-[13px] text-gray-900"></div>
+                <div className="flex h-[28px] w-[56.8px] items-center justify-center rounded-3xl bg-red-100 px-3 py-1"></div>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="h-fit max-w-[140px]">
+            <div className="flex h-fit max-w-[140px] flex-col gap-2 border-y-[1px] border-r-[1px] border-gray-300 bg-white px-3 pb-4 pt-2 lg:border-y-0 lg:border-l-[1px] lg:border-r-0">
+              <div className="h-[119px] w-[115px] rounded-md bg-gray-300 p-[7.4px]"></div>
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="h-[19.5px] w-[98.5px] truncate rounded-md bg-gray-300 text-[13px] text-gray-900"></div>
+                <div className="flex h-[28px] w-[56.8px] items-center justify-center rounded-3xl bg-red-100 px-3 py-1"></div>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="h-fit max-w-[140px]">
+            <div className="flex h-fit max-w-[140px] flex-col gap-2 border-y-[1px] border-r-[1px] border-gray-300 bg-white px-3 pb-4 pt-2 lg:border-y-0 lg:border-l-[1px] lg:border-r-0">
+              <div className="h-[119px] w-[115px] rounded-md bg-gray-300 p-[7.4px]"></div>
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="h-[19.5px] w-[98.5px] truncate rounded-md bg-gray-300 text-[13px] text-gray-900"></div>
+                <div className="flex h-[28px] w-[56.8px] items-center justify-center rounded-3xl bg-red-100 px-3 py-1"></div>
+              </div>
+            </div>
+          </SwiperSlide>
         </div>
       )}
     </Swiper>
