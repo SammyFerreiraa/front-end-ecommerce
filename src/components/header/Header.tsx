@@ -30,11 +30,15 @@ import 'swiper/css/navigation'
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import MobileUserIcon from '../icons/MobileUserIcon'
 import MobileMenu from '../menu-mobile/MobileMenu'
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
+  const pathname = usePathname()
   return (
     <MaxWidthWrapper className="px-4 text-sm md:px-[50px] lg:px-12 xl:px-0">
-      <div className="flex items-center justify-between gap-6  border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6">
+      <div
+        className={`flex items-center justify-between  gap-6 border-zinc-300 py-4 md:border-b-2 md:py-5 lg:py-6`}
+      >
         <div
           className="min-w-7xl flex items-center gap-4 md:gap-7 2xl:gap-11
     "
@@ -96,7 +100,9 @@ const Header = () => {
         </div>
       </div>
       {/* Search Mobile */}
-      <div className="mb-5 px-2 md:hidden">
+      <div
+        className={`mb-5 px-2 md:hidden ${pathname === '/cart' && 'hidden'}`}
+      >
         <div className="flex h-10 w-full flex-row items-center gap-2 rounded-md bg-gray-100 px-2">
           <SearchIcon />
           <input
