@@ -1,4 +1,5 @@
 import { MaxWidthWrapper } from '@/components'
+import { Button } from '@/components/ui/button'
 import React from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaPlus, FaMinus } from 'react-icons/fa6'
@@ -11,7 +12,7 @@ const Home = () => {
           Shopping Cart (3)
         </h1>
       </div>
-      <div className="w-full">
+      <div className="flex w-full flex-col lg:flex-row">
         <div className="w-full">
           <div className="flex flex-col items-center justify-center">
             {/* produto */}
@@ -140,7 +141,35 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div></div>
+        <div className="bg-white p-4 py-5">
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-row items-center justify-between ">
+              <p className="text-gray-400">Items (3):</p>
+              <p className="text-right font-medium text-zinc-900">R$ 32,00</p>
+            </div>
+            <div className="flex flex-row items-center justify-between ">
+              <p className="text-gray-400">Shipping:</p>
+              <p className="text-right font-medium text-zinc-900">R$ 10,00</p>
+            </div>
+            <div className="flex flex-row items-center justify-between ">
+              <p className="text-gray-400">Tax:</p>
+              <p className="text-right font-medium text-zinc-900">R$ 7,00</p>
+            </div>
+          </div>
+          <div className="mt-5 flex flex-col gap-4">
+            <div className="flex flex-row items-center justify-between">
+              <p className="text-right text-lg font-semibold text-zinc-900">
+                Total:
+              </p>
+              <p className="text-right text-lg font-semibold text-zinc-900">
+                R$220,00
+              </p>
+            </div>
+            <Button className="w-full bg-green-600 py-5 text-center text-base font-medium text-white hover:bg-green-700 lg:bg-red-500">
+              Checkout <span className="lg:hidden">(3 items)</span>
+            </Button>
+          </div>
+        </div>
       </div>
     </MaxWidthWrapper>
   )
