@@ -186,6 +186,13 @@ const Home = () => {
                 Checkout <span className="lg:hidden">(3 items)</span>
               </Button>
             </div>
+            <div className="mt-6 flex w-full flex-row items-center justify-center gap-2">
+              <img src="/images/cards/amex.png" alt="Amex" />
+              <img src="/images/cards/applepay.png" alt="" />
+              <img src="/images/cards/mastercard.png" alt="" />
+              <img src="/images/cards/pp.png" alt="" />
+              <img src="/images/cards/visa.png" alt="" />
+            </div>
           </div>
         </div>
       </div>
