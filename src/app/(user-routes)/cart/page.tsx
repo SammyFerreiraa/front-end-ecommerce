@@ -144,7 +144,7 @@ const Home = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-start gap-3">
-          <div className="hidden flex-col gap-2 rounded-md bg-white p-5 md:flex">
+          <div className="hidden flex-col gap-2 rounded-md bg-white p-5 lg:flex">
             <p className="text-base font-normal text-neutral-600">
               Have a coupon?
             </p>
@@ -158,7 +158,7 @@ const Home = () => {
               </Button>
             </div>
           </div>
-          <div className="w-[280px] rounded-md bg-white p-4 py-5">
+          <div className="w-full rounded-md bg-white p-4 py-5 lg:w-[280px]">
             <div className="flex flex-col gap-2">
               <div className="flex flex-row items-center justify-between ">
                 <p className="text-gray-400">Items (3):</p>
