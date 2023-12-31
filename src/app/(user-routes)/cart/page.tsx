@@ -1,11 +1,16 @@
+'use client'
+
 import { MaxWidthWrapper } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { ArrowLeftIcon } from '@radix-ui/react-icons'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaPlus, FaMinus } from 'react-icons/fa6'
 
 const Home = () => {
+  const router = useRouter()
   return (
     <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px] lg:px-12 xl:px-0">
       <div className="w-full bg-white px-4 py-4 shadow-md md:bg-transparent md:px-0 md:py-7 md:shadow-none">
@@ -16,7 +21,7 @@ const Home = () => {
       {/* shopping cart */}
       <div className="flex w-full flex-col md:gap-4 lg:flex-row">
         <div className="w-full">
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center ">
             {/* produto */}
             <div className="flex w-full flex-col gap-5  border-b border-neutral-300 bg-white p-4">
               <div className="flex flex-row justify-start gap-3">
@@ -141,6 +146,18 @@ const Home = () => {
                 <p>R$ 78,99</p>
               </div>
             </div>
+            <div className="hidden w-full flex-row items-center justify-between bg-white p-5 lg:flex">
+              <Button
+                className="flex flex-row gap-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-500"
+                onClick={() => router.push('/')}
+              >
+                <ArrowLeftIcon />
+                Back to shop
+              </Button>
+              <Button className="border border-gray-300 bg-transparent text-blue-600 hover:bg-transparent">
+                Remove All
+              </Button>
+            </div>
           </div>
         </div>
         <div className="flex flex-col items-center justify-start gap-3">
@@ -153,7 +170,7 @@ const Home = () => {
                 placeholder="Add coupon"
                 className="rounded-r-none py-3 placeholder:text-gray-400"
               />
-              <Button className="rounded-l-none bg-transparent text-blue-600 hover:bg-transparent">
+              <Button className="rounded-l-none border border-gray-300 bg-transparent text-blue-600 hover:bg-transparent  ">
                 Apply
               </Button>
             </div>
