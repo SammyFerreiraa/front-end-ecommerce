@@ -30,9 +30,10 @@ import 'swiper/css/navigation'
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import MobileUserIcon from '../icons/MobileUserIcon'
 import MobileMenu from '../menu-mobile/MobileMenu'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
+  const router = useRouter()
   const pathname = usePathname()
   return (
     <MaxWidthWrapper className="px-4 text-sm md:px-[50px] lg:px-12 xl:px-0">
@@ -93,7 +94,10 @@ const Header = () => {
             <HeartIcon fill="#8B96A5" />
             <p className="text-xs text-gray-400">Pedidos</p>
           </div>
-          <div className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70">
+          <div
+            className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70"
+            onClick={() => router.push('/cart')}
+          >
             <CartIcon fill="#8B96A5" />
             <p className="text-xs text-gray-400 ">Carrinho</p>
           </div>
