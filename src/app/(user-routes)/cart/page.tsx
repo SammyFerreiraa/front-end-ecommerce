@@ -261,7 +261,7 @@ const Home = () => {
                 placeholder="Add coupon"
                 className="rounded-r-none py-3 placeholder:text-gray-400"
               />
-              <Button className="rounded-l-none border border-gray-300 bg-transparent text-blue-600 hover:bg-transparent">
+              <Button className="rounded-l-none border border-gray-300 bg-transparent text-blue-600 hover:bg-blue-600 hover:text-white">
                 Apply
               </Button>
             </div>
@@ -269,16 +269,22 @@ const Home = () => {
           <div className="w-full rounded-md bg-white p-4 py-5 lg:w-[280px] lg:shadow-md">
             <div className="flex flex-col gap-2">
               <div className="flex flex-row items-center justify-between ">
-                <p className="text-gray-400">Items (3):</p>
-                <p className="text-right font-medium text-zinc-900">R$ 32,00</p>
+                <p className="text-gray-400">Subtotal:</p>
+                <p className="text-right font-medium text-zinc-900">
+                  R$ 320,00
+                </p>
               </div>
               <div className="flex flex-row items-center justify-between ">
-                <p className="text-gray-400">Shipping:</p>
-                <p className="text-right font-medium text-zinc-900">R$ 10,00</p>
+                <p className="text-gray-400">Discount:</p>
+                <p className="text-right font-medium text-red-600">
+                  <span>- {'   '}</span>R$ 110,00
+                </p>
               </div>
               <div className="flex flex-row items-center justify-between ">
                 <p className="text-gray-400">Tax:</p>
-                <p className="text-right font-medium text-zinc-900">R$ 7,00</p>
+                <p className="text-right font-medium text-green-600">
+                  <span>+ {'   '}</span>R$ 10,00
+                </p>
               </div>
             </div>
             <div className="mt-5 flex flex-col gap-4">
@@ -291,7 +297,7 @@ const Home = () => {
                 </p>
               </div>
               <Button className="w-full bg-green-600 py-5 text-center text-base font-medium text-white hover:bg-green-700">
-                Checkout <span className="lg:hidden">(3 items)</span>
+                Checkout <span className="ml-1 lg:hidden">(3 items)</span>
               </Button>
             </div>
             <div className="mt-6 flex w-full flex-row items-center justify-center gap-2">
