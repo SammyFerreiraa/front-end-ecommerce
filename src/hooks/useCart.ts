@@ -1,18 +1,5 @@
 import { create } from 'zustand'
-
-type ProductCartProps = {
-  id: string
-  name: string
-  code: string
-  price: string
-  description: string
-  offer: boolean
-  discount: string
-  category: string
-  image: string
-  featured: boolean
-  quantity: number
-}
+import { ProductCartProps } from '../@types'
 interface UseCartProps {
   cart: ProductCartProps[]
   setCart: (cart: ProductCartProps[]) => void

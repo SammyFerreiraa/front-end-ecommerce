@@ -29,12 +29,32 @@ export type ItemRecommendedProps = {
   price: string
 }
 
+type ProductCartProps = {
+  id: string
+  name: string
+  code: string
+  price: string
+  description: string
+  offer: boolean
+  discount: string
+  category: string
+  image: string
+  featured: boolean
+  quantity: number
+}
+
 export type userProps = {
   id: string
   name: string
   email: string
   cart: {
     id: string
-    products: ProductProps[]
+    products: ProductCartProps[]
+  }
+}
+
+declare module 'next-auth' {
+  interface Session {
+    user: userProps
   }
 }
