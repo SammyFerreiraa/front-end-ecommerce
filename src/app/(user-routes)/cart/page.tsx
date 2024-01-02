@@ -28,9 +28,8 @@ const Home = () => {
       {/* shopping cart */}
       <div className="flex w-full flex-col md:gap-4 lg:flex-row">
         <div className="w-full">
-          <div className="flex flex-col items-center justify-center lg:shadow-md">
+          <div className="flex flex-col items-center justify-center lg:rounded-md lg:shadow-md">
             {/* produto */}
-
             <div className="flex w-full flex-col gap-5  border-b border-neutral-300 bg-white p-4">
               <div className="flex flex-row justify-start gap-3">
                 <div className="h-fit w-16 rounded-md border border-neutral-300 bg-white p-1">
@@ -237,6 +236,18 @@ const Home = () => {
                 </div>
                 <p className="flex lg:hidden">R$ 78,99</p>
               </div>
+            </div>
+            <div className="hidden w-full flex-row items-center justify-between bg-white p-5 lg:flex">
+              <Button
+                className="flex flex-row gap-3 bg-blue-600 text-base font-medium text-white hover:bg-white hover:text-blue-600"
+                onClick={() => router.push('/')}
+              >
+                <ArrowLeftIcon />
+                Back to shop
+              </Button>
+              <Button className="border border-gray-300 bg-transparent text-red-600 hover:bg-red-600 hover:text-white">
+                Remove All
+              </Button>
             </div>
           </div>
         </div>
@@ -290,6 +301,35 @@ const Home = () => {
               <img src="/images/cards/pp.png" alt="" />
               <img src="/images/cards/visa.png" alt="" />
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="hidden w-full flex-row items-center justify-start gap-14 bg-transparent py-8 lg:flex">
+        <div className="flex flex-row gap-3">
+          <img src="/images/icons/lock.png" alt="Icon" />
+          <div className="flex flex-col">
+            <p className="leading-normal text-zinc-900">Secure Payment</p>
+            <p className="leading-normal text-zinc-400">
+              Have you ever finally just
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-row gap-3">
+          <img src="/images/icons/chat.png" alt="Icon" />
+          <div className="flex flex-col">
+            <p className="leading-normal text-zinc-900">Customer support</p>
+            <p className="leading-normal text-zinc-400">
+              Have you ever finally just
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-row gap-3">
+          <img src="/images/icons/car.png" alt="Icon" />
+          <div className="flex flex-col">
+            <p className="leading-normal text-zinc-900">Free delivery</p>
+            <p className="leading-normal text-zinc-400">
+              Have you ever finally just
+            </p>
           </div>
         </div>
       </div>
