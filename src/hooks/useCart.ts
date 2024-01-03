@@ -1,22 +1,36 @@
 import { create } from 'zustand'
-import { ProductCartProps } from '../@types'
+import { cartProps } from '../@types'
 interface UseCartProps {
-  cart: ProductCartProps[]
-  setCart: (cart: ProductCartProps[]) => void
+  cart: cartProps
+  setCart: (cart: cartProps) => void
   setQuantity: (code: string, quantity: number) => void
+  removeProduct: (code: string) => void
 }
 
 export const useCart = create<UseCartProps>((set) => ({
-  cart: [],
+  cart: { id: '', products: [] },
   setCart: (cart) => set({ cart }),
   setQuantity: (code, quantity) => {
     set((state) => ({
-      cart: state.cart.map((product) => {
-        if (product.code === code) {
-          return { ...product, quantity }
-        }
-        return product
-      }),
+      cart: {
+        ...state.cart,
+        products: state.cart.products.map((product) => {
+          if (product.code === code) {
+            return { ...product, quantity }
+          }
+          return product
+        }),
+      },
+    }))
+  },
+  removeProduct: (code) => {
+    set((state) => ({
+      cart: {
+        ...state.cart,
+        products: state.cart.products.filter(
+          (product) => product.code !== code,
+        ),
+      },
     }))
   },
 }))

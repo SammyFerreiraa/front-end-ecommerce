@@ -20,10 +20,11 @@ import axios from 'axios'
 const ProductsCart = () => {
   const router = useRouter()
   const { data: session } = useSession()
-  const [cart, setCart, setQuantity] = useCart((state) => [
+  const [cart, setCart, setQuantity, removeProduct] = useCart((state) => [
     state.cart,
     state.setCart,
     state.setQuantity,
+    state.removeProduct,
   ])
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const ProductsCart = () => {
             Authorization: `Bearer ${session?.token}`,
           },
         })
-        setCart(response.data.cart.products)
+        setCart(response.data.cart)
       } catch (error) {
         console.error('Erro na solicitação:', error)
       }
@@ -47,11 +48,25 @@ const ProductsCart = () => {
     setQuantity(code, quantity)
   }
 
+  const removeItemFromCart = async (cartId: string, productCode: string) => {
+    removeProduct(productCode)
+    if (!session?.token) return
+    await axios.delete(`http://localhost:3000/cart/removeitem`, {
+      headers: {
+        Authorization: `Bearer ${session?.token}`,
+      },
+      data: {
+        cartId,
+        productCode,
+      },
+    })
+  }
+
   return (
     <div className="w-full">
       <div className="flex flex-col items-center justify-center lg:rounded-md lg:shadow-md">
         {/* produto */}
-        {cart?.map((product) => (
+        {cart.products.map((product) => (
           <div
             className="flex w-full flex-col gap-5  border-b border-neutral-300 bg-white p-4"
             key={product.code}
@@ -82,7 +97,10 @@ const ProductsCart = () => {
             </div>
             <div className="flex flex-row items-center justify-between">
               <div className="hidden gap-3 lg:flex">
-                <Button className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white">
+                <Button
+                  className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white"
+                  onClick={() => removeItemFromCart(cart.id, product.code)}
+                >
                   Remove
                 </Button>
                 <Button
