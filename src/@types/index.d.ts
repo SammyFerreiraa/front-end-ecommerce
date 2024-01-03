@@ -43,6 +43,11 @@ type ProductCartProps = {
   quantity: number
 }
 
+type cartProps = {
+  id: string
+  products: ProductCartProps[]
+}
+
 export type userProps = {
   id: string
   name: string
