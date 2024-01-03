@@ -29,12 +29,12 @@ const ProductsCart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!session?.token) return
         const response = await axios.get('http://localhost:3000/profile', {
           headers: {
             Authorization: `Bearer ${session?.token}`,
           },
         })
-        console.log('Montado')
         setCart(response.data.cart.products)
       } catch (error) {
         console.error('Erro na solicitação:', error)
