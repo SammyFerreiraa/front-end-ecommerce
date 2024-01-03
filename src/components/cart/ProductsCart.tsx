@@ -15,17 +15,37 @@ import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
+import axios from 'axios'
 
 const ProductsCart = () => {
   const router = useRouter()
-  const { data: session } = useSession({ required: true })
-  const [cart, setCart] = useCart((state) => [state.cart, state.setCart])
+  const { data: session } = useSession()
+  const [cart, setCart, setQuantity] = useCart((state) => [
+    state.cart,
+    state.setCart,
+    state.setQuantity,
+  ])
+
   useEffect(() => {
-    const setItems = async () => {
-      await setCart(session?.user?.cart?.products || [])
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/profile', {
+          headers: {
+            Authorization: `Bearer ${session?.token}`,
+          },
+        })
+        console.log('Montado')
+        setCart(response.data.cart.products)
+      } catch (error) {
+        console.error('Erro na solicitação:', error)
+      }
     }
-    setItems()
-  }, [session?.user?.cart?.products, setCart])
+    fetchData()
+  }, [session?.token, setCart])
+
+  const changeQuantity = (code: string, quantity: number) => {
+    setQuantity(code, quantity)
+  }
 
   return (
     <div className="w-full">
@@ -84,7 +104,12 @@ const ProductsCart = () => {
                 </div>
               </div>
               <div>
-                <Select value={product.quantity.toString()}>
+                <Select
+                  value={product.quantity.toString()}
+                  onValueChange={(value) =>
+                    changeQuantity(product.code, parseInt(value))
+                  }
+                >
                   <SelectTrigger className="mr-3 hidden shadow lg:flex">
                     Quant: {'  '}
                     <SelectValue placeholder="" />
