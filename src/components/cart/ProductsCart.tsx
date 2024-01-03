@@ -44,11 +44,24 @@ const ProductsCart = () => {
     fetchData()
   }, [session?.token, setCart])
 
-  const changeQuantity = (code: string, quantity: number) => {
-    setQuantity(code, quantity)
+  const changeQuantity = async (productCode: string, quantity: number) => {
+    setQuantity(productCode, quantity)
+    if (!session?.token) return
+    await axios.post(
+      `http://localhost:3000/cart/updatequantity`,
+      {
+        quantity,
+        productCode,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+      },
+    )
   }
 
-  const removeItemFromCart = async (cartId: string, productCode: string) => {
+  const removeItemFromCart = async (productCode: string) => {
     removeProduct(productCode)
     if (!session?.token) return
     await axios.delete(`http://localhost:3000/cart/removeitem`, {
@@ -56,7 +69,6 @@ const ProductsCart = () => {
         Authorization: `Bearer ${session?.token}`,
       },
       data: {
-        cartId,
         productCode,
       },
     })
@@ -99,7 +111,7 @@ const ProductsCart = () => {
               <div className="hidden gap-3 lg:flex">
                 <Button
                   className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white"
-                  onClick={() => removeItemFromCart(cart.id, product.code)}
+                  onClick={() => removeItemFromCart(product.code)}
                 >
                   Remove
                 </Button>
@@ -144,6 +156,17 @@ const ProductsCart = () => {
                     <SelectItem value="7">{'  '}7</SelectItem>
                     <SelectItem value="8">{'  '}8</SelectItem>
                     <SelectItem value="9">{'  '}9</SelectItem>
+                    <SelectItem value="10">{'  '}10</SelectItem>
+                    <SelectItem value="11">{'  '}11</SelectItem>
+                    <SelectItem value="12">{'  '}12</SelectItem>
+                    <SelectItem value="13">{'  '}13</SelectItem>
+                    <SelectItem value="14">{'  '}14</SelectItem>
+                    <SelectItem value="15">{'  '}15</SelectItem>
+                    <SelectItem value="16">{'  '}16</SelectItem>
+                    <SelectItem value="17">{'  '}17</SelectItem>
+                    <SelectItem value="18">{'  '}18</SelectItem>
+                    <SelectItem value="19">{'  '}19</SelectItem>
+                    <SelectItem value="20">{'  '}20</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
