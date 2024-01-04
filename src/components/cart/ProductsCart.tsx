@@ -164,7 +164,16 @@ const ProductsCart = () => {
                   <div className="flex cursor-pointer p-2 lg:hidden">
                     <BsThreeDotsVertical />
                   </div>
-                  <p className="hidden p-2 lg:flex">{product.price}</p>
+                  <p className="hidden p-2 lg:flex">
+                    {(
+                      parseFloat(product.price.replace('R$ ', '')) *
+                      product.quantity *
+                      1000
+                    ).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-row items-center justify-between">
@@ -239,7 +248,16 @@ const ProductsCart = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <p className="flex lg:hidden">{product.price}</p>
+                <p className="flex lg:hidden">
+                  {(
+                    parseFloat(product.price.replace('R$ ', '')) *
+                    product.quantity *
+                    1000
+                  ).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </p>
               </div>
             </div>
           ))}
