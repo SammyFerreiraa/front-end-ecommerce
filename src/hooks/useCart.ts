@@ -5,10 +5,12 @@ interface UseCartProps {
   setCart: (cart: cartProps) => void
   setQuantity: (code: string, quantity: number) => void
   removeProduct: (code: string) => void
+  removeAllProducts: (id: string) => void
 }
 
 export const useCart = create<UseCartProps>((set) => ({
   cart: { id: '', products: [] },
+  removeAllProducts: (id) => set({ cart: { id, products: [] } }),
   setCart: (cart) => set({ cart }),
   setQuantity: (code, quantity) => {
     set((state) => ({

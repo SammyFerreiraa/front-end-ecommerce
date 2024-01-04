@@ -21,12 +21,14 @@ const ProductsCart = () => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
-  const [cart, setCart, setQuantity, removeProduct] = useCart((state) => [
-    state.cart,
-    state.setCart,
-    state.setQuantity,
-    state.removeProduct,
-  ])
+  const [cart, setCart, setQuantity, removeProduct, removeAllProducts] =
+    useCart((state) => [
+      state.cart,
+      state.setCart,
+      state.setQuantity,
+      state.removeProduct,
+      state.removeAllProducts,
+    ])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,6 +134,21 @@ const ProductsCart = () => {
       console.error('Erro na solicitação:', error)
       setLoading(false)
     }
+  }
+
+  const clearCart = async () => {
+    removeAllProducts(cart.id)
+    setLoading(true)
+    if (!session?.token) return
+    await axios.delete(`http://localhost:3000/cart`, {
+      headers: {
+        Authorization: `Bearer ${session?.token}`,
+      },
+      data: {
+        cartId: cart.id,
+      },
+    })
+    setLoading(false)
   }
   return (
     <div className="w-full">
@@ -268,7 +285,10 @@ const ProductsCart = () => {
               <ArrowLeftIcon />
               Back to shop
             </Button>
-            <Button className="border border-gray-300 bg-transparent text-red-600 hover:bg-red-600 hover:text-white">
+            <Button
+              className="border border-gray-300 bg-transparent text-red-600 hover:bg-red-600 hover:text-white"
+              onClick={() => clearCart()}
+            >
               Remove All
             </Button>
           </div>
