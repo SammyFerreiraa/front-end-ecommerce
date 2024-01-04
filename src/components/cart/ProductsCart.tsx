@@ -250,8 +250,7 @@ const ProductsCart = () => {
                 <p className="flex lg:hidden">
                   {(
                     parseFloat(product.price.replace('R$ ', '')) *
-                    product.quantity *
-                    1000
+                    product.quantity
                   ).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
