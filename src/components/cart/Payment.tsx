@@ -9,8 +9,7 @@ const Payment = () => {
   const cart = useCart((state) => state.cart)
   const subtotal = cart.products.reduce(
     (acc, product) =>
-      acc +
-      parseFloat(product.price.replace('R$ ', '')) * product.quantity * 1000,
+      acc + parseFloat(product.price.replace('R$ ', '')) * product.quantity,
     0,
   )
 
