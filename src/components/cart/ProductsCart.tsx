@@ -15,11 +15,13 @@ import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
+import { TbShoppingCartExclamation } from 'react-icons/tb'
 import axios from 'axios'
 import LoadingProduct from './LoadingProduct'
 
 const ProductsCart = () => {
   const [loading, setLoading] = useState(true)
+  const [empty, setEmpty] = useState(false)
   const [expired, setExpired] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
@@ -44,6 +46,7 @@ const ProductsCart = () => {
           })
           .then((response) => {
             setCart(response.data.cart)
+            if (response.data.cart.products.length === 0) setEmpty(true)
           })
         setLoading(false)
       } catch (error) {
@@ -151,10 +154,18 @@ const ProductsCart = () => {
     })
   }
   return (
-    <div className="w-full">
+    <div className="w-full rounded-md">
       {loading === false && (
         <div className="flex flex-col items-center justify-center lg:rounded-md lg:shadow-md">
           {/* produto */}
+          {empty && (
+            <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
+              <TbShoppingCartExclamation className="text-5xl text-zinc-400" />
+              <p className="text-3xl text-zinc-400">
+                Your shopping cart is empty{' '}
+              </p>
+            </div>
+          )}
           {cart.products.map((product) => (
             <div
               className="flex w-full flex-col gap-5  border-b border-neutral-300 bg-white p-4"
@@ -276,6 +287,7 @@ const ProductsCart = () => {
             <Button
               className="flex flex-row gap-3 bg-blue-600 text-base font-medium text-white hover:bg-white hover:text-blue-600"
               onClick={() => router.push('/')}
+              disabled={empty}
             >
               <ArrowLeftIcon />
               Back to shop
@@ -283,6 +295,7 @@ const ProductsCart = () => {
             <Button
               className="border border-gray-300 bg-transparent text-red-600 hover:bg-red-600 hover:text-white"
               onClick={() => clearCart()}
+              disabled={empty}
             >
               Remove All
             </Button>
