@@ -160,8 +160,8 @@ const ProductsCart = () => {
           {/* produto */}
           {empty && (
             <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
-              <TbShoppingCartExclamation className="text-5xl text-zinc-400" />
-              <p className="text-3xl text-zinc-400">
+              <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
+              <p className="text-2xl text-zinc-400 lg:text-3xl">
                 Your shopping cart is empty{' '}
               </p>
             </div>
