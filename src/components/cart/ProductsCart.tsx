@@ -13,12 +13,13 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
 import axios from 'axios'
 
 const ProductsCart = () => {
   const [loading, setLoading] = useState(false)
+  const [expired, setExpired] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
   const [cart, setCart, setQuantity, removeProduct, removeAllProducts] =
@@ -34,13 +35,17 @@ const ProductsCart = () => {
     const fetchData = async () => {
       try {
         if (!session?.token) return
-        const response = await axios.get('http://localhost:3000/profile', {
-          headers: {
-            Authorization: `Bearer ${session?.token}`,
-          },
-        })
-        setCart(response.data.cart)
+        await axios
+          .get('http://localhost:3000/profile', {
+            headers: {
+              Authorization: `Bearer ${session?.token}`,
+            },
+          })
+          .then((response) => {
+            setCart(response.data.cart)
+          })
       } catch (error) {
+        setExpired(true)
         console.error('Erro na solicitação:', error)
       }
     }
@@ -292,6 +297,12 @@ const ProductsCart = () => {
               Remove All
             </Button>
           </div>
+        </div>
+      )}
+      {expired && (
+        <div>
+          <p>Login Expirado</p>
+          <Button onClick={() => signOut()}>Relogar</Button>
         </div>
       )}
     </div>
