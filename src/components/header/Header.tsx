@@ -76,7 +76,9 @@ const Header = () => {
         </div>
         {/* Nav Mobile  */}
         <div className="flex flex-row items-center gap-5 lg:hidden">
-          <MobileCartIcon />
+          <div className="h-fit w-fit" onClick={() => router.push('/cart')}>
+            <MobileCartIcon />
+          </div>
           <MobileUserIcon />
         </div>
 
@@ -90,9 +92,12 @@ const Header = () => {
             <MessageIcon fill="#8B96A5" />
             <p className="text-xs text-gray-400">Mensagem</p>
           </div>
-          <div className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70">
+          <div
+            className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70"
+            onClick={() => router.push('/favorites')}
+          >
             <HeartIcon fill="#8B96A5" />
-            <p className="text-xs text-gray-400">Pedidos</p>
+            <p className="text-xs text-gray-400">Favoritos</p>
           </div>
           <div
             className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70"
