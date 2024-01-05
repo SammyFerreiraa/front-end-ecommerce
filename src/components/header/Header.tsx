@@ -13,7 +13,6 @@ import { MaxWidthWrapper } from '..'
 import {
   UserIcon,
   MessageIcon,
-  CartIcon,
   HeartIcon,
   EuaIcon,
   SearchIcon,
@@ -31,6 +30,7 @@ import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import MobileUserIcon from '../icons/MobileUserIcon'
 import MobileMenu from '../menu-mobile/MobileMenu'
 import { usePathname, useRouter } from 'next/navigation'
+import CartHeaderDesktop from './CartHeaderDesktop'
 
 const Header = () => {
   const router = useRouter()
@@ -47,7 +47,7 @@ const Header = () => {
           <MobileMenu />
 
           <img
-            onClick={() => (window.location.href = '/')}
+            onClick={() => router.push('/')}
             src="./assets/logo-colored.png"
             alt="Logo"
             className="w-[116px] cursor-pointer"
@@ -99,13 +99,7 @@ const Header = () => {
             <HeartIcon fill="#8B96A5" />
             <p className="text-xs text-gray-400">Favoritos</p>
           </div>
-          <div
-            className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70"
-            onClick={() => router.push('/cart')}
-          >
-            <CartIcon fill="#8B96A5" />
-            <p className="text-xs text-gray-400 ">Carrinho</p>
-          </div>
+          <CartHeaderDesktop />
         </div>
       </div>
       {/* Search Mobile */}
