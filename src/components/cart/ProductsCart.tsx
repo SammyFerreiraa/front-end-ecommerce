@@ -16,9 +16,10 @@ import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
 import axios from 'axios'
+import LoadingProduct from './LoadingProduct'
 
 const ProductsCart = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [expired, setExpired] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
@@ -44,6 +45,7 @@ const ProductsCart = () => {
           .then((response) => {
             setCart(response.data.cart)
           })
+        setLoading(false)
       } catch (error) {
         setExpired(true)
         console.error('Erro na solicitação:', error)
@@ -83,7 +85,6 @@ const ProductsCart = () => {
   }
 
   const removeOne = async (productCode: string) => {
-    setLoading(true)
     changeQuantity(
       productCode,
       (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) - 1,
@@ -92,7 +93,7 @@ const ProductsCart = () => {
       removeProduct(productCode)
     }
     if (!session?.token) return
-    const response = await axios.post(
+    await axios.post(
       `http://localhost:3000/cart/updatequantity`,
       {
         quantity:
@@ -106,12 +107,10 @@ const ProductsCart = () => {
         },
       },
     )
-    if (response.status === 200) setLoading(false)
   }
 
   const addOne = async (productCode: string) => {
     try {
-      setLoading(true)
       await changeQuantity(
         productCode,
         (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) + 1,
@@ -133,11 +132,8 @@ const ProductsCart = () => {
           },
         },
       )
-
-      setLoading(false)
     } catch (error) {
       console.error('Erro na solicitação:', error)
-      setLoading(false)
     }
   }
 
@@ -153,7 +149,6 @@ const ProductsCart = () => {
         cartId: cart.id,
       },
     })
-    setLoading(false)
   }
   return (
     <div className="w-full">
@@ -165,8 +160,8 @@ const ProductsCart = () => {
               className="flex w-full flex-col gap-5  border-b border-neutral-300 bg-white p-4"
               key={product.code}
             >
-              <div className="flex flex-row justify-start gap-3">
-                <div className="h-fit w-16 rounded-md border border-neutral-300 bg-white p-1">
+              <div className="flex flex-row items-center justify-start gap-3">
+                <div className="flex h-fit w-16 items-center justify-center rounded-md border border-neutral-300 bg-white p-1">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -176,10 +171,10 @@ const ProductsCart = () => {
                 <div className="flex w-full flex-row justify-between">
                   <div className="flex flex-col p-1">
                     <h1 className="text-base text-zinc-900">{product.name}</h1>
-                    <p className="text-[13px] text-gray-400">
+                    <p className="w-fit text-[13px] text-gray-400">
                       Size: medium, Color: blue
                     </p>
-                    <p className="text-[13px] text-gray-400">
+                    <p className="w-fit text-[13px] text-gray-400">
                       Seller: Artel Market
                     </p>
                   </div>
@@ -241,12 +236,7 @@ const ProductsCart = () => {
                       <SelectValue placeholder="" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem
-                        value="1"
-                        onClickCapture={() => console.log(1)}
-                      >
-                        {'  '}1
-                      </SelectItem>
+                      <SelectItem value="1">{'  '}1</SelectItem>
                       <SelectItem value="2">{'  '}2</SelectItem>
                       <SelectItem value="3">{'  '}3</SelectItem>
                       <SelectItem value="4">{'  '}4</SelectItem>
@@ -299,10 +289,12 @@ const ProductsCart = () => {
           </div>
         </div>
       )}
+
+      {loading === true && <LoadingProduct />}
       {expired && (
         <div>
           <p>Login Expirado</p>
-          <Button onClick={() => signOut()}>Relogar</Button>
+          <Button onClick={() => signOut()}>Reconectar</Button>
         </div>
       )}
     </div>
