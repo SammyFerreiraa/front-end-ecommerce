@@ -1,5 +1,6 @@
 import { ItemRecommendedProps } from '@/@types'
 import React from 'react'
+import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
 
 const ItemRecommended = ({ name, image, price }: ItemRecommendedProps) => {
   return (
@@ -19,12 +20,8 @@ const ItemRecommended = ({ name, image, price }: ItemRecommendedProps) => {
               <p className="text-sm text-amber-500">4.0</p>
             </div>
           </div>
-          <div className="flex items-center justify-center rounded-md border-2 border-gray-300 p-2">
-            <img
-              src="/images/icons/favorite_border.png"
-              alt="fav"
-              className="h-5 w-5"
-            />
+          <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:bg-gray-300 hover:text-red-600">
+            <IoMdHeartEmpty className="m-2 h-5 w-5 text-blue-600 hover:text-inherit" />
           </div>
         </div>
         <p className="line-clamp-2 text-[13px] text-gray-400">{name}</p>
