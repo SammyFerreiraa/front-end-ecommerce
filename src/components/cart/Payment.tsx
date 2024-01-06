@@ -83,7 +83,8 @@ const Payment = () => {
             </p>
           </div>
           <Button className="w-full bg-green-600 py-5 text-center text-base font-medium text-white hover:bg-green-700">
-            Checkout <span className="ml-1 lg:hidden">(3 items)</span>
+            Checkout{' '}
+            <span className="ml-1 lg:hidden">({cart.products.length})</span>
           </Button>
         </div>
         <div className="mt-6 flex w-full flex-row items-center justify-center gap-2">
