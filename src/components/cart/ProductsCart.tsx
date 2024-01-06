@@ -100,21 +100,23 @@ const ProductsCart = () => {
   }
 
   const removeOne = (productCode: string) => {
-    changeQuantity(
-      productCode,
-      (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) - 1,
-    )
-    if (cart.products.find((p) => p.code === productCode)?.quantity === 1) {
+    const quantity =
+      (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) - 1
+    changeQuantity(productCode, quantity)
+    if (quantity === 0) {
       removeProduct(productCode)
     }
+
+    const verify = async () => {
+      if ((await cart.products.length) === 1) setEmpty(true)
+    }
+    verify()
     if (!session?.token) return
     const req = async () => {
       await axios.post(
         `http://localhost:3000/cart/updatequantity`,
         {
-          quantity:
-            (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) -
-            1,
+          quantity,
           productCode,
         },
         {
