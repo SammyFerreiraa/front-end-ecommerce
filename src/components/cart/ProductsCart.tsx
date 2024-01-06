@@ -142,7 +142,7 @@ const ProductsCart = () => {
 
   const clearCart = async () => {
     removeAllProducts(cart.id)
-    setLoading(true)
+    setEmpty(true)
     if (!session?.token) return
     await axios.delete(`http://localhost:3000/cart`, {
       headers: {
