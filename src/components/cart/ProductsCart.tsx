@@ -57,37 +57,43 @@ const ProductsCart = () => {
     fetchData()
   }, [session?.token, setCart])
 
-  const changeQuantity = async (productCode: string, quantity: number) => {
+  const changeQuantity = (productCode: string, quantity: number) => {
     setQuantity(productCode, quantity)
     if (!session?.token) return
-    await axios.post(
-      `http://localhost:3000/cart/updatequantity`,
-      {
-        quantity,
-        productCode,
-      },
-      {
+    const make = async () => {
+      await axios.post(
+        `http://localhost:3000/cart/updatequantity`,
+        {
+          quantity,
+          productCode,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session?.token}`,
+          },
+        },
+      )
+    }
+    make()
+  }
+
+  const removeItemFromCart = (productCode: string) => {
+    removeProduct(productCode)
+    if (!session?.token) return
+    const make = async () => {
+      await axios.delete(`http://localhost:3000/cart/removeitem`, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
         },
-      },
-    )
+        data: {
+          productCode,
+        },
+      })
+    }
+    make()
   }
 
-  const removeItemFromCart = async (productCode: string) => {
-    removeProduct(productCode)
-    if (!session?.token) return
-    await axios.delete(`http://localhost:3000/cart/removeitem`, {
-      headers: {
-        Authorization: `Bearer ${session?.token}`,
-      },
-      data: {
-        productCode,
-      },
-    })
-  }
-
-  const removeOne = async (productCode: string) => {
+  const removeOne = (productCode: string) => {
     changeQuantity(
       productCode,
       (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) - 1,
@@ -96,36 +102,12 @@ const ProductsCart = () => {
       removeProduct(productCode)
     }
     if (!session?.token) return
-    await axios.post(
-      `http://localhost:3000/cart/updatequantity`,
-      {
-        quantity:
-          (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) -
-          1,
-        productCode,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${session?.token}`,
-        },
-      },
-    )
-  }
-
-  const addOne = async (productCode: string) => {
-    try {
-      await changeQuantity(
-        productCode,
-        (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) + 1,
-      )
-
-      if (!session?.token) return
-
+    const make = async () => {
       await axios.post(
         `http://localhost:3000/cart/updatequantity`,
         {
           quantity:
-            (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) +
+            (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) -
             1,
           productCode,
         },
@@ -135,23 +117,57 @@ const ProductsCart = () => {
           },
         },
       )
+    }
+    make()
+  }
+
+  const addOne = (productCode: string) => {
+    try {
+      changeQuantity(
+        productCode,
+        (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) + 1,
+      )
+
+      if (!session?.token) return
+
+      const make = async () => {
+        await axios.post(
+          `http://localhost:3000/cart/updatequantity`,
+          {
+            quantity:
+              (cart.products.find((p) => p.code === productCode)?.quantity ??
+                0) + 1,
+            productCode,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${session?.token}`,
+            },
+          },
+        )
+      }
+      make()
     } catch (error) {
       console.error('Erro na solicitação:', error)
     }
   }
 
-  const clearCart = async () => {
+  const clearCart = () => {
     removeAllProducts(cart.id)
     setEmpty(true)
     if (!session?.token) return
-    await axios.delete(`http://localhost:3000/cart`, {
-      headers: {
-        Authorization: `Bearer ${session?.token}`,
-      },
-      data: {
-        cartId: cart.id,
-      },
-    })
+
+    const make = async () => {
+      await axios.delete(`http://localhost:3000/cart`, {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+        data: {
+          cartId: cart.id,
+        },
+      })
+    }
+    make()
   }
   return (
     <div className="w-full rounded-md">
