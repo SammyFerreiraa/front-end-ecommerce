@@ -13,7 +13,6 @@ import { MaxWidthWrapper } from '..'
 import {
   UserIcon,
   MessageIcon,
-  HeartIcon,
   EuaIcon,
   SearchIcon,
   MobileCartIcon,
@@ -31,6 +30,7 @@ import MobileUserIcon from '../icons/MobileUserIcon'
 import MobileMenu from '../menu-mobile/MobileMenu'
 import { usePathname, useRouter } from 'next/navigation'
 import CartHeaderDesktop from './CartHeaderDesktop'
+import FavoritesHeaderDesktop from './FavoritesHeaderDesktop'
 
 const Header = () => {
   const router = useRouter()
@@ -92,13 +92,7 @@ const Header = () => {
             <MessageIcon fill="#8B96A5" />
             <p className="text-xs text-gray-400">Mensagem</p>
           </div>
-          <div
-            className="flex cursor-pointer flex-col items-center justify-between gap-1 hover:opacity-70"
-            onClick={() => router.push('/favorites')}
-          >
-            <HeartIcon fill="#8B96A5" />
-            <p className="text-xs text-gray-400">Favoritos</p>
-          </div>
+          <FavoritesHeaderDesktop />
           <CartHeaderDesktop />
         </div>
       </div>
