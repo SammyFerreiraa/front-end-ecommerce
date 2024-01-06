@@ -18,6 +18,8 @@ import { useCart } from '@/hooks/useCart'
 import { TbShoppingCartExclamation } from 'react-icons/tb'
 import axios from 'axios'
 import LoadingProduct from './LoadingProduct'
+import { useFavorites } from '@/hooks/useFavorites'
+import { ProductCartProps, ProductProps } from '@/@types'
 
 const ProductsCart = () => {
   const [loading, setLoading] = useState(true)
@@ -25,6 +27,11 @@ const ProductsCart = () => {
   const [expired, setExpired] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
+  const [favorites, setFavorites, addProduct] = useFavorites((state) => [
+    state.favorites,
+    state.setFavorites,
+    state.addProduct,
+  ])
   const [cart, setCart, setQuantity, removeProduct, removeAllProducts] =
     useCart((state) => [
       state.cart,
@@ -60,7 +67,7 @@ const ProductsCart = () => {
   const changeQuantity = (productCode: string, quantity: number) => {
     setQuantity(productCode, quantity)
     if (!session?.token) return
-    const make = async () => {
+    const req = async () => {
       await axios.post(
         `http://localhost:3000/cart/updatequantity`,
         {
@@ -74,13 +81,13 @@ const ProductsCart = () => {
         },
       )
     }
-    make()
+    req()
   }
 
   const removeItemFromCart = (productCode: string) => {
     removeProduct(productCode)
     if (!session?.token) return
-    const make = async () => {
+    const req = async () => {
       await axios.delete(`http://localhost:3000/cart/removeitem`, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
@@ -90,7 +97,7 @@ const ProductsCart = () => {
         },
       })
     }
-    make()
+    req()
   }
 
   const removeOne = (productCode: string) => {
@@ -102,7 +109,7 @@ const ProductsCart = () => {
       removeProduct(productCode)
     }
     if (!session?.token) return
-    const make = async () => {
+    const req = async () => {
       await axios.post(
         `http://localhost:3000/cart/updatequantity`,
         {
@@ -118,7 +125,7 @@ const ProductsCart = () => {
         },
       )
     }
-    make()
+    req()
   }
 
   const addOne = (productCode: string) => {
@@ -130,7 +137,7 @@ const ProductsCart = () => {
 
       if (!session?.token) return
 
-      const make = async () => {
+      const req = async () => {
         await axios.post(
           `http://localhost:3000/cart/updatequantity`,
           {
@@ -146,7 +153,7 @@ const ProductsCart = () => {
           },
         )
       }
-      make()
+      req()
     } catch (error) {
       console.error('Erro na solicitação:', error)
     }
@@ -157,7 +164,7 @@ const ProductsCart = () => {
     setEmpty(true)
     if (!session?.token) return
 
-    const make = async () => {
+    const req = async () => {
       await axios.delete(`http://localhost:3000/cart`, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
@@ -167,7 +174,34 @@ const ProductsCart = () => {
         },
       })
     }
-    make()
+    req()
+  }
+
+  const saveForLater = (code: string, product: ProductCartProps) => {
+    if (favorites.products.find((p) => p.code === code)) return
+    const { quantity, ...productAdd } = product
+    const productToAdd: ProductProps = {
+      ...productAdd,
+      availableQuantity: 50 - quantity,
+    }
+    addProduct(productToAdd)
+
+    if (!session?.token) return
+    const req = async () => {
+      await axios.post(
+        `http://localhost:3000/favorites`,
+        {
+          favoriteId: favorites.id,
+          productCode: code,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session?.token}`,
+          },
+        },
+      )
+    }
+    req()
   }
   return (
     <div className="w-full rounded-md">
@@ -228,7 +262,12 @@ const ProductsCart = () => {
                     Remove
                   </Button>
                   <Button
-                    onClick={() => console.log(cart)}
+                    onClick={() =>
+                      saveForLater(
+                        product.code,
+                        cart.products.find((p) => p.code === product.code)!,
+                      )
+                    }
                     className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-blue-600 hover:bg-blue-600 hover:text-white"
                   >
                     Save for Later

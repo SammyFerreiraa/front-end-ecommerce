@@ -1,9 +1,10 @@
 import { create } from 'zustand'
-import { favoritesProps } from '../@types'
+import { ProductProps, favoritesProps } from '../@types'
 interface useFavoritesProps {
   favorites: favoritesProps
   setFavorites: (favorites: favoritesProps) => void
   removeProduct: (code: string) => void
+  addProduct: (product: ProductProps) => void
 }
 
 export const useFavorites = create<useFavoritesProps>((set) => ({
@@ -16,6 +17,14 @@ export const useFavorites = create<useFavoritesProps>((set) => ({
         products: state.favorites.products.filter(
           (product) => product.code !== code,
         ),
+      },
+    }))
+  },
+  addProduct: (product) => {
+    set((state) => ({
+      favorites: {
+        ...state.favorites,
+        products: [...state.favorites.products, product],
       },
     }))
   },
