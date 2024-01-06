@@ -255,7 +255,7 @@ const ProductsCart = () => {
               <div className="flex flex-row items-center justify-between">
                 <div className="hidden gap-3 lg:flex">
                   <Button
-                    className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white"
+                    className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-red-600 hover:bg-red-600 hover:text-white"
                     onClick={() => removeItemFromCart(product.code)}
                   >
                     Remove
@@ -268,7 +268,7 @@ const ProductsCart = () => {
                         cart.products.find((p) => p.code === product.code)!,
                       )
                     }
-                    className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-blue-600 hover:bg-blue-600 hover:text-white"
+                    className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
                   >
                     Save for Later
                   </Button>
@@ -340,7 +340,7 @@ const ProductsCart = () => {
 
           <div className="hidden w-full flex-row items-center justify-between bg-white p-5 lg:flex">
             <Button
-              className="flex flex-row gap-3 bg-blue-600 text-base font-medium text-white hover:bg-white hover:text-blue-600"
+              className="flex flex-row gap-3 bg-blue-600 text-base font-semibold text-white hover:bg-white hover:text-blue-600"
               onClick={() => router.push('/')}
               disabled={empty}
             >
@@ -348,7 +348,7 @@ const ProductsCart = () => {
               Back to shop
             </Button>
             <Button
-              className="border border-gray-300 bg-transparent text-red-600 hover:bg-red-600 hover:text-white"
+              className="border border-gray-300 bg-transparent font-semibold text-red-600 hover:bg-red-600 hover:text-white"
               onClick={() => clearCart()}
               disabled={empty}
             >

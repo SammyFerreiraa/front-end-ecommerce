@@ -5,7 +5,7 @@ import { CartTitle, Payment, ProductsCart } from '@/components/cart'
 const Home = () => {
   return (
     <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px] lg:px-12 xl:px-0">
-      <div className="w-full bg-white px-4 py-4 shadow-md md:bg-transparent md:px-0 md:py-7 md:shadow-none">
+      <div className="w-full bg-white px-4 py-4 shadow-md md:bg-transparent md:px-0 md:py-5 md:shadow-none">
         <CartTitle />
       </div>
       {/* shopping cart */}

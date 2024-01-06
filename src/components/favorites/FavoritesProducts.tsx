@@ -54,18 +54,18 @@ const FavoritesProducts = () => {
           </div>
           <div className="flex flex-row items-center justify-between">
             <div className="hidden gap-3 lg:flex">
-              <Button className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-blue-600 hover:bg-blue-600 hover:text-white">
+              <Button className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-blue-600 hover:bg-blue-600 hover:text-white">
                 Move to Cart
               </Button>
-              <Button className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white">
+              <Button className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-red-600 hover:bg-red-600 hover:text-white">
                 Remove
               </Button>
             </div>
             <div className="flex flex-row gap-2 rounded-md border-neutral-300 lg:hidden">
-              <Button className="border border-zinc-300 bg-transparent text-center font-medium text-blue-600 hover:bg-blue-600 hover:text-white">
+              <Button className="border border-zinc-300 bg-transparent text-center font-semibold text-blue-600 hover:bg-blue-600 hover:text-white">
                 Move to cart
               </Button>
-              <Button className="border border-zinc-300 bg-transparent text-center font-medium text-red-600 hover:bg-red-600 hover:text-white">
+              <Button className="border border-zinc-300 bg-transparent text-center font-semibold text-red-600 hover:bg-red-600 hover:text-white">
                 Remove
               </Button>
             </div>
