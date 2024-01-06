@@ -57,7 +57,7 @@ const FavoritesProducts = () => {
     if (cart.products.find((p) => p.code === code)) return
     setCart({
       ...cart,
-      products: [...cart.products, { ...product, quantity: 1 }],
+      products: [...cart.products, { ...product, code, quantity: 1 }],
     })
 
     if (!session?.token) return

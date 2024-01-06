@@ -68,7 +68,7 @@ const ProductsCart = () => {
     if (!session?.token) return
     const req = async () => {
       await axios.post(
-        `http://localhost:3000/cart/updatequantity`,
+        `http://localhost:3000/cart/update/quantity`,
         {
           quantity,
           productCode,
@@ -87,7 +87,7 @@ const ProductsCart = () => {
     removeProduct(productCode)
     if (!session?.token) return
     const req = async () => {
-      await axios.delete(`http://localhost:3000/cart/removeitem`, {
+      await axios.delete(`http://localhost:3000/cart/remove/item`, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
         },
@@ -99,32 +99,27 @@ const ProductsCart = () => {
     req()
   }
 
-  const removeOne = (productCode: string) => {
+  const removeOne = (productCode: string, cartId: string) => {
     const quantity =
       (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) - 1
-    changeQuantity(productCode, quantity)
+
+    setQuantity(productCode, quantity)
     if (quantity === 0) {
       removeProduct(productCode)
     }
+    if (cart.products.length === 1) setEmpty(true)
 
-    const verify = async () => {
-      if ((await cart.products.length) === 1) setEmpty(true)
-    }
-    verify()
     if (!session?.token) return
     const req = async () => {
-      await axios.post(
-        `http://localhost:3000/cart/updatequantity`,
-        {
-          quantity,
+      await axios.delete(`http://localhost:3000/cart/remove`, {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+        data: {
+          cartId,
           productCode,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${session?.token}`,
-          },
-        },
-      )
+      })
     }
     req()
   }
@@ -140,7 +135,7 @@ const ProductsCart = () => {
 
       const req = async () => {
         await axios.post(
-          `http://localhost:3000/cart/updatequantity`,
+          `http://localhost:3000/cart/update/quantity`,
           {
             quantity:
               (cart.products.find((p) => p.code === productCode)?.quantity ??
@@ -278,7 +273,7 @@ const ProductsCart = () => {
                 <div className="flex flex-row rounded-md border border-neutral-300 lg:hidden">
                   <div
                     className="flex cursor-pointer items-center justify-center p-2 px-3"
-                    onClick={() => removeOne(product.code)}
+                    onClick={() => removeOne(product.code, cart.id)}
                   >
                     <FaMinus />
                   </div>
