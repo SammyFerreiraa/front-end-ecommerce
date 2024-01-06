@@ -27,9 +27,8 @@ const ProductsCart = () => {
   const [expired, setExpired] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
-  const [favorites, setFavorites, addProduct] = useFavorites((state) => [
+  const [favorites, addProduct] = useFavorites((state) => [
     state.favorites,
-    state.setFavorites,
     state.addProduct,
   ])
   const [cart, setCart, setQuantity, removeProduct, removeAllProducts] =
@@ -265,6 +264,7 @@ const ProductsCart = () => {
                     onClick={() =>
                       saveForLater(
                         product.code,
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                         cart.products.find((p) => p.code === product.code)!,
                       )
                     }
