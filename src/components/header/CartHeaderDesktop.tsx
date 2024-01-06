@@ -9,12 +9,11 @@ import { useSession } from 'next-auth/react'
 
 const CartHeaderDesktop = () => {
   const router = useRouter()
-  const cart = useCart((state) => state.cart)
-  const setCart = useCart((state) => state.setCart)
+  const [cart, setCart] = useCart((state) => [state.cart, state.setCart])
   const { data: session } = useSession()
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCart = async () => {
       if (!session?.token) return
       await axios
         .get('http://localhost:3000/profile', {
@@ -26,7 +25,7 @@ const CartHeaderDesktop = () => {
           setCart(res.data.cart)
         })
     }
-    fetchData()
+    fetchCart()
   }, [session?.token, setCart])
   return (
     <div
