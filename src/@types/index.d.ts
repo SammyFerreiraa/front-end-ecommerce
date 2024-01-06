@@ -48,6 +48,11 @@ type cartProps = {
   products: ProductCartProps[]
 }
 
+type favoritesProps = {
+  id: string
+  products: ProductProps[]
+}
+
 export type userProps = {
   id: string
   name: string
