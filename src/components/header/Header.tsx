@@ -98,7 +98,9 @@ const Header = () => {
       </div>
       {/* Search Mobile */}
       <div
-        className={`mb-5 px-2 md:hidden ${pathname === '/cart' && 'hidden'}`}
+        className={`mb-5 px-2 md:hidden ${pathname === '/cart' && 'hidden'}  ${
+          pathname === '/favorites' && 'hidden'
+        }`}
       >
         <div className="flex h-10 w-full flex-row items-center gap-2 rounded-md bg-gray-100 px-2">
           <SearchIcon />
