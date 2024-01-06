@@ -6,9 +6,12 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { Button } from '../ui/button'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
+import { useCart } from '@/hooks/useCart'
+import { ProductProps } from '@/@types'
 
 const FavoritesProducts = () => {
   const { data: session } = useSession()
+  const [cart, setCart] = useCart((state) => [state.cart, state.setCart])
   const [favorites, setFavorites] = useFavorites((state) => [
     state.favorites,
     state.setFavorites,
@@ -29,6 +32,50 @@ const FavoritesProducts = () => {
     }
     fetchFavorites()
   }, [session?.token, setFavorites])
+
+  const removeProduct = (code: string) => {
+    const newFavorites = favorites.products.filter(
+      (product) => product.code !== code,
+    )
+    setFavorites({ ...favorites, products: newFavorites })
+
+    if (!session?.token) return
+    const req = async () => {
+      await axios.delete(`http://localhost:3000/favorites`, {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+        data: {
+          productCode: code,
+        },
+      })
+    }
+    req()
+  }
+
+  const addToCart = (code: string, product: ProductProps) => {
+    if (cart.products.find((p) => p.code === code)) return
+    setCart({
+      ...cart,
+      products: [...cart.products, { ...product, quantity: 1 }],
+    })
+
+    if (!session?.token) return
+    const req = async () => {
+      await axios.post(
+        `http://localhost:3000/cart`,
+        {
+          productCode: code,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session?.token}`,
+          },
+        },
+      )
+    }
+    req()
+  }
   return (
     <div className="flex flex-col items-center justify-center lg:rounded-md lg:shadow-md">
       {favorites.products.map((product) => (
@@ -54,18 +101,30 @@ const FavoritesProducts = () => {
           </div>
           <div className="flex flex-row items-center justify-between">
             <div className="hidden gap-3 lg:flex">
-              <Button className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-blue-600 hover:bg-blue-600 hover:text-white">
+              <Button
+                className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
+                onClick={() => addToCart(product.code, product)}
+              >
                 Move to Cart
               </Button>
-              <Button className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-red-600 hover:bg-red-600 hover:text-white">
+              <Button
+                className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-red-600 hover:bg-red-600 hover:text-white"
+                onClick={() => removeProduct(product.code)}
+              >
                 Remove
               </Button>
             </div>
             <div className="flex flex-row gap-2 rounded-md border-neutral-300 lg:hidden">
-              <Button className="border border-zinc-300 bg-transparent text-center font-semibold text-blue-600 hover:bg-blue-600 hover:text-white">
+              <Button
+                className="border border-zinc-300 bg-transparent text-center font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
+                onClick={() => addToCart(product.code, product)}
+              >
                 Move to cart
               </Button>
-              <Button className="border border-zinc-300 bg-transparent text-center font-semibold text-red-600 hover:bg-red-600 hover:text-white">
+              <Button
+                className="border border-zinc-300 bg-transparent text-center font-semibold text-red-600 hover:bg-red-600 hover:text-white"
+                onClick={() => removeProduct(product.code)}
+              >
                 Remove
               </Button>
             </div>
