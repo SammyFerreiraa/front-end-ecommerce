@@ -340,7 +340,6 @@ const ProductsCart = () => {
             <Button
               className="flex flex-row gap-3 bg-blue-600 text-base font-semibold text-white hover:bg-white hover:text-blue-600"
               onClick={() => router.push('/')}
-              disabled={empty}
             >
               <ArrowLeftIcon />
               Back to shop
