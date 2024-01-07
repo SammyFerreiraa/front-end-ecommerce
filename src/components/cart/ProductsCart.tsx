@@ -108,7 +108,7 @@ const ProductsCart = () => {
     if (quantity === 0) {
       removeProduct(productCode)
     }
-    if (cart.products.length === 1) setEmpty(true)
+    if (cart.products.length === 1 && quantity === 0) setEmpty(true)
 
     if (!session?.token) return
     const req = async () => {
