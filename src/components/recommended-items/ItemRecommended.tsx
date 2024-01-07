@@ -14,7 +14,10 @@ const ItemRecommended = ({
   favorite,
   product,
 }: ItemRecommendedProps) => {
-  const addProduct = useFavorites((state) => state.addProduct)
+  const [addProduct, removeProduct] = useFavorites((state) => [
+    state.addProduct,
+    state.removeProduct,
+  ])
   const { data: session } = useSession()
 
   const addFavorites = () => {
@@ -28,6 +31,22 @@ const ItemRecommended = ({
         },
         { headers: { Authorization: `Bearer ${session?.token}` } },
       )
+    }
+    req()
+  }
+
+  const removeFavorites = () => {
+    removeProduct(product.code)
+
+    const req = async () => {
+      await axios.delete('http://localhost:3000/favorites', {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+        data: {
+          productCode: product.code,
+        },
+      })
     }
     req()
   }
@@ -57,7 +76,10 @@ const ItemRecommended = ({
             </div>
           )}
           {favorite && (
-            <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200">
+            <div
+              className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200"
+              onClick={() => removeFavorites()}
+            >
               <IoMdHeart className="m-2 h-5 w-5 text-red-600 hover:text-inherit" />
             </div>
           )}
