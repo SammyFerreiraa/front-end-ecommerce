@@ -27,6 +27,8 @@ export type ItemRecommendedProps = {
   name: string
   image: string
   price: string
+  favorite: boolean
+  product: ProductProps
 }
 
 type ProductCartProps = {
