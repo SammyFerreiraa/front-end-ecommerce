@@ -85,6 +85,7 @@ const ProductsCart = () => {
 
   const removeItemFromCart = (productCode: string) => {
     removeProduct(productCode)
+    if (cart.products.length === 1) setEmpty(true)
     if (!session?.token) return
     const req = async () => {
       await axios.delete(`http://localhost:3000/cart/remove/item`, {
