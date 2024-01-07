@@ -201,9 +201,9 @@ const ProductsCart = () => {
     req()
   }
   return (
-    <div className="w-full rounded-md">
+    <div className="w-full lg:rounded-md">
       {loading === false && (
-        <div className="flex flex-col items-center justify-center lg:rounded-md lg:shadow-md">
+        <div className="flex flex-col items-center justify-center bg-white lg:rounded-md lg:shadow-md">
           {/* produto */}
           {empty && (
             <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
@@ -215,11 +215,11 @@ const ProductsCart = () => {
           )}
           {cart.products.map((product) => (
             <div
-              className="flex w-full flex-col gap-5  border-b border-neutral-300 bg-white p-4"
+              className="flex w-full flex-col gap-5  border-b border-neutral-300 p-4"
               key={product.code}
             >
               <div className="flex flex-row items-center justify-start gap-3">
-                <div className="flex h-fit w-16 items-center justify-center rounded-md border border-neutral-300 bg-white p-1">
+                <div className="flex h-fit w-16 items-center justify-center rounded-md border border-neutral-300 p-1">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -336,7 +336,7 @@ const ProductsCart = () => {
             </div>
           ))}
 
-          <div className="hidden w-full flex-row items-center justify-between bg-white p-5 lg:flex">
+          <div className="hidden w-full flex-row items-center justify-between rounded-b-md bg-white p-5 lg:flex">
             <Button
               className="flex flex-row gap-3 bg-blue-600 text-base font-semibold text-white hover:bg-white hover:text-blue-600"
               onClick={() => router.push('/')}
