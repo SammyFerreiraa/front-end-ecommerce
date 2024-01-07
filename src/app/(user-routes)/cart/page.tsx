@@ -1,6 +1,11 @@
 import { MaxWidthWrapper } from '@/components'
 import React from 'react'
-import { CartTitle, Payment, ProductsCart } from '@/components/cart'
+import {
+  CartTitle,
+  Payment,
+  ProductsCart,
+  SavedForLater,
+} from '@/components/cart'
 
 const Home = () => {
   return (
@@ -43,6 +48,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <SavedForLater />
     </MaxWidthWrapper>
   )
 }
