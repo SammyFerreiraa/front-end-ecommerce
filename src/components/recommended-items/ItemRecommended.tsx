@@ -1,8 +1,36 @@
+'use client'
+
 import { ItemRecommendedProps } from '@/@types'
+import { useFavorites } from '@/hooks/useFavorites'
+import axios from 'axios'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
 
-const ItemRecommended = ({ name, image, price }: ItemRecommendedProps) => {
+const ItemRecommended = ({
+  name,
+  image,
+  price,
+  favorite,
+  product,
+}: ItemRecommendedProps) => {
+  const addProduct = useFavorites((state) => state.addProduct)
+  const { data: session } = useSession()
+
+  const addFavorites = () => {
+    addProduct(product)
+
+    const req = async () => {
+      await axios.post(
+        'http://localhost:3000/favorites',
+        {
+          productCode: product.code,
+        },
+        { headers: { Authorization: `Bearer ${session?.token}` } },
+      )
+    }
+    req()
+  }
   return (
     <div className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3">
       <div className="flex items-center justify-center p-3">
@@ -20,9 +48,19 @@ const ItemRecommended = ({ name, image, price }: ItemRecommendedProps) => {
               <p className="text-sm text-amber-500">4.0</p>
             </div>
           </div>
-          <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:bg-gray-300 hover:text-red-600">
-            <IoMdHeartEmpty className="m-2 h-5 w-5 text-blue-600 hover:text-inherit" />
-          </div>
+          {!favorite && (
+            <div
+              className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600"
+              onClick={() => addFavorites()}
+            >
+              <IoMdHeartEmpty className="m-2 h-5 w-5 text-blue-600" />
+            </div>
+          )}
+          {favorite && (
+            <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200">
+              <IoMdHeart className="m-2 h-5 w-5 text-red-600 hover:text-inherit" />
+            </div>
+          )}
         </div>
         <p className="line-clamp-2 text-[13px] text-gray-400">{name}</p>
       </div>
