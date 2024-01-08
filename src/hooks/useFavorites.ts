@@ -5,10 +5,13 @@ interface useFavoritesProps {
   setFavorites: (favorites: favoritesProps) => void
   removeProduct: (code: string) => void
   addProduct: (product: ProductProps) => void
+  favoritesEmpty: boolean
+  setFavoritesEmpty: (favoritesEmpty: boolean) => void
 }
 
 export const useFavorites = create<useFavoritesProps>((set) => ({
   favorites: { id: '', products: [] },
+  favoritesEmpty: true,
   setFavorites: (favorites) => set({ favorites }),
   removeProduct: (code) => {
     set((state) => ({
@@ -28,4 +31,5 @@ export const useFavorites = create<useFavoritesProps>((set) => ({
       },
     }))
   },
+  setFavoritesEmpty: (favoritesEmpty) => set({ favoritesEmpty }),
 }))
