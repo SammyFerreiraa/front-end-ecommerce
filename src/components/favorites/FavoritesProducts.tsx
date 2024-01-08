@@ -8,14 +8,18 @@ import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
 import { ProductProps } from '@/@types'
+import { TbShoppingCartExclamation } from 'react-icons/tb'
 
 const FavoritesProducts = () => {
   const { data: session } = useSession()
   const [cart, setCart] = useCart((state) => [state.cart, state.setCart])
-  const [favorites, setFavorites] = useFavorites((state) => [
-    state.favorites,
-    state.setFavorites,
-  ])
+  const [favorites, setFavorites, favoritesEmpty, setFavoritesEmpty] =
+    useFavorites((state) => [
+      state.favorites,
+      state.setFavorites,
+      state.favoritesEmpty,
+      state.setFavoritesEmpty,
+    ])
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -28,16 +32,20 @@ const FavoritesProducts = () => {
         })
         .then((res) => {
           setFavorites(res.data.favorites)
+          if (res.data.favorites.products.length === 0) setFavoritesEmpty(true)
+          if (res.data.favorites.products.length !== 0) setFavoritesEmpty(false)
         })
     }
     fetchFavorites()
-  }, [session?.token, setFavorites])
+  }, [session?.token, setFavorites, setFavoritesEmpty])
 
   const removeProduct = (code: string) => {
     const newFavorites = favorites.products.filter(
       (product) => product.code !== code,
     )
     setFavorites({ ...favorites, products: newFavorites })
+
+    if (favorites.products.length === 1) setFavoritesEmpty(true)
 
     if (!session?.token) return
     const req = async () => {
@@ -60,6 +68,8 @@ const FavoritesProducts = () => {
       products: [...cart.products, { ...product, code, quantity: 1 }],
     })
 
+    setFavoritesEmpty(false)
+
     if (!session?.token) return
     const req = async () => {
       await axios.post(
@@ -77,7 +87,17 @@ const FavoritesProducts = () => {
     req()
   }
   return (
-    <div className="flex flex-col items-center justify-center lg:rounded-md lg:shadow-md">
+    <div className="flex w-full flex-col items-center justify-center lg:rounded-md lg:shadow-md">
+      {favoritesEmpty && (
+        <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
+          <div className="flex flex-row items-center justify-center gap-3">
+            <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
+            <p className="text-2xl text-zinc-400 lg:text-3xl ">
+              Seus Favoritos estão vazios{' '}
+            </p>
+          </div>
+        </div>
+      )}
       {favorites.products.map((product) => (
         <div
           className="flex w-full flex-col gap-5  border-b border-neutral-300 bg-white p-4"
