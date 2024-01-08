@@ -23,7 +23,6 @@ import { ProductCartProps, ProductProps } from '@/@types'
 
 const ProductsCart = () => {
   const [loading, setLoading] = useState(true)
-  const [empty, setEmpty] = useState(false)
   const [expired, setExpired] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
@@ -31,14 +30,23 @@ const ProductsCart = () => {
     state.favorites,
     state.addProduct,
   ])
-  const [cart, setCart, setQuantity, removeProduct, removeAllProducts] =
-    useCart((state) => [
-      state.cart,
-      state.setCart,
-      state.setQuantity,
-      state.removeProduct,
-      state.removeAllProducts,
-    ])
+  const [
+    cart,
+    setCart,
+    setQuantity,
+    removeProduct,
+    removeAllProducts,
+    empty,
+    setEmpty,
+  ] = useCart((state) => [
+    state.cart,
+    state.setCart,
+    state.setQuantity,
+    state.removeProduct,
+    state.removeAllProducts,
+    state.empty,
+    state.setEmpty,
+  ])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +61,7 @@ const ProductsCart = () => {
           .then((response) => {
             setCart(response.data.cart)
             if (response.data.cart.products.length === 0) setEmpty(true)
+            if (response.data.cart.products.length !== 0) setEmpty(false)
           })
         setLoading(false)
       } catch (error) {
@@ -61,7 +70,7 @@ const ProductsCart = () => {
       }
     }
     fetchData()
-  }, [session?.token, setCart])
+  }, [session?.token, setCart, setEmpty])
 
   const changeQuantity = (productCode: string, quantity: number) => {
     setQuantity(productCode, quantity)
