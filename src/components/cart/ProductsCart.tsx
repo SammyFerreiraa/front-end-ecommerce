@@ -26,9 +26,10 @@ const ProductsCart = () => {
   const [expired, setExpired] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
-  const [favorites, addProduct] = useFavorites((state) => [
+  const [favorites, addProduct, setFavoritesEmpty] = useFavorites((state) => [
     state.favorites,
     state.addProduct,
+    state.setFavoritesEmpty,
   ])
   const [
     cart,
@@ -58,10 +59,14 @@ const ProductsCart = () => {
               Authorization: `Bearer ${session?.token}`,
             },
           })
-          .then((response) => {
-            setCart(response.data.cart)
-            if (response.data.cart.products.length === 0) setEmpty(true)
-            if (response.data.cart.products.length !== 0) setEmpty(false)
+          .then((res) => {
+            setCart(res.data.cart)
+            if (res.data.cart.products.length === 0) setEmpty(true)
+            if (res.data.cart.products.length !== 0) setEmpty(false)
+            if (res.data.favorites.products.length === 0)
+              setFavoritesEmpty(true)
+            if (res.data.favorites.products.length !== 0)
+              setFavoritesEmpty(false)
           })
         setLoading(false)
       } catch (error) {
@@ -70,7 +75,7 @@ const ProductsCart = () => {
       }
     }
     fetchData()
-  }, [session?.token, setCart, setEmpty])
+  }, [session?.token, setCart, setEmpty, setFavoritesEmpty])
 
   const changeQuantity = (productCode: string, quantity: number) => {
     setQuantity(productCode, quantity)
@@ -191,6 +196,7 @@ const ProductsCart = () => {
       availableQuantity: 50 - quantity,
     }
     addProduct(productToAdd)
+    setFavoritesEmpty(false)
 
     if (!session?.token) return
     const req = async () => {

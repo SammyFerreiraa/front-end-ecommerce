@@ -8,12 +8,14 @@ import { useFavorites } from '@/hooks/useFavorites'
 import { ProductProps } from '@/@types'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
+import { TbShoppingCartExclamation } from 'react-icons/tb'
 
 const SavedForLater = () => {
   const { data: session } = useSession()
-  const [favorites, setFavorites] = useFavorites((state) => [
+  const [favorites, setFavorites, favoritesEmpty] = useFavorites((state) => [
     state.favorites,
     state.setFavorites,
+    state.favoritesEmpty,
   ])
   const [cart, setCart, setEmpty] = useCart((state) => [
     state.cart,
@@ -71,7 +73,21 @@ const SavedForLater = () => {
       <h1 className="w-full text-left text-lg font-semibold text-zinc-900">
         Saved for later
       </h1>
-      <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-1 lg:grid-cols-4 lg:gap-5">
+      <div
+        className={`grid w-full grid-cols-1 gap-2 md:grid-cols-1 lg:grid-cols-4 lg:gap-5 ${
+          favoritesEmpty ? 'lg:grid-cols-1' : ''
+        }`}
+      >
+        {favoritesEmpty && (
+          <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
+            <div className="flex flex-row items-center justify-center gap-3">
+              <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
+              <p className="text-2xl text-zinc-400 lg:text-3xl ">
+                Seus Favoritos estão vazios{' '}
+              </p>
+            </div>
+          </div>
+        )}
         {favorites.products.map((product) => (
           <div
             className="flex flex-row gap-3 rounded-md border-2 border-gray-300 bg-white p-2 lg:flex-col lg:rounded-none lg:border-none lg:p-0"
