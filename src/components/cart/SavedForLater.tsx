@@ -8,7 +8,7 @@ import { useFavorites } from '@/hooks/useFavorites'
 import { ProductProps } from '@/@types'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
-import { TbShoppingCartExclamation } from 'react-icons/tb'
+import { LuHeartOff } from 'react-icons/lu'
 
 const SavedForLater = () => {
   const { data: session } = useSession()
@@ -74,14 +74,14 @@ const SavedForLater = () => {
         Saved for later
       </h1>
       <div
-        className={`grid w-full grid-cols-1 gap-2 md:grid-cols-1 lg:grid-cols-4 lg:gap-5 ${
-          favoritesEmpty ? 'lg:grid-cols-1' : ''
+        className={`grid w-full grid-cols-1 gap-2 md:grid-cols-1  lg:gap-5 ${
+          favoritesEmpty ? 'lg:grid-cols-1' : 'lg:grid-cols-4'
         }`}
       >
         {favoritesEmpty && (
           <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
             <div className="flex flex-row items-center justify-center gap-3">
-              <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
+              <LuHeartOff className="text-2xl text-zinc-400 lg:text-5xl" />
               <p className="text-2xl text-zinc-400 lg:text-3xl ">
                 Seus Favoritos estão vazios{' '}
               </p>

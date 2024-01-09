@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
 import { ProductProps } from '@/@types'
 import { TbShoppingCartExclamation } from 'react-icons/tb'
+import { LuHeartOff } from 'react-icons/lu'
 
 const FavoritesProducts = () => {
   const { data: session } = useSession()
@@ -91,7 +92,7 @@ const FavoritesProducts = () => {
       {favoritesEmpty && (
         <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
           <div className="flex flex-row items-center justify-center gap-3">
-            <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
+            <LuHeartOff className="text-2xl text-zinc-400 lg:text-5xl" />
             <p className="text-2xl text-zinc-400 lg:text-3xl ">
               Seus Favoritos estão vazios{' '}
             </p>
