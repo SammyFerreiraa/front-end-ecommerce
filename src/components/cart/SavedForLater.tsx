@@ -71,7 +71,7 @@ const SavedForLater = () => {
   return (
     <div className="mt-5 flex w-full flex-col items-center gap-5 px-3 lg:rounded-md lg:bg-white lg:p-5">
       <h1 className="w-full text-left text-lg font-semibold text-zinc-900">
-        Saved for later
+        Favoritos
       </h1>
       <div
         className={`grid w-full grid-cols-1 gap-2 md:grid-cols-1  lg:gap-5 ${
@@ -130,7 +130,7 @@ const SavedForLater = () => {
                   onClick={() => addToCart(product.code, product)}
                 >
                   <MdOutlineShoppingCart className="h-4 w-4" />
-                  Move to cart
+                  Carrinho
                 </Button>
                 <Button
                   className=" border-2 border-zinc-300 bg-transparent text-center font-semibold text-red-600 hover:bg-red-600 hover:text-white md:flex lg:hidden"

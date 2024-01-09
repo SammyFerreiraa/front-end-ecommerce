@@ -8,7 +8,6 @@ import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
 import { ProductProps } from '@/@types'
-import { TbShoppingCartExclamation } from 'react-icons/tb'
 import { LuHeartOff } from 'react-icons/lu'
 
 const FavoritesProducts = () => {

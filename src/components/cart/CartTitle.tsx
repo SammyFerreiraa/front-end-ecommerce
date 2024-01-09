@@ -7,7 +7,7 @@ const CartTitle = () => {
   const cart = useCart((state) => state.cart)
   return (
     <h1 className="text-lg font-semibold text-zinc-900 md:text-2xl">
-      Shopping Cart ({cart.products.length})
+      Carrinho ({cart.products.length})
     </h1>
   )
 }

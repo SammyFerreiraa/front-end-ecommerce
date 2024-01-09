@@ -36,13 +36,13 @@ const LoadingProduct = () => {
               className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white"
               disabled
             >
-              Remove
+              Remover
             </Button>
             <Button
               className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-blue-600 hover:bg-blue-600 hover:text-white"
               disabled
             >
-              Save for Later
+              Favoritos
             </Button>
           </div>
           <div className="flex flex-row rounded-md border border-neutral-300 lg:hidden">
@@ -110,13 +110,13 @@ const LoadingProduct = () => {
               className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white"
               disabled
             >
-              Remove
+              Remover
             </Button>
             <Button
               className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-blue-600 hover:bg-blue-600 hover:text-white"
               disabled
             >
-              Save for Later
+              Favoritos
             </Button>
           </div>
           <div className="flex flex-row rounded-md border border-neutral-300 lg:hidden">
@@ -184,13 +184,13 @@ const LoadingProduct = () => {
               className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-red-600 hover:bg-red-600 hover:text-white"
               disabled
             >
-              Remove
+              Remover
             </Button>
             <Button
               className="border border-gray-300 bg-transparent text-center text-[13px] font-medium text-blue-600 hover:bg-blue-600 hover:text-white"
               disabled
             >
-              Save for Later
+              Favoritos
             </Button>
           </div>
           <div className="flex flex-row rounded-md border border-neutral-300 lg:hidden">
@@ -250,7 +250,7 @@ const LoadingProduct = () => {
           className="border border-gray-300 bg-transparent text-red-600 hover:bg-red-600 hover:text-white"
           disabled
         >
-          Remove All
+          Remover Tudo
         </Button>
       </div>
     </div>

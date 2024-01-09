@@ -224,7 +224,7 @@ const ProductsCart = () => {
             <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
               <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
               <p className="text-2xl text-zinc-400 lg:text-3xl">
-                Your shopping cart is empty{' '}
+                Seu carrinho está vazio{' '}
               </p>
             </div>
           )}
@@ -271,7 +271,7 @@ const ProductsCart = () => {
                     className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-red-600 hover:bg-red-600 hover:text-white"
                     onClick={() => removeItemFromCart(product.code)}
                   >
-                    Remove
+                    Remover
                   </Button>
                   <Button
                     onClick={() =>
@@ -283,7 +283,7 @@ const ProductsCart = () => {
                     }
                     className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
                   >
-                    Save for Later
+                    Salvar nos Favoritos
                   </Button>
                 </div>
                 <div className="flex flex-row rounded-md border border-neutral-300 lg:hidden">
@@ -357,14 +357,14 @@ const ProductsCart = () => {
               onClick={() => router.push('/')}
             >
               <ArrowLeftIcon />
-              Back to shop
+              Voltar pro Shop
             </Button>
             <Button
               className="border border-gray-300 bg-transparent font-semibold text-red-600 hover:bg-red-600 hover:text-white"
               onClick={() => clearCart()}
               disabled={empty}
             >
-              Remove All
+              Remover tudo
             </Button>
           </div>
         </div>

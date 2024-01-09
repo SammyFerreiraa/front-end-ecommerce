@@ -23,7 +23,7 @@ const Home = () => {
         <div className="flex flex-row gap-3">
           <img src="/images/icons/lock.png" alt="Icon" />
           <div className="flex flex-col">
-            <p className="leading-normal text-zinc-900">Secure Payment</p>
+            <p className="leading-normal text-zinc-900">Pagamento seguro</p>
             <p className="leading-normal text-zinc-400">
               Have you ever finally just
             </p>
@@ -32,7 +32,9 @@ const Home = () => {
         <div className="flex flex-row gap-3">
           <img src="/images/icons/chat.png" alt="Icon" />
           <div className="flex flex-col">
-            <p className="leading-normal text-zinc-900">Customer support</p>
+            <p className="leading-normal text-zinc-900">
+              Suporte personalizado
+            </p>
             <p className="leading-normal text-zinc-400">
               Have you ever finally just
             </p>
@@ -41,7 +43,7 @@ const Home = () => {
         <div className="flex flex-row gap-3">
           <img src="/images/icons/car.png" alt="Icon" />
           <div className="flex flex-col">
-            <p className="leading-normal text-zinc-900">Free delivery</p>
+            <p className="leading-normal text-zinc-900">Entrega gratuita</p>
             <p className="leading-normal text-zinc-400">
               Have you ever finally just
             </p>
