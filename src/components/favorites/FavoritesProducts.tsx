@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react'
 import { useCart } from '@/hooks/useCart'
 import { ProductProps } from '@/@types'
 import { LuHeartOff } from 'react-icons/lu'
+import { MdOutlineShoppingCart } from 'react-icons/md'
 
 const FavoritesProducts = () => {
   const { data: session } = useSession()
@@ -125,13 +126,14 @@ const FavoritesProducts = () => {
                 className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
                 onClick={() => addToCart(product.code, product)}
               >
-                Move to Cart
+                <MdOutlineShoppingCart className="mr-1 h-4 w-4" />
+                Carrinho
               </Button>
               <Button
                 className="border border-gray-300 bg-transparent text-center text-[13px] font-semibold text-red-600 hover:bg-red-600 hover:text-white"
                 onClick={() => removeProduct(product.code)}
               >
-                Remove
+                Remover
               </Button>
             </div>
             <div className="flex flex-row gap-2 rounded-md border-neutral-300 lg:hidden">
@@ -139,13 +141,14 @@ const FavoritesProducts = () => {
                 className="border border-zinc-300 bg-transparent text-center font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
                 onClick={() => addToCart(product.code, product)}
               >
-                Move to cart
+                <MdOutlineShoppingCart className="mr-1 h-4 w-4" />
+                Carrinho
               </Button>
               <Button
                 className="border border-zinc-300 bg-transparent text-center font-semibold text-red-600 hover:bg-red-600 hover:text-white"
                 onClick={() => removeProduct(product.code)}
               >
-                Remove
+                Remover
               </Button>
             </div>
             <p className="flex">
