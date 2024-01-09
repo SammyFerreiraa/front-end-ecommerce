@@ -67,7 +67,7 @@ const ItemRecommended = ({
               <p className="text-sm text-amber-500">4.0</p>
             </div>
           </div>
-          {!favorite && (
+          {!favorite && session?.token && (
             <div
               className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600"
               onClick={() => addFavorites()}
@@ -75,7 +75,7 @@ const ItemRecommended = ({
               <IoMdHeartEmpty className="m-2 h-5 w-5 text-blue-600" />
             </div>
           )}
-          {favorite && (
+          {favorite && session?.token && (
             <div
               className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200"
               onClick={() => removeFavorites()}
