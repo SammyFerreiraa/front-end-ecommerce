@@ -159,7 +159,7 @@ const Home = () => {
                   onClick={toggleVariant}
                   className="cursor-pointer text-base font-medium text-emerald-600"
                 >
-                  Cadastre-se
+                  {variant === 'login' ? 'Crie uma conta' : 'Entrar'}
                 </span>
               </p>
             </div>
