@@ -105,6 +105,7 @@ const Home = () => {
                   name="password"
                   id="password"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
+                  autoComplete="off"
                 />
               </div>
               {variant === 'register' && (
@@ -123,6 +124,7 @@ const Home = () => {
                     name="confirmPassword"
                     id="confirmPassword"
                     className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
+                    autoComplete="off"
                   />
                 </div>
               )}
