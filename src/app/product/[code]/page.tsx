@@ -20,8 +20,10 @@ import { SwiperSlide, Swiper } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
+import { useRouter } from 'next/navigation'
 
 const Home = ({ params }: { params: { code: string } }) => {
+  const router = useRouter()
   const code = params.code
   const [product, setProduct] = useState<ProductProps>({} as ProductProps)
   const [similares, setSimilares] = useState<ProductProps[]>(
@@ -41,7 +43,7 @@ const Home = ({ params }: { params: { code: string } }) => {
       if (!product.category) return
       await axios
         .post('http://localhost:3000/category', {
-          category: 'tecnologia',
+          category: product.category,
         })
         .then((res) => setSimilares(res.data))
     }
@@ -67,12 +69,12 @@ const Home = ({ params }: { params: { code: string } }) => {
                 </CarouselItem>
                 <CarouselItem className="basis-[80%]">
                   <div className="">
-                    <img src="/images/tech/4.png" alt={product.name} />
+                    <img src={product.image} alt={product.name} />
                   </div>
                 </CarouselItem>
                 <CarouselItem className="basis-[80%]">
                   <div className="">
-                    <img src="/images/tech/7.png" alt={product.name} />
+                    <img src={product.image} alt={product.name} />
                   </div>
                 </CarouselItem>
               </CarouselContent>
@@ -211,7 +213,10 @@ const Home = ({ params }: { params: { code: string } }) => {
                       key={product.id}
                       className="h-fit max-w-[150px]"
                     >
-                      <div className="flex h-fit max-w-[150px] cursor-pointer flex-col gap-2 rounded-md border-2 border-gray-300 bg-white px-3 pb-4 pt-2">
+                      <div
+                        className="flex h-fit max-w-[150px] cursor-pointer flex-col gap-2 rounded-md border-2 border-gray-300 bg-white px-3 pb-4 pt-2"
+                        onClick={() => router.push(`/product/${product.code}`)}
+                      >
                         <img
                           src={product.image}
                           alt={product.name}
