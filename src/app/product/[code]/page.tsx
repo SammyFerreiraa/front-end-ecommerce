@@ -13,7 +13,7 @@ import { useFavorites } from '@/hooks/useFavorites'
 import { ChevronRightIcon } from '@radix-ui/react-icons'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { IoMdHeartEmpty } from 'react-icons/io'
+import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import { SwiperSlide, Swiper } from 'swiper/react'
 
@@ -25,12 +25,13 @@ import { useRouter } from 'next/navigation'
 const Home = ({ params }: { params: { code: string } }) => {
   const router = useRouter()
   const code = params.code
+  const [favorite, setFavorite] = useState(false)
   const [product, setProduct] = useState<ProductProps>({} as ProductProps)
   const [similares, setSimilares] = useState<ProductProps[]>(
     [] as ProductProps[],
   )
   const [favorites] = useFavorites((state) => [state.favorites])
-  // const [cart] = useCart((state) => [state.cart])
+  const [cart] = useCart((state) => [state.cart])
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -48,7 +49,11 @@ const Home = ({ params }: { params: { code: string } }) => {
         .then((res) => setSimilares(res.data))
     }
     fetchProduct()
-  }, [code, product.category])
+
+    if (favorites.products.some((item) => item.code === code)) {
+      setFavorite(true)
+    }
+  }, [code, product.category, favorites.products])
 
   return (
     <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px] lg:px-12 xl:px-0">
@@ -116,9 +121,16 @@ const Home = ({ params }: { params: { code: string } }) => {
               <Button className="w-full bg-blue-600 text-white hover:bg-white hover:text-blue-600">
                 Adicionar ao Carrinho
               </Button>
-              <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600">
-                <IoMdHeartEmpty className="m-2 h-5 w-5 text-blue-600" />
-              </div>
+              {!favorite && (
+                <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600">
+                  <IoMdHeartEmpty className="m-2 h-5 w-5 text-blue-600" />
+                </div>
+              )}
+              {favorite && (
+                <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200">
+                  <IoMdHeart className="m-2 h-5 w-5 text-red-600 hover:text-inherit" />
+                </div>
+              )}
             </div>
             {/* info */}
             <div className="flex flex-col">
