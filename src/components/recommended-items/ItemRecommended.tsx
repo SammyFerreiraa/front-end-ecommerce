@@ -4,6 +4,7 @@ import { ItemRecommendedProps } from '@/@types'
 import { useFavorites } from '@/hooks/useFavorites'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
 
@@ -14,6 +15,7 @@ const ItemRecommended = ({
   favorite,
   product,
 }: ItemRecommendedProps) => {
+  const router = useRouter()
   const [addProduct, removeProduct] = useFavorites((state) => [
     state.addProduct,
     state.removeProduct,
@@ -51,7 +53,10 @@ const ItemRecommended = ({
     req()
   }
   return (
-    <div className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3">
+    <div
+      className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3"
+      onClick={() => router.push(`/product/${product.code}`)}
+    >
       <div className="flex items-center justify-center p-3">
         <img src={image} alt="camisa" />
       </div>
