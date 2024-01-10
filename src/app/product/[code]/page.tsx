@@ -21,8 +21,10 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 const Home = ({ params }: { params: { code: string } }) => {
+  const { data: session } = useSession()
   const router = useRouter()
   const code = params.code
   const [favorite, setFavorite] = useState(false)
@@ -30,7 +32,14 @@ const Home = ({ params }: { params: { code: string } }) => {
   const [similares, setSimilares] = useState<ProductProps[]>(
     [] as ProductProps[],
   )
-  const [favorites] = useFavorites((state) => [state.favorites])
+  const [favorites, addProduct, setFavoritesEmpty, setFavorites] = useFavorites(
+    (state) => [
+      state.favorites,
+      state.addProduct,
+      state.setFavoritesEmpty,
+      state.setFavorites,
+    ],
+  )
   const [cart] = useCart((state) => [state.cart])
 
   useEffect(() => {
@@ -54,6 +63,51 @@ const Home = ({ params }: { params: { code: string } }) => {
       setFavorite(true)
     }
   }, [code, product.category, favorites.products])
+
+  const removeToFavorites = (code: string) => {
+    const newFavorites = favorites.products.filter(
+      (product) => product.code !== code,
+    )
+
+    setFavorites({ ...favorites, products: newFavorites })
+    setFavorite(false)
+
+    if (!session?.token) return
+    const req = async () => {
+      await axios.delete(`http://localhost:3000/favorites`, {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+        data: {
+          productCode: code,
+        },
+      })
+    }
+    req()
+  }
+
+  const addFavorites = (code: string, product: ProductProps) => {
+    if (favorites.products.find((p) => p.code === code)) return
+    const { ...productAdd } = product
+    const productToAdd: ProductProps = {
+      ...productAdd,
+    }
+    addProduct(productToAdd)
+    setFavoritesEmpty(false)
+    setFavorite(true)
+
+    if (!session?.token) return
+    const req = async () => {
+      await axios.post(
+        'http://localhost:3000/favorites',
+        {
+          productCode: product.code,
+        },
+        { headers: { Authorization: `Bearer ${session?.token}` } },
+      )
+    }
+    req()
+  }
 
   return (
     <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px] lg:px-12 xl:px-0">
@@ -123,12 +177,18 @@ const Home = ({ params }: { params: { code: string } }) => {
               </Button>
               {!favorite && (
                 <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600">
-                  <IoMdHeartEmpty className="m-2 h-5 w-5 text-blue-600" />
+                  <IoMdHeartEmpty
+                    className="m-2 h-5 w-5 text-blue-600"
+                    onClick={() => addFavorites(code, product)}
+                  />
                 </div>
               )}
               {favorite && (
                 <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200">
-                  <IoMdHeart className="m-2 h-5 w-5 text-red-600 hover:text-inherit" />
+                  <IoMdHeart
+                    className="m-2 h-5 w-5 text-red-600 hover:text-inherit"
+                    onClick={() => removeToFavorites(code)}
+                  />
                 </div>
               )}
             </div>
