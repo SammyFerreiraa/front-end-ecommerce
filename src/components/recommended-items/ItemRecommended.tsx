@@ -53,16 +53,19 @@ const ItemRecommended = ({
     req()
   }
   return (
-    <div
-      className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3"
-      onClick={() => router.push(`/product/${product.code}`)}
-    >
-      <div className="flex items-center justify-center p-3">
+    <div className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3">
+      <div
+        className="flex items-center justify-center p-3"
+        onClick={() => router.push(`/product/${product.code}`)}
+      >
         <img src={image} alt="camisa" />
       </div>
       <div className="flex flex-col gap-1">
         <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-col items-start justify-center gap-1">
+          <div
+            className="flex flex-col items-start justify-center gap-1"
+            onClick={() => router.push(`/product/${product.code}`)}
+          >
             <p className="font-medium leading-snug text-zinc-900">
               R$ {'   '}
               {price}
@@ -89,7 +92,12 @@ const ItemRecommended = ({
             </div>
           )}
         </div>
-        <p className="line-clamp-2 text-[13px] text-gray-400">{name}</p>
+        <p
+          className="line-clamp-2 text-[13px] text-gray-400"
+          onClick={() => router.push(`/product/${product.code}`)}
+        >
+          {name}
+        </p>
       </div>
     </div>
   )
