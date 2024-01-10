@@ -28,6 +28,7 @@ const Home = ({ params }: { params: { code: string } }) => {
   const router = useRouter()
   const code = params.code
   const [favorite, setFavorite] = useState(false)
+  const [inCart, setInCart] = useState(false)
   const [product, setProduct] = useState<ProductProps>({} as ProductProps)
   const [similares, setSimilares] = useState<ProductProps[]>(
     [] as ProductProps[],
@@ -40,7 +41,11 @@ const Home = ({ params }: { params: { code: string } }) => {
       state.setFavorites,
     ],
   )
-  const [cart] = useCart((state) => [state.cart])
+  const [cart, setCartEmpty, setCart] = useCart((state) => [
+    state.cart,
+    state.setEmpty,
+    state.setCart,
+  ])
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -62,7 +67,10 @@ const Home = ({ params }: { params: { code: string } }) => {
     if (favorites.products.some((item) => item.code === code)) {
       setFavorite(true)
     }
-  }, [code, product.category, favorites.products])
+    if (cart.products.some((item) => item.code === code)) {
+      setInCart(true)
+    }
+  }, [code, product.category, favorites.products, cart.products])
 
   const removeToFavorites = (code: string) => {
     const newFavorites = favorites.products.filter(
@@ -88,11 +96,7 @@ const Home = ({ params }: { params: { code: string } }) => {
 
   const addFavorites = (code: string, product: ProductProps) => {
     if (favorites.products.find((p) => p.code === code)) return
-    const { ...productAdd } = product
-    const productToAdd: ProductProps = {
-      ...productAdd,
-    }
-    addProduct(productToAdd)
+    addProduct(product)
     setFavoritesEmpty(false)
     setFavorite(true)
 
@@ -104,6 +108,33 @@ const Home = ({ params }: { params: { code: string } }) => {
           productCode: product.code,
         },
         { headers: { Authorization: `Bearer ${session?.token}` } },
+      )
+    }
+    req()
+  }
+
+  const addToCart = (code: string, product: ProductProps) => {
+    if (cart.products.find((p) => p.code === code)) return
+    setCart({
+      ...cart,
+      products: [...cart.products, { ...product, code, quantity: 1 }],
+    })
+
+    setInCart(true)
+    setCartEmpty(false)
+
+    if (!session?.token) return
+    const req = async () => {
+      await axios.post(
+        `http://localhost:3000/cart`,
+        {
+          productCode: code,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session?.token}`,
+          },
+        },
       )
     }
     req()
@@ -172,11 +203,21 @@ const Home = ({ params }: { params: { code: string } }) => {
               </span>
             </h1>
             <div className="flex items-center gap-2 pb-5">
-              <Button className="w-full bg-blue-600 text-white hover:bg-white hover:text-blue-600">
-                Adicionar ao Carrinho
-              </Button>
+              {!inCart && (
+                <Button
+                  className="w-full bg-blue-600 text-white hover:bg-white hover:text-blue-600"
+                  onClick={() => addToCart(code, product)}
+                >
+                  Adicionar ao Carrinho
+                </Button>
+              )}
+              {inCart && (
+                <Button className="w-full bg-red-600 text-white hover:bg-white hover:text-red-600">
+                  Remover do Carrinho
+                </Button>
+              )}
               {!favorite && (
-                <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600">
+                <div className="flex h-fit w-fit cursor-pointer items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600">
                   <IoMdHeartEmpty
                     className="m-2 h-5 w-5 text-blue-600"
                     onClick={() => addFavorites(code, product)}
@@ -184,7 +225,7 @@ const Home = ({ params }: { params: { code: string } }) => {
                 </div>
               )}
               {favorite && (
-                <div className="flex h-fit w-fit items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200">
+                <div className="flex h-fit w-fit cursor-pointer items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200">
                   <IoMdHeart
                     className="m-2 h-5 w-5 text-red-600 hover:text-inherit"
                     onClick={() => removeToFavorites(code)}
