@@ -41,10 +41,11 @@ const Home = ({ params }: { params: { code: string } }) => {
       state.setFavorites,
     ],
   )
-  const [cart, setCartEmpty, setCart] = useCart((state) => [
+  const [cart, setCartEmpty, setCart, removeProduct] = useCart((state) => [
     state.cart,
     state.setEmpty,
     state.setCart,
+    state.removeProduct,
   ])
 
   useEffect(() => {
@@ -140,6 +141,24 @@ const Home = ({ params }: { params: { code: string } }) => {
     req()
   }
 
+  const removeItemFromCart = (productCode: string) => {
+    removeProduct(productCode)
+    setInCart(false)
+    if (cart.products.length === 1) setCartEmpty(true)
+    if (!session?.token) return
+    const req = async () => {
+      await axios.delete(`http://localhost:3000/cart/remove/item`, {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+        data: {
+          productCode,
+        },
+      })
+    }
+    req()
+  }
+
   return (
     <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px] lg:px-12 xl:px-0">
       <div className="w-full">
@@ -212,7 +231,10 @@ const Home = ({ params }: { params: { code: string } }) => {
                 </Button>
               )}
               {inCart && (
-                <Button className="w-full bg-red-600 text-white hover:bg-white hover:text-red-600">
+                <Button
+                  className="w-full bg-red-600 text-white hover:bg-white hover:text-red-600"
+                  onClick={() => removeItemFromCart(code)}
+                >
                   Remover do Carrinho
                 </Button>
               )}
