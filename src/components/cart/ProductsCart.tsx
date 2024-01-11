@@ -97,10 +97,10 @@ const ProductsCart = () => {
   return (
     <div className="w-full lg:rounded-md">
       {loading === false && (
-        <div className="flex flex-col items-center justify-center bg-white lg:rounded-md lg:shadow-md">
+        <div className="flex flex-col items-center justify-center bg-white md:rounded-md lg:shadow-md">
           {/* produto */}
           {empty && (
-            <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
+            <div className="flex h-80 w-full items-center justify-center gap-3 bg-white md:rounded-md">
               <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
               <p className="text-2xl text-zinc-400 lg:text-3xl">
                 Seu carrinho está vazio{' '}

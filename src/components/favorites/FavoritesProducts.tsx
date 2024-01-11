@@ -90,7 +90,7 @@ const FavoritesProducts = () => {
   return (
     <div className="flex w-full flex-col items-center justify-center lg:rounded-md lg:shadow-md">
       {favoritesEmpty && (
-        <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
+        <div className="flex h-80 w-full items-center justify-center gap-3 bg-white md:rounded-md">
           <div className="flex flex-row items-center justify-center gap-3">
             <LuHeartOff className="text-2xl text-zinc-400 lg:text-5xl" />
             <p className="text-2xl text-zinc-400 lg:text-3xl ">

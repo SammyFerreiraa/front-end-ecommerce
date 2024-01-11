@@ -177,7 +177,7 @@ const Home = ({ params }: { params: { code: string } }) => {
               <div className="hidden max-w-[345px] rounded-md border border-gray-300 p-1 md:flex">
                 <img src={product.image} alt={product.name} />
               </div>
-              <div className="flex flex-row justify-between">
+              <div className="flex flex-row justify-between gap-2">
                 <div className="hidden max-w-[56px] cursor-pointer rounded-md border border-black p-1 md:flex">
                   <img src={product.image} alt={product.name} />
                 </div>
@@ -356,7 +356,7 @@ const Home = ({ params }: { params: { code: string } }) => {
               </div>
               {!favorite && (
                 <Button
-                  className="flex w-fit flex-row items-center gap-2 bg-white text-blue-600 hover:bg-white hover:text-red-600"
+                  className="flex w-fit flex-row items-center gap-2 bg-blue-600 text-white hover:bg-white hover:text-blue-600"
                   onClick={() => addFavorites(code, product)}
                 >
                   <IoMdHeartEmpty className="h-5 w-5" />
@@ -367,7 +367,7 @@ const Home = ({ params }: { params: { code: string } }) => {
               )}
               {favorite && (
                 <Button
-                  className="flex flex-row items-center gap-2 bg-white text-red-600 hover:bg-white hover:text-blue-600"
+                  className="flex flex-row items-center gap-2 bg-red-600 text-white hover:bg-white hover:text-red-600"
                   onClick={() => removeToFavorites(code)}
                 >
                   <IoMdHeart className=" h-5 w-5 " />

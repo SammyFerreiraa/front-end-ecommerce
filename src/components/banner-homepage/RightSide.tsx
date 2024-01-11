@@ -12,9 +12,9 @@ const RightSide = ({ name }: RightSideProps) => {
   return (
     <div className="hidden h-auto max-w-[200px] flex-col items-center justify-between md:flex md:gap-2 md:text-sm xl:gap-0">
       <div className="flex w-full flex-col justify-between gap-3 rounded-md bg-sky-100 p-3 text-sm">
-        <div className="flex w-full flex-row items-center justify-center gap-2">
+        <div className="flex w-full flex-row items-center gap-2">
           <img src="/assets/Avatar.png" className="h-10 w-10" alt="Avatar" />
-          <p className="text-sm font-bold">{name}</p>
+          <p className="line-clamp-1 text-sm font-bold">{name}</p>
           {!name && <p className="text">Oi, vamos começar </p>}
         </div>
         {!name && (
@@ -23,7 +23,7 @@ const RightSide = ({ name }: RightSideProps) => {
               onClick={() => {
                 window.location.href = '/auth'
               }}
-              className="w-full bg-blue-600 text-white hover:bg-blue-500"
+              className="w-full bg-blue-600 text-white hover:bg-white hover:text-blue-600"
             >
               Entrar
             </Button>
@@ -31,7 +31,7 @@ const RightSide = ({ name }: RightSideProps) => {
               onClick={() => {
                 window.location.href = '/auth'
               }}
-              className="w-full rounded-md bg-white py-2 text-blue-600 hover:bg-gray-100"
+              className="w-full rounded-md bg-white py-2 text-blue-600 hover:bg-blue-600  hover:text-white"
             >
               Registrar
             </Button>
@@ -42,9 +42,9 @@ const RightSide = ({ name }: RightSideProps) => {
             onClick={() => {
               signOut({ callbackUrl: '/auth' })
             }}
-            className="mt-4 w-full bg-blue-600 text-white hover:bg-blue-500"
+            className="mt-4 w-full bg-blue-600 text-white hover:bg-white hover:text-blue-600"
           >
-            Sair
+            Desconectar
           </Button>
         )}
       </div>
