@@ -145,15 +145,36 @@ const ProductsCart = () => {
                   <div className="flex cursor-pointer p-2 lg:hidden">
                     <BsThreeDotsVertical />
                   </div>
-                  <p className="hidden p-2 lg:flex">
-                    {(
-                      parseFloat(product.price.replace('R$ ', '')) *
-                      product.quantity
-                    ).toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
-                  </p>
+                  {product.offer && (
+                    <div className="hidden h-fit flex-row items-center gap-2 lg:flex">
+                      <p className="text-xs text-red-600 line-through">
+                        {Number(product.price).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </p>
+                      <p className="font-semibold text-green-600">
+                        {(
+                          Number(product.price) -
+                          Number(product.price) * Number(product.discount)
+                        ).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </p>
+                    </div>
+                  )}
+                  {!product.offer && (
+                    <p className="hidden font-semibold lg:flex">
+                      {(
+                        parseFloat(product.price.replace('R$ ', '')) *
+                        product.quantity
+                      ).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex flex-row items-center justify-between">
@@ -229,15 +250,36 @@ const ProductsCart = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <p className="flex lg:hidden">
-                  {(
-                    parseFloat(product.price.replace('R$ ', '')) *
-                    product.quantity
-                  ).toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </p>
+                {product.offer && (
+                  <div className="flex flex-row items-center gap-2 lg:hidden">
+                    <p className="text-xs text-red-600 line-through">
+                      {Number(product.price).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </p>
+                    <p className="font-semibold text-green-600">
+                      {(
+                        Number(product.price) -
+                        Number(product.price) * Number(product.discount)
+                      ).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </p>
+                  </div>
+                )}
+                {!product.offer && (
+                  <p className="flex font-semibold lg:hidden">
+                    {(
+                      parseFloat(product.price.replace('R$ ', '')) *
+                      product.quantity
+                    ).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </p>
+                )}
               </div>
             </div>
           ))}

@@ -151,15 +151,36 @@ const FavoritesProducts = () => {
                 Remover
               </Button>
             </div>
-            <p className="flex">
-              {parseFloat(product.price.replace('R$ ', '')).toLocaleString(
-                'pt-BR',
-                {
-                  style: 'currency',
-                  currency: 'BRL',
-                },
-              )}
-            </p>
+            {product.offer && (
+              <div className="flex flex-row items-center gap-2 truncate">
+                <p className="text-xs text-red-600 line-through">
+                  {Number(product.price).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </p>
+                <p className="text-sm font-semibold text-green-600">
+                  {(
+                    Number(product.price) -
+                    Number(product.price) * Number(product.discount)
+                  ).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </p>
+              </div>
+            )}
+            {!product.offer && (
+              <p className="flex font-semibold">
+                {parseFloat(product.price.replace('R$ ', '')).toLocaleString(
+                  'pt-BR',
+                  {
+                    style: 'currency',
+                    currency: 'BRL',
+                  },
+                )}
+              </p>
+            )}
           </div>
         </div>
       ))}
