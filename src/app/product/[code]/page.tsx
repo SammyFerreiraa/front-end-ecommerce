@@ -28,6 +28,7 @@ const Home = ({ params }: { params: { code: string } }) => {
   const { data: session } = useSession()
   const router = useRouter()
   const code = params.code
+  const [readMore, setReadMore] = useState(false)
   const [favorite, setFavorite] = useState(false)
   const [inCart, setInCart] = useState(false)
   const [product, setProduct] = useState<ProductProps>({} as ProductProps)
@@ -229,7 +230,7 @@ const Home = ({ params }: { params: { code: string } }) => {
                       alt="cart shopping"
                       className="h-[18px] w-[18px]"
                     />
-                    <p className="text-sm text-zinc-500">154 sold</p>
+                    <p className="text-sm text-zinc-500">154 vendidos</p>
                   </div>
                 </div>
               </div>
@@ -312,20 +313,36 @@ const Home = ({ params }: { params: { code: string } }) => {
                   <p className="text-neutral-600">{product.code}</p>
                 </div>
                 <div className=" hidden h-[1px] w-full bg-gray-300 lg:flex"></div>
-
                 <div className="hidden flex-row md:justify-between lg:flex">
                   <p className="text-gray-400">Design:</p>
                   <p className="text-neutral-600">Moderno</p>
                 </div>
                 <div className="hidden flex-row md:justify-between lg:flex">
                   <p className="text-gray-400">Descrição:</p>
-                  <p className="line-clamp-2 max-w-[408px] text-neutral-600">
+                  <p
+                    className={`max-w-[408px] text-neutral-600 ${
+                      readMore ? '' : 'line-clamp-2'
+                    }`}
+                  >
                     {product.description}
                   </p>
                 </div>
-                <p className="mt-2 hidden w-fit cursor-pointer font-medium text-blue-600 lg:flex">
-                  Ler Mais
-                </p>
+                {!readMore && (
+                  <p
+                    className="mt-2 hidden w-fit cursor-pointer font-medium text-blue-600 lg:flex"
+                    onClick={() => setReadMore(true)}
+                  >
+                    Ler Mais
+                  </p>
+                )}
+                {readMore && (
+                  <p
+                    className="mt-2 hidden w-fit cursor-pointer font-medium text-blue-600 lg:flex"
+                    onClick={() => setReadMore(false)}
+                  >
+                    Ler Menos
+                  </p>
+                )}{' '}
               </div>
             </div>
             <div className="hidden flex-col items-center gap-5 xl:flex">
@@ -446,7 +463,7 @@ const Home = ({ params }: { params: { code: string } }) => {
                   alt="cart shopping"
                   className="h-[18px] w-[18px]"
                 />
-                <p className="text-sm text-zinc-500">154 sold</p>
+                <p className="text-sm text-zinc-500">154 vendidos</p>
               </div>
             </div>
             <h1 className="mb-1.5 mt-3 line-clamp-1 text-left text-lg font-medium text-zinc-900">
