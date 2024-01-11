@@ -3,20 +3,30 @@
 import { MaxWidthWrapper } from '@/components'
 import { ChevronRightIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiOutlineDesktopComputer } from 'react-icons/hi'
 import { LiaBookSolid } from 'react-icons/lia'
 import { PiTShirtBold } from 'react-icons/pi'
 import { MdOutlineBedroomChild, MdOutlineSportsFootball } from 'react-icons/md'
 import { GoTools } from 'react-icons/go'
-import { useFavorites, useProducts } from '@/hooks'
+import { useFavorites } from '@/hooks'
 import { ProductProps } from '@/@types'
 import ItemRecommended from '@/components/recommended-items/ItemRecommended'
+import axios from 'axios'
 
 const Home = () => {
-  const [products] = useProducts((state) => [state.products])
+  const [products, setProducts] = useState<ProductProps[]>([])
   const favorites = useFavorites((state) => state.favorites)
   const router = useRouter()
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await axios.get('http://localhost:3000/products').then((response) => {
+        setProducts(response.data)
+      })
+    }
+    fetchProducts()
+  })
 
   const isFavorite = (product: ProductProps) => {
     return favorites.products.some((favorite) => favorite.code === product.code)
@@ -90,7 +100,6 @@ const Home = () => {
             <h1 className="text-lg font-semibold text-gray-900">
               {products.length} Produtos Encontrados
             </h1>
-            <p className="cursor-pointer text-blue-600">Limpar Filtro</p>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
             {products &&
