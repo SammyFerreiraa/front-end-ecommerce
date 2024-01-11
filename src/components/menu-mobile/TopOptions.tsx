@@ -28,7 +28,7 @@ const TopOptions = () => {
             fill="#8B96A5"
           />
         </svg>
-        <p>Home</p>
+        <p>Inicio</p>
       </div>
       <div
         className={`flex w-full cursor-pointer items-center justify-start gap-4 rounded-md p-3 ${
@@ -50,7 +50,7 @@ const TopOptions = () => {
             fill="#8B96A5"
           />
         </svg>
-        <p>Categories</p>
+        <p>Categorias</p>
       </div>
       <div
         className={`flex w-full cursor-pointer items-center justify-start gap-4 rounded-md p-3 ${
@@ -72,7 +72,7 @@ const TopOptions = () => {
             fill="#8B96A5"
           />
         </svg>
-        <p>Favorites</p>
+        <p>Favoritos</p>
       </div>
       <div
         className={`flex w-full cursor-pointer items-center justify-start gap-4 rounded-md p-3 ${
@@ -95,7 +95,7 @@ const TopOptions = () => {
           />
           <path d="M15 12H9V14H15V12Z" fill="#8B96A5" />
         </svg>
-        <p>My orders</p>
+        <p>Meu Carrinho</p>
       </div>
     </div>
   )
