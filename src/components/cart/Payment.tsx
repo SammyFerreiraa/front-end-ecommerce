@@ -8,17 +8,15 @@ import { useCart } from '@/hooks/useCart'
 const Payment = () => {
   const cart = useCart((state) => state.cart)
   const subtotal = cart.products.reduce(
-    (acc, product) =>
-      acc + parseFloat(product.price.replace('R$ ', '')) * product.quantity,
+    (acc, product) => acc + Number(product.price) * product.quantity,
     0,
   )
 
-  const discount =
-    subtotal *
-    cart.products.reduce(
-      (acc, product) => acc + parseFloat(product.discount),
-      0,
-    )
+  const discount = cart.products.reduce(
+    (acc, product) =>
+      Number(product.price) * Number(product.discount) * product.quantity + acc,
+    0,
+  )
 
   const tax = subtotal * 0.005
 
