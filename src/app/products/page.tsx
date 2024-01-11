@@ -41,27 +41,45 @@ const Home = () => {
           </p>
         </div>
         <div className="m-2.5 mt-5 grid grid-cols-3 justify-between gap-3 md:m-0 md:mt-0 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-          <div className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900">
+          <div
+            className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900"
+            onClick={() => router.push('/category/tecnologia')}
+          >
             <HiOutlineDesktopComputer className="h-5 w-5" />
             <p>Tecnologia</p>
           </div>
-          <div className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900">
+          <div
+            className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900"
+            onClick={() => router.push('/category/interior')}
+          >
             <MdOutlineBedroomChild className="h-5 w-5" />
             <p>Interior</p>
           </div>
-          <div className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900">
+          <div
+            className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900"
+            onClick={() => router.push('/category/roupas')}
+          >
             <PiTShirtBold className="h-5 w-5" />
             <p>Roupas</p>
           </div>
-          <div className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900">
+          <div
+            className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900"
+            onClick={() => router.push('/category/livros')}
+          >
             <LiaBookSolid className="h-5 w-5" />
             <p>Livros</p>
           </div>
-          <div className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900">
+          <div
+            className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900"
+            onClick={() => router.push('/category/esporte')}
+          >
             <MdOutlineSportsFootball className="h-5 w-5" />
             <p>Esporte</p>
           </div>
-          <div className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900">
+          <div
+            className="flex cursor-pointer flex-col gap-2.5 rounded-md border border-gray-300 bg-white p-4 text-gray-900"
+            onClick={() => router.push('/category/ferramentas')}
+          >
             <GoTools className="h-5 w-5" />
             <p>Ferramentas</p>
           </div>
