@@ -118,26 +118,26 @@ const ProductsCart = () => {
                     src={product.image}
                     alt={product.name}
                     className="w-full  cursor-pointer"
-                    onClick={() => router.push(`/product/${product.code}`)}
+                    onClick={() => router.push(`/products/${product.code}`)}
                   />
                 </div>
                 <div className="flex w-full flex-row justify-between">
                   <div className="flex flex-col p-1">
                     <h1
                       className="cursor-pointer text-base text-zinc-900"
-                      onClick={() => router.push(`/product/${product.code}`)}
+                      onClick={() => router.push(`/products/${product.code}`)}
                     >
                       {product.name}
                     </h1>
                     <p
                       className="w-fit cursor-pointer text-[13px] text-gray-400"
-                      onClick={() => router.push(`/product/${product.code}`)}
+                      onClick={() => router.push(`/products/${product.code}`)}
                     >
                       Size: medium, Color: blue
                     </p>
                     <p
                       className="w-fit cursor-pointer text-[13px] text-gray-400"
-                      onClick={() => router.push(`/product/${product.code}`)}
+                      onClick={() => router.push(`/products/${product.code}`)}
                     >
                       Seller: Artel Market
                     </p>

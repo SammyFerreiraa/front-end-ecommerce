@@ -166,7 +166,19 @@ const Home = ({ params }: { params: { code: string } }) => {
       <div className="w-full">
         <div className="w-full">
           <div className="my-4 hidden flex-row items-center gap-1.5 text-gray-400 md:flex">
-            <p className="cursor-pointer capitalize">Home</p>
+            <p
+              className="cursor-pointer capitalize"
+              onClick={() => router.push('/')}
+            >
+              Home
+            </p>
+            <ChevronRightIcon />
+            <p
+              className="cursor-pointer capitalize"
+              onClick={() => router.push('/products')}
+            >
+              Produtos
+            </p>
             <ChevronRightIcon />
             <p className="cursor-pointer capitalize">{product.category}</p>
             <ChevronRightIcon />
@@ -606,7 +618,7 @@ const Home = ({ params }: { params: { code: string } }) => {
                     >
                       <div
                         className="flex h-fit max-w-[150px] cursor-pointer flex-col gap-2 rounded-md border-2 border-gray-300 bg-white px-3 pb-4 pt-2"
-                        onClick={() => router.push(`/product/${product.code}`)}
+                        onClick={() => router.push(`/products/${product.code}`)}
                       >
                         <img
                           src={product.image}

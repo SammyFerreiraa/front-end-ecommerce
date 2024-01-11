@@ -165,7 +165,10 @@ const Header = () => {
       {/* SubBar Desktop  */}
       <div className="hidden justify-between border-b-2 border-zinc-300 py-5 text-xs md:flex xl:text-sm">
         <div className="flex items-center justify-center gap-6">
-          <div className="flex cursor-pointer items-center justify-center gap-1">
+          <div
+            className="flex cursor-pointer items-center justify-center gap-1"
+            onClick={() => router.push('/products')}
+          >
             <IoMenu />
             <p>Categorias</p>
           </div>
