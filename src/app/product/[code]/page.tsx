@@ -272,7 +272,33 @@ const Home = ({ params }: { params: { code: string } }) => {
               <div className="mt-5 flex flex-col gap-4">
                 <div className="flex flex-row md:justify-between">
                   <p className="text-gray-400">Preço:</p>
-                  <p className="text-neutral-600">R$ {product.price}</p>
+                  {product.offer && (
+                    <div className="flex flex-row items-center gap-3">
+                      <p className="text-xs text-red-600 line-through">
+                        {Number(product.price).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </p>
+                      <p className="font-semibold text-green-600">
+                        {(
+                          Number(product.price) -
+                          Number(product.price) * Number(product.discount)
+                        ).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </p>
+                    </div>
+                  )}
+                  {!product.offer && (
+                    <p className="font-semibold text-neutral-600">
+                      {Number(product.price).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </p>
+                  )}
                 </div>
                 <div className=" h-[1px] w-full bg-gray-300"></div>
                 <div className="flex flex-row md:justify-between">
