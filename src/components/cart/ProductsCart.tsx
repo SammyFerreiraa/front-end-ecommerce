@@ -14,12 +14,10 @@ import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
-import { useCart } from '@/hooks/useCart'
 import { TbShoppingCartExclamation } from 'react-icons/tb'
 import axios from 'axios'
 import LoadingProduct from './LoadingProduct'
-import { useFavorites } from '@/hooks/useFavorites'
-import { ProductCartProps, ProductProps } from '@/@types'
+import { useCart, useFavorites, useProductsCart } from '@/hooks'
 
 const ProductsCart = () => {
   const [loading, setLoading] = useState(true)
@@ -77,144 +75,25 @@ const ProductsCart = () => {
     fetchData()
   }, [session?.token, setCart, setEmpty, setFavoritesEmpty])
 
-  const changeQuantity = (productCode: string, quantity: number) => {
-    setQuantity(productCode, quantity)
-    if (!session?.token) return
-    const req = async () => {
-      await axios.post(
-        `http://localhost:3000/cart/update/quantity`,
-        {
-          quantity,
-          productCode,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${session?.token}`,
-          },
-        },
-      )
-    }
-    req()
-  }
+  const {
+    changeQuantity,
+    removeItemFromCart,
+    removeOne,
+    addOne,
+    clearCart,
+    saveForLater,
+  } = useProductsCart(
+    cart,
+    favorites,
+    session?.token,
+    setQuantity,
+    removeProduct,
+    setEmpty,
+    removeAllProducts,
+    addProduct,
+    setFavoritesEmpty,
+  )
 
-  const removeItemFromCart = (productCode: string) => {
-    removeProduct(productCode)
-    if (cart.products.length === 1) setEmpty(true)
-    if (!session?.token) return
-    const req = async () => {
-      await axios.delete(`http://localhost:3000/cart/remove/item`, {
-        headers: {
-          Authorization: `Bearer ${session?.token}`,
-        },
-        data: {
-          productCode,
-        },
-      })
-    }
-    req()
-  }
-
-  const removeOne = (productCode: string, cartId: string) => {
-    const quantity =
-      (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) - 1
-
-    setQuantity(productCode, quantity)
-    if (quantity === 0) {
-      removeProduct(productCode)
-    }
-    if (cart.products.length === 1 && quantity === 0) setEmpty(true)
-
-    if (!session?.token) return
-    const req = async () => {
-      await axios.delete(`http://localhost:3000/cart/remove`, {
-        headers: {
-          Authorization: `Bearer ${session?.token}`,
-        },
-        data: {
-          cartId,
-          productCode,
-        },
-      })
-    }
-    req()
-  }
-
-  const addOne = (productCode: string) => {
-    try {
-      changeQuantity(
-        productCode,
-        (cart.products.find((p) => p.code === productCode)?.quantity ?? 0) + 1,
-      )
-
-      if (!session?.token) return
-
-      const req = async () => {
-        await axios.post(
-          `http://localhost:3000/cart/update/quantity`,
-          {
-            quantity:
-              (cart.products.find((p) => p.code === productCode)?.quantity ??
-                0) + 1,
-            productCode,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${session?.token}`,
-            },
-          },
-        )
-      }
-      req()
-    } catch (error) {
-      console.error('Erro na solicitação:', error)
-    }
-  }
-
-  const clearCart = () => {
-    removeAllProducts(cart.id)
-    setEmpty(true)
-    if (!session?.token) return
-
-    const req = async () => {
-      await axios.delete(`http://localhost:3000/cart`, {
-        headers: {
-          Authorization: `Bearer ${session?.token}`,
-        },
-        data: {
-          cartId: cart.id,
-        },
-      })
-    }
-    req()
-  }
-
-  const saveForLater = (code: string, product: ProductCartProps) => {
-    if (favorites.products.find((p) => p.code === code)) return
-    const { quantity, ...productAdd } = product
-    const productToAdd: ProductProps = {
-      ...productAdd,
-      availableQuantity: 50 - quantity,
-    }
-    addProduct(productToAdd)
-    setFavoritesEmpty(false)
-
-    if (!session?.token) return
-    const req = async () => {
-      await axios.post(
-        `http://localhost:3000/favorites`,
-        {
-          favoriteId: favorites.id,
-          productCode: code,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${session?.token}`,
-          },
-        },
-      )
-    }
-    req()
-  }
   return (
     <div className="w-full lg:rounded-md">
       {loading === false && (

@@ -1,14 +1,16 @@
+'use client'
+
 import React from 'react'
 import { Sheet, SheetTrigger, SheetContent, SheetHeader } from '../ui/sheet'
 import { Separator } from '../ui/separator'
 import { HamburgerIcon } from '../icons'
-import { getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import AuthMobileMenu from './AuthMobileMenu'
 import LogoutButtonMobile from './LogoutButtonMobile'
 import TopOptions from './TopOptions'
 
-const MobileMenu = async () => {
-  const session = await getSession()
+const MobileMenu = () => {
+  const { data: session } = useSession()
   return (
     <Sheet>
       <SheetTrigger>
