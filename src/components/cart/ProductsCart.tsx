@@ -148,15 +148,18 @@ const ProductsCart = () => {
                   {product.offer && (
                     <div className="hidden h-fit flex-row items-center gap-2 lg:flex">
                       <p className="text-xs text-red-600 line-through">
-                        {Number(product.price).toLocaleString('pt-BR', {
+                        {(
+                          Number(product.price) * product.quantity
+                        ).toLocaleString('pt-BR', {
                           style: 'currency',
                           currency: 'BRL',
                         })}
                       </p>
                       <p className="font-semibold text-green-600">
                         {(
-                          Number(product.price) -
-                          Number(product.price) * Number(product.discount)
+                          (Number(product.price) -
+                            Number(product.price) * Number(product.discount)) *
+                          product.quantity
                         ).toLocaleString('pt-BR', {
                           style: 'currency',
                           currency: 'BRL',
@@ -253,7 +256,9 @@ const ProductsCart = () => {
                 {product.offer && (
                   <div className="flex flex-row items-center gap-2 lg:hidden">
                     <p className="text-xs text-red-600 line-through">
-                      {Number(product.price).toLocaleString('pt-BR', {
+                      {(
+                        Number(product.price) * product.quantity
+                      ).toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
                       })}
