@@ -182,7 +182,7 @@ const Home = ({ params }: { params: { code: string } }) => {
             <ChevronRightIcon />
             <p
               className="cursor-pointer capitalize"
-              onClick={() => router.push(`/category/${product.code}`)}
+              onClick={() => router.push(`/category/${product.category}`)}
             >
               {product.category}
             </p>
