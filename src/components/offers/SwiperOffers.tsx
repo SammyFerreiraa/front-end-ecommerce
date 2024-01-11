@@ -11,8 +11,10 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import { useProducts } from '@/hooks/useProducts'
 import { ProductProps } from '@/@types'
+import { useRouter } from 'next/navigation'
 
 const SwiperOffers = () => {
+  const router = useRouter()
   const [products, setProducts] = useProducts((state) => [
     state.products,
     state.setProducts,
@@ -44,7 +46,11 @@ const SwiperOffers = () => {
         products
           .filter((product: ProductProps) => product.offer === true)
           .map((product: ProductProps) => (
-            <SwiperSlide key={product.id} className="h-fit max-w-[140px]">
+            <SwiperSlide
+              key={product.id}
+              className="h-fit max-w-[140px]"
+              onClick={() => router.push(`/product/${product.code}`)}
+            >
               <OffersItem
                 name={product.name}
                 discount={product.discount}
