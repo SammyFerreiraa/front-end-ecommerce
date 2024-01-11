@@ -6,7 +6,7 @@ import { Input } from '../ui/input'
 import { useCart } from '@/hooks/useCart'
 
 const Payment = () => {
-  const cart = useCart((state) => state.cart)
+  const [cart, empty] = useCart((state) => [state.cart, state.empty])
   const subtotal = cart.products.reduce(
     (acc, product) => acc + Number(product.price) * product.quantity,
     0,
@@ -80,7 +80,10 @@ const Payment = () => {
               })}
             </p>
           </div>
-          <Button className="w-full bg-green-600 py-5 text-center text-base font-medium text-white hover:bg-green-700">
+          <Button
+            className="w-full bg-green-600 py-5 text-center text-base font-medium text-white hover:bg-green-700"
+            disabled={empty}
+          >
             Checkout{' '}
             <span className="ml-1 lg:hidden">({cart.products.length})</span>
           </Button>
