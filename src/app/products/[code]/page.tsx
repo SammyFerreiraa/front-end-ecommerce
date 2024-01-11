@@ -180,7 +180,12 @@ const Home = ({ params }: { params: { code: string } }) => {
               Produtos
             </p>
             <ChevronRightIcon />
-            <p className="cursor-pointer capitalize">{product.category}</p>
+            <p
+              className="cursor-pointer capitalize"
+              onClick={() => router.push(`/category/${product.code}`)}
+            >
+              {product.category}
+            </p>
             <ChevronRightIcon />
             <p>{product.name}</p>
           </div>
