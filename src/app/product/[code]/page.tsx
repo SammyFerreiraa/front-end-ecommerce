@@ -22,6 +22,7 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { CheckIcon } from '@/components/icons'
 
 const Home = ({ params }: { params: { code: string } }) => {
   const { data: session } = useSession()
@@ -162,8 +163,218 @@ const Home = ({ params }: { params: { code: string } }) => {
   return (
     <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px] lg:px-12 xl:px-0">
       <div className="w-full">
-        <div className="w-ful">
-          <div className="w-full bg-white">
+        <div className="w-full">
+          <div className="my-4 hidden flex-row items-center gap-1.5 text-gray-400 md:flex">
+            <p className="cursor-pointer capitalize">Home</p>
+            <ChevronRightIcon />
+            <p className="cursor-pointer capitalize">{product.category}</p>
+            <ChevronRightIcon />
+            <p>{product.name}</p>
+          </div>
+          {/* Desktop infor and carrossel mobile */}
+          <div className="w-full bg-white p-5 md:flex md:flex-row md:justify-evenly md:gap-5 md:rounded-md md:border md:border-gray-300 xl:justify-between">
+            <div className="flex flex-col gap-5">
+              <div className="hidden max-w-[345px] rounded-md border border-gray-300 p-1 md:flex">
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className="flex flex-row justify-between">
+                <div className="hidden max-w-[56px] cursor-pointer rounded-md border border-black p-1 md:flex">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <div className="hidden max-w-[56px] cursor-pointer rounded-md border border-gray-300 p-1 md:flex">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <div className="hidden max-w-[56px] cursor-pointer rounded-md border border-gray-300 p-1 md:flex">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <div className="hidden max-w-[56px] cursor-pointer rounded-md border border-gray-300 p-1 md:flex">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <div className="hidden max-w-[56px] cursor-pointer rounded-md border border-gray-300 p-1 md:flex">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <div className="hidden max-w-[56px] cursor-pointer rounded-md border border-gray-300 p-1 md:flex">
+                  <img src={product.image} alt={product.name} />
+                </div>
+              </div>
+            </div>
+            <div className="hidden flex-col md:flex">
+              <div className="flex flex-col">
+                {product.availableQuantity > 0 && (
+                  <div className="mb-1 flex flex-row items-center gap-1">
+                    <CheckIcon />
+                    <p className="text-sm leading-normal text-green-600">
+                      Disponível
+                    </p>
+                  </div>
+                )}
+                <h1 className=" line-clamp-2 text-xl font-semibold text-zinc-900">
+                  {product.name}
+                </h1>
+                <div className="mt-3 flex min-w-[280px] flex-row items-center justify-between">
+                  <img src="/images/rating/4.png" alt="four stars" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-gray-300"></div>
+                  <div className="flex flex-row items-center justify-center gap-1.5">
+                    <img
+                      src="/images/icons/message.png"
+                      alt="message icon"
+                      className="h-[18px] w-[18px]"
+                    />
+                    <p className="text-sm text-zinc-500">32 reviews</p>
+                  </div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-gray-300 "></div>
+                  <div className="flex flex-row items-center justify-center gap-1.5">
+                    <img
+                      src="/images/icons/shopping_cart.png"
+                      alt="cart shopping"
+                      className="h-[18px] w-[18px]"
+                    />
+                    <p className="text-sm text-zinc-500">154 sold</p>
+                  </div>
+                </div>
+              </div>
+              {/* adicionar e remover favoritos e carrinho */}
+              <div className="mt-4 flex flex-row gap-3">
+                {!inCart && (
+                  <Button
+                    className="w-full bg-blue-600 text-white hover:bg-white hover:text-blue-600"
+                    onClick={() => addToCart(code, product)}
+                  >
+                    Adicionar ao Carrinho
+                  </Button>
+                )}
+                {inCart && (
+                  <Button
+                    className="w-full bg-red-600 text-white hover:bg-white hover:text-red-600"
+                    onClick={() => removeItemFromCart(code)}
+                  >
+                    Remover do Carrinho
+                  </Button>
+                )}
+                {!favorite && (
+                  <div className="flex h-fit w-fit cursor-pointer items-center justify-center rounded-md border-2 border-gray-300 hover:border-gray-200 hover:bg-gray-200 hover:text-red-600 xl:hidden ">
+                    <IoMdHeartEmpty
+                      className="m-2 h-5 w-5 text-blue-600"
+                      onClick={() => addFavorites(code, product)}
+                    />
+                  </div>
+                )}
+                {favorite && (
+                  <div className=" flex h-fit w-fit cursor-pointer items-center justify-center rounded-md border-2 border-gray-300 text-red-600 hover:border-gray-200 hover:bg-gray-200 xl:hidden">
+                    <IoMdHeart
+                      className="m-2 h-5 w-5 text-red-600 hover:text-inherit"
+                      onClick={() => removeToFavorites(code)}
+                    />
+                  </div>
+                )}
+              </div>
+              {/* informações do produto */}
+              <div className="mt-5 flex flex-col gap-4">
+                <div className="flex flex-row md:justify-between">
+                  <p className="text-gray-400">Preço:</p>
+                  <p className="text-neutral-600">R$ {product.price}</p>
+                </div>
+                <div className=" h-[1px] w-full bg-gray-300"></div>
+                <div className="flex flex-row md:justify-between">
+                  <p className="text-gray-400">Categoria:</p>
+                  <p className="capitalize text-neutral-600">
+                    {product.category}
+                  </p>
+                </div>
+                <div className="flex flex-row md:justify-between">
+                  <p className="text-gray-400">Código:</p>
+                  <p className="text-neutral-600">{product.code}</p>
+                </div>
+                <div className=" hidden h-[1px] w-full bg-gray-300 lg:flex"></div>
+
+                <div className="hidden flex-row md:justify-between lg:flex">
+                  <p className="text-gray-400">Design:</p>
+                  <p className="text-neutral-600">Moderno</p>
+                </div>
+                <div className="hidden flex-row md:justify-between lg:flex">
+                  <p className="text-gray-400">Descrição:</p>
+                  <p className="line-clamp-2 max-w-[408px] text-neutral-600">
+                    {product.description}
+                  </p>
+                </div>
+                <p className="mt-2 hidden w-fit cursor-pointer font-medium text-blue-600 lg:flex">
+                  Ler Mais
+                </p>
+              </div>
+            </div>
+            <div className="hidden flex-col items-center gap-5 xl:flex">
+              <div className="rounded-md border-2 border-gray-300 bg-white p-5 ">
+                <div className="flex flex-row items-center gap-2.5">
+                  <div className="relative">
+                    <img src="/assets/rectangle.png" alt="perfil vendedor" />
+                    <p className="absolute left-[30%] top-0 text-[28px] font-semibold text-emerald-400 text-opacity-60">
+                      R
+                    </p>
+                  </div>
+                  <div className="flex w-full flex-row items-center justify-between">
+                    <div className="text-neutral-900">
+                      <p>Supplier</p>
+                      <p>Gunji Trading LLC</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="my-3 h-[1px] w-full bg-gray-300"></div>
+                <div className="flex flex-col items-start justify-evenly gap-2">
+                  <div className="flex flex-row items-center gap-1.5 text-neutral-600">
+                    <img
+                      src="/images/icons/eua.png"
+                      alt="icon"
+                      className="h-5"
+                    />
+                    <p>EUA, Nova York</p>
+                  </div>
+                  <div className="flex flex-row items-center gap-1.5 text-neutral-600">
+                    <img
+                      src="/images/icons/verified_user.png"
+                      alt="icon"
+                      className="h-5 w-5"
+                    />
+                    <p>Vendedor Verificado</p>
+                  </div>
+                  <div className="flex flex-row items-center gap-1.5 text-neutral-600">
+                    <img
+                      src="/images/icons/language.png"
+                      alt="icon"
+                      className="h-5 w-5"
+                    />
+                    <p>Envio Global</p>
+                  </div>
+                </div>
+                <div className="mt-7 flex flex-col items-center gap-2">
+                  <Button className="w-full bg-blue-600 text-white hover:bg-white hover:text-blue-600">
+                    Enviar Consulta
+                  </Button>
+                  <Button className="mt-2 w-full bg-white text-blue-600 hover:bg-blue-600 hover:text-white">
+                    Perfil do vendedor
+                  </Button>
+                </div>
+              </div>
+              {!favorite && (
+                <Button
+                  className="flex w-fit flex-row items-center gap-2 bg-white text-blue-600 hover:bg-white hover:text-red-600"
+                  onClick={() => addFavorites(code, product)}
+                >
+                  <IoMdHeartEmpty className="h-5 w-5" />
+                  <p className="text-base font-medium">
+                    Adicionar aos favoritos
+                  </p>
+                </Button>
+              )}
+              {favorite && (
+                <Button
+                  className="flex flex-row items-center gap-2 bg-white text-red-600 hover:bg-white hover:text-blue-600"
+                  onClick={() => removeToFavorites(code)}
+                >
+                  <IoMdHeart className=" h-5 w-5 " />
+                  <p className="text-base font-medium">Remover dos favoritos</p>
+                </Button>
+              )}
+            </div>
             <Carousel
               className="flex w-fit md:hidden"
               opts={{
@@ -189,7 +400,8 @@ const Home = ({ params }: { params: { code: string } }) => {
               </CarouselContent>
             </Carousel>
           </div>
-          <div className="flex flex-col border-b-2 border-gray-300 bg-white p-4">
+          {/* Informações mobile */}
+          <div className="flex flex-col border-b-2 border-gray-300 bg-white p-4 md:hidden">
             <div className="flex flex-row items-center justify-between">
               <img src="/images/rating/4.png" alt="four stars" />
               <div className="h-1.5 w-1.5 rounded-full bg-gray-300"></div>
@@ -285,7 +497,8 @@ const Home = ({ params }: { params: { code: string } }) => {
               </p>
             </div>
           </div>
-          <div className="m-2.5 rounded-md border-2 border-gray-300 bg-white p-2.5">
+          {/* seller mobile */}
+          <div className="m-2.5 rounded-md border-2 border-gray-300 bg-white p-2.5 md:hidden">
             <div className="flex flex-row items-center gap-2.5">
               <div className="relative">
                 <img src="/assets/rectangle.png" alt="perfil vendedor" />
