@@ -9,8 +9,10 @@ import { ProductProps } from '@/@types'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { LuHeartOff } from 'react-icons/lu'
+import { useRouter } from 'next/navigation'
 
 const SavedForLater = () => {
+  const router = useRouter()
   const { data: session } = useSession()
   const [favorites, setFavorites, favoritesEmpty] = useFavorites((state) => [
     state.favorites,
@@ -93,14 +95,26 @@ const SavedForLater = () => {
             className="flex flex-row gap-3 rounded-md border-2 border-gray-300 bg-white p-2 lg:flex-col lg:rounded-none lg:border-none lg:p-0"
             key={product.code}
           >
-            <div className="flex h-full max-h-[98px] w-fit min-w-[98px] items-center justify-center lg:max-h-none lg:w-full lg:px-5 lg:py-2">
+            <div
+              className="flex h-full max-h-[98px] w-fit min-w-[98px] cursor-pointer items-center justify-center lg:max-h-none lg:w-full lg:px-5 lg:py-2"
+              onClick={() =>
+                router.push(`/products/${product.category}/${product.code}`)
+              }
+            >
               <img src={product.image} alt="mmm" className="h-full w-full" />
             </div>
             <div className="flex flex-col items-start justify-center gap-3">
               <div className="flex w-full flex-col">
                 {product.offer && (
                   <div className="flex flex-row items-center gap-2 truncate">
-                    <p className="font-semibold text-green-600">
+                    <p
+                      className="cursor-pointer font-semibold text-green-600"
+                      onClick={() =>
+                        router.push(
+                          `/products/${product.category}/${product.code}`,
+                        )
+                      }
+                    >
                       {(
                         Number(product.price) -
                         Number(product.price) * Number(product.discount)
@@ -109,7 +123,14 @@ const SavedForLater = () => {
                         currency: 'BRL',
                       })}
                     </p>
-                    <p className="text-xs text-red-600 line-through">
+                    <p
+                      className="cursor-pointer text-xs text-red-600 line-through"
+                      onClick={() =>
+                        router.push(
+                          `/products/${product.category}/${product.code}`,
+                        )
+                      }
+                    >
                       {Number(product.price).toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
@@ -118,7 +139,14 @@ const SavedForLater = () => {
                   </div>
                 )}
                 {!product.offer && (
-                  <p className="flex font-semibold">
+                  <p
+                    className="flex cursor-pointer font-semibold"
+                    onClick={() =>
+                      router.push(
+                        `/products/${product.category}/${product.code}`,
+                      )
+                    }
+                  >
                     {parseFloat(
                       product.price.replace('R$ ', ''),
                     ).toLocaleString('pt-BR', {
@@ -127,14 +155,29 @@ const SavedForLater = () => {
                     })}
                   </p>
                 )}
-                <p className="hidden w-full text-sm text-zinc-600 lg:line-clamp-1">
+                <p
+                  className="hidden w-full cursor-pointer text-sm text-zinc-600 lg:line-clamp-1"
+                  onClick={() =>
+                    router.push(`/products/${product.category}/${product.code}`)
+                  }
+                >
                   {product.name}
                 </p>
 
-                <h1 className="line-clamp-1 text-sm text-neutral-600 lg:hidden">
+                <h1
+                  className="line-clamp-1 cursor-pointer text-sm text-neutral-600 lg:hidden"
+                  onClick={() =>
+                    router.push(`/products/${product.category}/${product.code}`)
+                  }
+                >
                   {product.name}
                 </h1>
-                <p className="text-base font-semibold text-zinc-800 lg:hidden">
+                <p
+                  className="cursor-pointer text-base font-semibold text-zinc-800 lg:hidden"
+                  onClick={() =>
+                    router.push(`/products/${product.category}/${product.code}`)
+                  }
+                >
                   {Number(product.price).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',

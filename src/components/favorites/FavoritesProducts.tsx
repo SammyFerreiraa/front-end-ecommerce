@@ -10,8 +10,10 @@ import { useCart } from '@/hooks/useCart'
 import { ProductProps } from '@/@types'
 import { LuHeartOff } from 'react-icons/lu'
 import { MdOutlineShoppingCart } from 'react-icons/md'
+import { useRouter } from 'next/navigation'
 
 const FavoritesProducts = () => {
+  const router = useRouter()
   const { data: session } = useSession()
   const [cart, setCart] = useCart((state) => [state.cart, state.setCart])
   const [favorites, setFavorites, favoritesEmpty, setFavoritesEmpty] =
@@ -105,13 +107,30 @@ const FavoritesProducts = () => {
           key={product.code}
         >
           <div className="flex flex-row items-center justify-start gap-3">
-            <div className="flex h-fit w-16 items-center justify-center rounded-md border border-neutral-300 bg-white p-1">
+            <div
+              className="flex h-fit w-16 cursor-pointer items-center justify-center rounded-md border border-neutral-300 bg-white p-1"
+              onClick={() =>
+                router.push(`/products/${product.category}/${product.code}`)
+              }
+            >
               <img src={product.image} alt={product.name} className="w-full" />
             </div>
             <div className="flex w-full flex-row justify-between">
               <div className="flex flex-col p-1">
-                <h1 className="text-base text-zinc-900">{product.name}</h1>
-                <p className="line-clamp-2 w-fit text-[13px] text-gray-400">
+                <h1
+                  className="cursor-pointer text-base text-zinc-900"
+                  onClick={() =>
+                    router.push(`/products/${product.category}/${product.code}`)
+                  }
+                >
+                  {product.name}
+                </h1>
+                <p
+                  className="line-clamp-2 w-fit cursor-pointer text-[13px] text-gray-400"
+                  onClick={() =>
+                    router.push(`/products/${product.category}/${product.code}`)
+                  }
+                >
                   {product.description}
                 </p>
               </div>
