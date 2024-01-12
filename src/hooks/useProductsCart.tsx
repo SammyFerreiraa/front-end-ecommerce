@@ -5,6 +5,7 @@ import {
   favoritesProps,
 } from '@/@types'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export const useProductsCart = (
   cart: cartProps,
@@ -42,6 +43,10 @@ export const useProductsCart = (
   const removeItemFromCart = (productCode: string) => {
     removeProduct(productCode)
     if (cart.products.length === 1) setEmpty(true)
+    toast.success('Item removido com sucesso!', {
+      pauseOnHover: false,
+      theme: 'colored',
+    })
     if (!token) return
     const req = async () => {
       await axios.delete(`http://localhost:3000/cart/remove/item`, {
@@ -119,6 +124,10 @@ export const useProductsCart = (
     removeAllProducts(cart.id)
     setEmpty(true)
     if (!token) return
+    toast.success('Carrinho limpo com sucesso', {
+      pauseOnHover: false,
+      theme: 'colored',
+    })
 
     const req = async () => {
       await axios.delete(`http://localhost:3000/cart`, {
@@ -135,7 +144,13 @@ export const useProductsCart = (
 
   // Adicionar aos favoritos
   const saveForLater = (code: string, product: ProductCartProps) => {
-    if (favorites.products.find((p) => p.code === code)) return
+    if (favorites.products.find((p) => p.code === code)) {
+      toast.error('Ja foi adicionado aos favoritos', {
+        pauseOnHover: false,
+        theme: 'colored',
+      })
+      return
+    }
     const { quantity, ...productAdd } = product
     const productToAdd: ProductProps = {
       ...productAdd,
@@ -143,6 +158,11 @@ export const useProductsCart = (
     }
     addProduct(productToAdd)
     setFavoritesEmpty(false)
+
+    toast.success('Adicionado aos favoritos', {
+      pauseOnHover: false,
+      theme: 'colored',
+    })
 
     if (!token) return
     const req = async () => {
