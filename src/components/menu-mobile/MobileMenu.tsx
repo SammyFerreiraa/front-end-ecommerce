@@ -45,7 +45,7 @@ const MobileMenu = () => {
               />
             </svg>
 
-            <p>English | USD</p>
+            <p>Português | BRL</p>
           </div>
           <div className="flex w-full cursor-pointer items-center justify-start gap-4 p-3">
             <svg
@@ -61,7 +61,7 @@ const MobileMenu = () => {
               />
             </svg>
 
-            <p>Contact us</p>
+            <p>Contate-nos</p>
           </div>
           <div className="flex w-full cursor-pointer items-center justify-start gap-4 p-3">
             <svg
@@ -77,7 +77,7 @@ const MobileMenu = () => {
               />
             </svg>
 
-            <p>About</p>
+            <p>Sobre</p>
           </div>
         </div>
       </SheetContent>

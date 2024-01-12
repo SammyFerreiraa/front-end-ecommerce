@@ -97,10 +97,10 @@ const ProductsCart = () => {
   return (
     <div className="w-full lg:rounded-md">
       {loading === false && (
-        <div className="flex flex-col items-center justify-center bg-white lg:rounded-md lg:shadow-md">
+        <div className="flex flex-col items-center justify-center bg-white md:rounded-md lg:shadow-md">
           {/* produto */}
           {empty && (
-            <div className="flex h-80 w-full items-center justify-center gap-3 bg-white">
+            <div className="flex h-80 w-full items-center justify-center gap-3 bg-white md:rounded-md">
               <TbShoppingCartExclamation className="text-2xl text-zinc-400 lg:text-5xl" />
               <p className="text-2xl text-zinc-400 lg:text-3xl">
                 Seu carrinho está vazio{' '}
@@ -118,26 +118,42 @@ const ProductsCart = () => {
                     src={product.image}
                     alt={product.name}
                     className="w-full  cursor-pointer"
-                    onClick={() => router.push(`/product/${product.code}`)}
+                    onClick={() =>
+                      router.push(
+                        `/products/${product.category}/${product.code}`,
+                      )
+                    }
                   />
                 </div>
                 <div className="flex w-full flex-row justify-between">
                   <div className="flex flex-col p-1">
                     <h1
                       className="cursor-pointer text-base text-zinc-900"
-                      onClick={() => router.push(`/product/${product.code}`)}
+                      onClick={() =>
+                        router.push(
+                          `/products/${product.category}/${product.code}`,
+                        )
+                      }
                     >
                       {product.name}
                     </h1>
                     <p
                       className="w-fit cursor-pointer text-[13px] text-gray-400"
-                      onClick={() => router.push(`/product/${product.code}`)}
+                      onClick={() =>
+                        router.push(
+                          `/products/${product.category}/${product.code}`,
+                        )
+                      }
                     >
                       Size: medium, Color: blue
                     </p>
                     <p
                       className="w-fit cursor-pointer text-[13px] text-gray-400"
-                      onClick={() => router.push(`/product/${product.code}`)}
+                      onClick={() =>
+                        router.push(
+                          `/products/${product.category}/${product.code}`,
+                        )
+                      }
                     >
                       Seller: Artel Market
                     </p>
@@ -145,15 +161,39 @@ const ProductsCart = () => {
                   <div className="flex cursor-pointer p-2 lg:hidden">
                     <BsThreeDotsVertical />
                   </div>
-                  <p className="hidden p-2 lg:flex">
-                    {(
-                      parseFloat(product.price.replace('R$ ', '')) *
-                      product.quantity
-                    ).toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
-                  </p>
+                  {product.offer && (
+                    <div className="hidden h-fit flex-row items-center gap-2 lg:flex">
+                      <p className="text-xs text-red-600 line-through">
+                        {(
+                          Number(product.price) * product.quantity
+                        ).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </p>
+                      <p className="font-semibold text-green-600">
+                        {(
+                          (Number(product.price) -
+                            Number(product.price) * Number(product.discount)) *
+                          product.quantity
+                        ).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </p>
+                    </div>
+                  )}
+                  {!product.offer && (
+                    <p className="hidden font-semibold lg:flex">
+                      {(
+                        parseFloat(product.price.replace('R$ ', '')) *
+                        product.quantity
+                      ).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex flex-row items-center justify-between">
@@ -229,15 +269,38 @@ const ProductsCart = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <p className="flex lg:hidden">
-                  {(
-                    parseFloat(product.price.replace('R$ ', '')) *
-                    product.quantity
-                  ).toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </p>
+                {product.offer && (
+                  <div className="flex flex-row items-center gap-2 lg:hidden">
+                    <p className="text-xs text-red-600 line-through">
+                      {(
+                        Number(product.price) * product.quantity
+                      ).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </p>
+                    <p className="font-semibold text-green-600">
+                      {(
+                        Number(product.price) -
+                        Number(product.price) * Number(product.discount)
+                      ).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </p>
+                  </div>
+                )}
+                {!product.offer && (
+                  <p className="flex font-semibold lg:hidden">
+                    {(
+                      parseFloat(product.price.replace('R$ ', '')) *
+                      product.quantity
+                    ).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </p>
+                )}
               </div>
             </div>
           ))}

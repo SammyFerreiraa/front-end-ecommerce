@@ -11,7 +11,6 @@ import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
 const ItemRecommended = ({
   name,
   image,
-  price,
   favorite,
   product,
 }: ItemRecommendedProps) => {
@@ -56,7 +55,9 @@ const ItemRecommended = ({
     <div className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3">
       <div
         className="flex items-center justify-center p-3"
-        onClick={() => router.push(`/product/${product.code}`)}
+        onClick={() =>
+          router.push(`/products/${product.category}/${product.code}`)
+        }
       >
         <img src={image} alt="camisa" />
       </div>
@@ -64,12 +65,40 @@ const ItemRecommended = ({
         <div className="flex flex-row items-center justify-between">
           <div
             className="flex flex-col items-start justify-center gap-1"
-            onClick={() => router.push(`/product/${product.code}`)}
+            onClick={() =>
+              router.push(`/products/${product.category}/${product.code}`)
+            }
           >
-            <p className="font-medium leading-snug text-zinc-900">
-              R$ {'   '}
-              {price}
-            </p>
+            {product.offer && (
+              <div className="flex flex-col items-start truncate">
+                <p className="text-sm font-semibold text-green-600">
+                  {(
+                    Number(product.price) -
+                    Number(product.price) * Number(product.discount)
+                  ).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </p>
+                <p className="text-xs text-red-600 line-through">
+                  {Number(product.price).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </p>
+              </div>
+            )}
+            {!product.offer && (
+              <p className="flex font-semibold">
+                {parseFloat(product.price.replace('R$ ', '')).toLocaleString(
+                  'pt-BR',
+                  {
+                    style: 'currency',
+                    currency: 'BRL',
+                  },
+                )}
+              </p>
+            )}
             <div className="flex flex-row items-center gap-1.5">
               <img src="/images/rating/4.png" alt="4" className="w-16" />
               <p className="text-sm text-amber-500">4.0</p>
@@ -94,7 +123,9 @@ const ItemRecommended = ({
         </div>
         <p
           className="line-clamp-2 text-[13px] text-gray-400"
-          onClick={() => router.push(`/product/${product.code}`)}
+          onClick={() =>
+            router.push(`/products/${product.category}/${product.code}`)
+          }
         >
           {name}
         </p>
