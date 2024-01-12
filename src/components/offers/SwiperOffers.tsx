@@ -49,7 +49,9 @@ const SwiperOffers = () => {
             <SwiperSlide
               key={product.id}
               className="h-fit max-w-[140px]"
-              onClick={() => router.push(`/products/${product.code}`)}
+              onClick={() =>
+                router.push(`/products/${product.category}/${product.code}`)
+              }
             >
               <OffersItem
                 name={product.name}

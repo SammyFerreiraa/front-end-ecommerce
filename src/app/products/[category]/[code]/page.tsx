@@ -182,7 +182,7 @@ const Home = ({ params }: { params: { code: string } }) => {
             <ChevronRightIcon />
             <p
               className="cursor-pointer capitalize"
-              onClick={() => router.push(`/category/${product.category}`)}
+              onClick={() => router.push(`/products/${product.category}`)}
             >
               {product.category}
             </p>
@@ -623,7 +623,11 @@ const Home = ({ params }: { params: { code: string } }) => {
                     >
                       <div
                         className="flex h-fit max-w-[150px] cursor-pointer flex-col gap-2 rounded-md border-2 border-gray-300 bg-white px-3 pb-4 pt-2"
-                        onClick={() => router.push(`/products/${product.code}`)}
+                        onClick={() =>
+                          router.push(
+                            `/products/${product.category}/${product.code}`,
+                          )
+                        }
                       >
                         <img
                           src={product.image}

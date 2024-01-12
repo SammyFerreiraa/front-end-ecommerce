@@ -55,7 +55,9 @@ const ItemRecommended = ({
     <div className="cursor-pointer rounded-md border-[1px] border-gray-300 bg-white p-3">
       <div
         className="flex items-center justify-center p-3"
-        onClick={() => router.push(`/products/${product.code}`)}
+        onClick={() =>
+          router.push(`/products/${product.category}/${product.code}`)
+        }
       >
         <img src={image} alt="camisa" />
       </div>
@@ -63,7 +65,9 @@ const ItemRecommended = ({
         <div className="flex flex-row items-center justify-between">
           <div
             className="flex flex-col items-start justify-center gap-1"
-            onClick={() => router.push(`/products/${product.code}`)}
+            onClick={() =>
+              router.push(`/products/${product.category}/${product.code}`)
+            }
           >
             {product.offer && (
               <div className="flex flex-col items-start truncate">
@@ -119,7 +123,9 @@ const ItemRecommended = ({
         </div>
         <p
           className="line-clamp-2 text-[13px] text-gray-400"
-          onClick={() => router.push(`/products/${product.code}`)}
+          onClick={() =>
+            router.push(`/products/${product.category}/${product.code}`)
+          }
         >
           {name}
         </p>
