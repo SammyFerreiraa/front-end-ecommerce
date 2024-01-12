@@ -74,3 +74,20 @@
     @apply text-foreground;
   }
 }
+
+html ::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+html ::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+
+html ::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
