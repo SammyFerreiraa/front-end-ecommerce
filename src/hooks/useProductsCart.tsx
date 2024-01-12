@@ -43,7 +43,7 @@ export const useProductsCart = (
   const removeItemFromCart = (productCode: string) => {
     removeProduct(productCode)
     if (cart.products.length === 1) setEmpty(true)
-    toast.success('Item removido com sucesso!', {
+    toast.info('Produto removido com sucesso!', {
       pauseOnHover: false,
       theme: 'colored',
     })
@@ -145,7 +145,7 @@ export const useProductsCart = (
   // Adicionar aos favoritos
   const saveForLater = (code: string, product: ProductCartProps) => {
     if (favorites.products.find((p) => p.code === code)) {
-      toast.error('Ja foi adicionado aos favoritos', {
+      toast.info('Já foi adicionado aos favoritos', {
         pauseOnHover: false,
         theme: 'colored',
       })

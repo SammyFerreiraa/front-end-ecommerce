@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { LuHeartOff } from 'react-icons/lu'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const SavedForLater = () => {
   const router = useRouter()
@@ -30,6 +31,10 @@ const SavedForLater = () => {
       (product) => product.code !== code,
     )
     setFavorites({ ...favorites, products: newFavorites })
+    toast.info('Produto removido dos favoritos', {
+      pauseOnHover: false,
+      theme: 'colored',
+    })
 
     if (!session?.token) return
     const req = async () => {
@@ -46,10 +51,20 @@ const SavedForLater = () => {
   }
 
   const addToCart = (code: string, product: ProductProps) => {
-    if (cart.products.find((p) => p.code === code)) return
+    if (cart.products.find((p) => p.code === code)) {
+      toast.info('Já foi adicionado ao carrinho', {
+        pauseOnHover: false,
+        theme: 'colored',
+      })
+      return
+    }
     setCart({
       ...cart,
       products: [...cart.products, { ...product, code, quantity: 1 }],
+    })
+    toast.success('Produto adicionado ao carrinho', {
+      pauseOnHover: false,
+      theme: 'colored',
     })
 
     setEmpty(false)

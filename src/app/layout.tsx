@@ -28,13 +28,13 @@ export default function RootLayout({
             position="bottom-right"
             autoClose={4000}
             hideProgressBar={false}
-            newestOnTop={false}
+            newestOnTop={true}
             closeOnClick
             rtl={false}
             pauseOnFocusLoss
             draggable
-            pauseOnHover
-            theme="light"
+            pauseOnHover={false}
+            theme="colored"
           />
           <main className="relative flex min-h-screen flex-col">
             <Header />

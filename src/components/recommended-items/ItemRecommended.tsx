@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io'
+import { toast } from 'react-toastify'
 
 const ItemRecommended = ({
   name,
@@ -23,6 +24,10 @@ const ItemRecommended = ({
 
   const addFavorites = () => {
     addProduct(product)
+    toast.success('Adicionado aos favoritos', {
+      pauseOnHover: false,
+      theme: 'colored',
+    })
 
     const req = async () => {
       await axios.post(
@@ -38,6 +43,7 @@ const ItemRecommended = ({
 
   const removeFavorites = () => {
     removeProduct(product.code)
+    toast.info('Removido dos favoritos')
 
     const req = async () => {
       await axios.delete('http://localhost:3000/favorites', {
