@@ -31,10 +31,31 @@ import MobileMenu from '../menu-mobile/MobileMenu'
 import { usePathname, useRouter } from 'next/navigation'
 import CartHeaderDesktop from './CartHeaderDesktop'
 import FavoritesHeaderDesktop from './FavoritesHeaderDesktop'
+import { toast } from 'react-toastify'
 
 const Header = () => {
+  const [category, setCategory] = React.useState('')
+  const [textSearch, setTextSearch] = React.useState('')
   const router = useRouter()
   const pathname = usePathname()
+
+  const searchAction = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (textSearch === '') {
+      toast.error('Preencha o campo de pesquisa')
+      return
+    }
+    if (category === '') {
+      toast.error('Selecione uma categoria')
+      return
+    }
+    if (textSearch.length < 3) {
+      toast.error('Preencha pelo menos 3 caracteres')
+      return
+    }
+
+    router.push(`/search/${category}/${textSearch}`)
+  }
   return (
     <MaxWidthWrapper className="px-4 text-sm md:px-[50px] lg:px-12 xl:px-0">
       <div
@@ -53,26 +74,32 @@ const Header = () => {
             className="w-[116px] cursor-pointer"
           />
           {/* Search Desktop */}
-          <div className="hidden w-full flex-row md:flex">
+          <form className="hidden w-full flex-row md:flex">
             <input
               type="text"
               className="h-10 w-full rounded-l-md border-y-2 border-l-2 border-blue-600 bg-transparent px-4 py-2 text-black outline-none placeholder:text-gray-400"
               placeholder="Search"
+              onChange={(e) => setTextSearch(e.target.value)}
             />
-            <Select>
+            <Select onValueChange={(value) => setCategory(value)}>
               <SelectTrigger className="m-0 h-full w-fit rounded-none border-0 border-y-2 border-l-2 border-blue-600 pb-[9px] lg:min-w-[120px]">
                 <SelectValue placeholder="Categorias" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="roupas">Roupas</SelectItem>
                 <SelectItem value="tecnologia">Tecnologia</SelectItem>
-                <SelectItem value="Livros">Livros</SelectItem>
+                <SelectItem value="livros">Livros</SelectItem>
+                <SelectItem value="interior">Interior</SelectItem>
               </SelectContent>
             </Select>
-            <button className="w-fit rounded-r-md bg-blue-600 px-3 text-white hover:bg-blue-500 lg:min-w-[80px]">
+            <button
+              type="submit"
+              className="w-fit rounded-r-md bg-blue-600 px-3 text-white hover:bg-blue-500 lg:min-w-[80px]"
+              onClick={searchAction}
+            >
               Search
             </button>
-          </div>
+          </form>
         </div>
         {/* Nav Mobile  */}
         <div className="flex flex-row items-center gap-5 lg:hidden">
