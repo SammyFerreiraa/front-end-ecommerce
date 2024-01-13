@@ -23,6 +23,7 @@ import 'swiper/css/navigation'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { CheckIcon } from '@/components/icons'
+import { toast } from 'react-toastify'
 
 const Home = ({ params }: { params: { code: string } }) => {
   const { data: session } = useSession()
@@ -82,6 +83,7 @@ const Home = ({ params }: { params: { code: string } }) => {
 
     setFavorites({ ...favorites, products: newFavorites })
     setFavorite(false)
+    toast.info('Produto removido dos favoritos')
 
     if (!session?.token) return
     const req = async () => {
@@ -102,6 +104,7 @@ const Home = ({ params }: { params: { code: string } }) => {
     addProduct(product)
     setFavoritesEmpty(false)
     setFavorite(true)
+    toast.success('Produto adicionado aos favoritos!')
 
     if (!session?.token) return
     const req = async () => {
@@ -126,6 +129,8 @@ const Home = ({ params }: { params: { code: string } }) => {
     setInCart(true)
     setCartEmpty(false)
 
+    toast.success('Produto adicionado ao carrinho!')
+
     if (!session?.token) return
     const req = async () => {
       await axios.post(
@@ -146,6 +151,7 @@ const Home = ({ params }: { params: { code: string } }) => {
   const removeItemFromCart = (productCode: string) => {
     removeProduct(productCode)
     setInCart(false)
+    toast.info('Produto removido removido do carrinho!')
     if (cart.products.length === 1) setCartEmpty(true)
     if (!session?.token) return
     const req = async () => {

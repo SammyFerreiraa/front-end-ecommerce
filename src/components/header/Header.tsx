@@ -124,38 +124,59 @@ const Header = () => {
             className="mySwiper mt-4"
           >
             <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
+              <div
+                className="h-fit rounded-md bg-gray-100 p-2"
+                onClick={() => router.push('/products')}
+              >
                 <p className="h-fit text-center text-blue-600">Categorias</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">Acessorios</p>
+              <div
+                className="h-fit rounded-md bg-gray-100 p-2"
+                onClick={() => router.push('/products/tecnologia')}
+              >
+                <p className="h-fit text-center text-blue-600">Tecnologia</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">Joias</p>
+              <div
+                className="h-fit rounded-md bg-gray-100 p-2"
+                onClick={() => router.push('/products/interior')}
+              >
+                <p className="h-fit text-center text-blue-600">Interior</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">Tablets</p>
+              <div
+                className="h-fit rounded-md bg-gray-100 p-2"
+                onClick={() => router.push('/products/roupas')}
+              >
+                <p className="h-fit text-center text-blue-600">Roupas</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">Celulares</p>
+              <div
+                className="h-fit rounded-md bg-gray-100 p-2"
+                onClick={() => router.push('/products/livros')}
+              >
+                <p className="h-fit text-center text-blue-600">Livros</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">iPads</p>
+              <div
+                className="h-fit rounded-md bg-gray-100 p-2"
+                onClick={() => router.push('/products/esportes')}
+              >
+                <p className="h-fit text-center text-blue-600">Esportes</p>
               </div>
             </SwiperSlide>
             <SwiperSlide className="h-fit">
-              <div className="h-fit rounded-md bg-gray-100 p-2">
-                <p className="h-fit text-center text-blue-600">iPods</p>
+              <div
+                className="h-fit rounded-md bg-gray-100 p-2"
+                onClick={() => router.push('/products/ferramentas')}
+              >
+                <p className="h-fit text-center text-blue-600">Ferramentas</p>
               </div>
             </SwiperSlide>
           </Swiper>

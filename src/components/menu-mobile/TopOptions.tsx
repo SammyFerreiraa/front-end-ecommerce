@@ -32,10 +32,10 @@ const TopOptions = () => {
       </div>
       <div
         className={`flex w-full cursor-pointer items-center justify-start gap-4 rounded-md p-3 ${
-          pathname === '/categories' ? 'bg-gray-200' : ''
+          pathname === '/products' ? 'bg-gray-200' : ''
         }`}
         onClick={() => {
-          if (pathname !== '/categories') router.push('/categories')
+          if (pathname !== '/products') router.push('/products')
         }}
       >
         <svg

@@ -11,6 +11,7 @@ import { ProductProps } from '@/@types'
 import { LuHeartOff } from 'react-icons/lu'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const FavoritesProducts = () => {
   const router = useRouter()
@@ -47,6 +48,10 @@ const FavoritesProducts = () => {
       (product) => product.code !== code,
     )
     setFavorites({ ...favorites, products: newFavorites })
+    toast.info('Produto removido dos favoritos', {
+      pauseOnHover: false,
+      theme: 'colored',
+    })
 
     if (favorites.products.length === 1) setFavoritesEmpty(true)
 
@@ -65,10 +70,20 @@ const FavoritesProducts = () => {
   }
 
   const addToCart = (code: string, product: ProductProps) => {
-    if (cart.products.find((p) => p.code === code)) return
+    if (cart.products.find((p) => p.code === code)) {
+      toast.info('Já foi adicionado ao carrinho', {
+        pauseOnHover: false,
+        theme: 'colored',
+      })
+      return
+    }
     setCart({
       ...cart,
       products: [...cart.products, { ...product, code, quantity: 1 }],
+    })
+    toast.success('Produto adicionado ao carrinho', {
+      pauseOnHover: false,
+      theme: 'colored',
     })
 
     setFavoritesEmpty(false)
