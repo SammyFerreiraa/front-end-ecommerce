@@ -64,7 +64,9 @@ const Home = ({ params }: { params: { code: string } }) => {
         .post('http://localhost:3000/category', {
           category: product.category,
         })
-        .then((res) => setSimilares(res.data))
+        .then((res) =>
+          setSimilares(res.data.filter((p: ProductProps) => p.code !== code)),
+        )
     }
     fetchProduct()
 
