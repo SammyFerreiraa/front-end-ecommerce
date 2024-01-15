@@ -31,7 +31,7 @@ const Home = ({ params }: { params: { category: string; name: string } }) => {
 
   return (
     <MaxWidthWrapper className="flex flex-col items-center gap-3 pb-11 md:px-[50px] lg:px-12 xl:px-0">
-      <div className="w-full">
+      <div className="flex w-full flex-col gap-3 p-2.5 md:p-0">
         <div className="my-5 flex flex-row items-center justify-between">
           <h1 className="text-lg font-semibold text-gray-900">
             {
