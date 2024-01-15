@@ -26,7 +26,7 @@ export default function RootLayout({
         <body className={cn('relative h-full antialiased', inter.className)}>
           <ToastContainer
             position="bottom-right"
-            autoClose={4000}
+            autoClose={2000}
             hideProgressBar={false}
             newestOnTop={true}
             closeOnClick

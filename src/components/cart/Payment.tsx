@@ -29,7 +29,7 @@ const Payment = () => {
         <div className="flex flex-row items-center justify-center">
           <Input
             placeholder="Adicionar cupom"
-            className="rounded-r-none py-3 placeholder:text-gray-400"
+            className="rounded-r-none py-3 placeholder:text-gray-400 focus:border-gray-300 focus-visible:outline-0 focus-visible:ring-0"
           />
           <Button className="rounded-l-none border border-gray-300 bg-transparent text-blue-600 hover:bg-blue-600 hover:text-white">
             Aplicar
