@@ -129,14 +129,29 @@ const Header = () => {
           pathname === '/favorites' && 'hidden'
         } ${pathname === '/auth' && 'hidden'}`}
       >
-        <div className="flex h-10 w-full flex-row items-center gap-2 rounded-md bg-gray-100 px-2">
+        <form
+          className="flex h-10 w-full flex-row items-center gap-2 rounded-md bg-gray-100 pl-2"
+          onSubmit={searchAction}
+        >
           <SearchIcon />
           <input
             type="text"
             placeholder="Procurar"
             className="w-full appearance-none bg-transparent focus:outline-none focus:ring-0"
+            onChange={(e) => setTextSearch(e.target.value)}
           />
-        </div>
+          <Select onValueChange={(value) => setCategory(value)}>
+            <SelectTrigger className="m-0 h-full w-fit rounded-none border-none pb-[9px] shadow-none lg:min-w-[120px]">
+              <SelectValue placeholder="Categorias" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="roupas">Roupas</SelectItem>
+              <SelectItem value="tecnologia">Tecnologia</SelectItem>
+              <SelectItem value="livros">Livros</SelectItem>
+              <SelectItem value="interior">Interior</SelectItem>
+            </SelectContent>
+          </Select>
+        </form>
         <>
           <Swiper
             slidesPerView={3.1}

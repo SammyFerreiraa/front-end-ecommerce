@@ -88,6 +88,7 @@ const Home = () => {
                   name="email"
                   id="email"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
+                  autoComplete="off"
                 />
               </div>
               <div className="flex flex-col gap-3">

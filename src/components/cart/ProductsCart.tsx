@@ -281,8 +281,9 @@ const ProductsCart = () => {
                     </p>
                     <p className="font-semibold text-green-600">
                       {(
-                        Number(product.price) -
-                        Number(product.price) * Number(product.discount)
+                        (Number(product.price) -
+                          Number(product.price) * Number(product.discount)) *
+                        product.quantity
                       ).toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
