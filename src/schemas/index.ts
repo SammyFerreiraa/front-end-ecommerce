@@ -1,0 +1,1 @@
+export { schemaFormRegister } from './SchemaFormRegister'
