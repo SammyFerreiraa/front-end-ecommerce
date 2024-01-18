@@ -1,1 +1,2 @@
-export { schemaFormRegister } from './SchemaFormRegister'
+export { schemaFormRegister } from './schemaFormRegister'
+export { schemaFormLogin } from './schemaFormLogin'
