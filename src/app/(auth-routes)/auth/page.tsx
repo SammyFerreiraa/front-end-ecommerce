@@ -4,38 +4,14 @@ import { MaxWidthWrapper } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { signIn } from 'next-auth/react'
-import React, { useCallback, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 
 const Home = () => {
-  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
 
-  const login = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault()
-      const res = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
-      })
-      if (res?.error) {
-        return
-      }
-      window.location.href = '/'
-    },
-    [email, password],
-  )
-
-  const [variant, setVariant] = useState('login')
-
-  const toggleVariant = useCallback(() => {
-    setVariant((currentVariant) =>
-      currentVariant === 'login' ? 'register' : 'login',
-    )
-  }, [setVariant])
+  const router = useRouter()
 
   return (
     <MaxWidthWrapper>
@@ -45,34 +21,15 @@ const Home = () => {
             {/* Cabeçalho */}
             <div className="mb-7 flex w-full flex-col items-start justify-center">
               <p className="text-base font-medium text-gray-900">
-                {variant === 'login' ? 'Bem vindo de volta' : 'Bem vindo'}
+                Bem vindo de volta
               </p>
               <h1 className="text-2xl font-semibold text-gray-900">
-                {variant === 'login' ? 'Acesse sua conta' : 'Crie sua conta'}
+                Acesse sua conta
               </h1>
             </div>
 
             {/* Formulário */}
             <form className="mb-6 flex flex-col gap-5">
-              {variant === 'register' && (
-                <div className="flex flex-col gap-3">
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-normal text-gray-900"
-                  >
-                    Name
-                  </label>
-                  <Input
-                    type="text"
-                    value={name}
-                    placeholder="Seu Nome"
-                    onChange={(e) => setName(e.target.value)}
-                    name="name"
-                    id="name"
-                    className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
-                  />
-                </div>
-              )}
               <div className="flex flex-col gap-3">
                 <label
                   htmlFor="email"
@@ -109,26 +66,6 @@ const Home = () => {
                   autoComplete="off"
                 />
               </div>
-              {variant === 'register' && (
-                <div className="flex flex-col gap-3">
-                  <label
-                    htmlFor="confirmPassword"
-                    className="text-sm font-normal text-gray-900"
-                  >
-                    Confirmar Senha
-                  </label>
-                  <Input
-                    type="text"
-                    value={confirmPassword}
-                    placeholder="0123456789"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
-                    autoComplete="off"
-                  />
-                </div>
-              )}
             </form>
             <div className="mb-8 flex w-full flex-row items-center justify-between">
               <div className="flex flex-row items-center justify-between gap-2">
@@ -141,11 +78,8 @@ const Home = () => {
                 Esqueceu sua senha?
               </p>
             </div>
-            <Button
-              onClick={login}
-              className="mb-6 h-auto w-full bg-blue-500 px-8 py-3 hover:bg-blue-600"
-            >
-              {variant === 'login' ? 'Entrar' : 'Cadastrar'}
+            <Button className="mb-6 h-auto w-full bg-blue-500 px-8 py-3 hover:bg-blue-600">
+              Entrar
             </Button>
             <Button className=" mb-10 flex h-auto w-full flex-row gap-3 bg-gray-900 px-8 py-3 hover:bg-gray-950">
               <img
@@ -159,10 +93,12 @@ const Home = () => {
               <p className="text-base font-medium text-gray-900">
                 Não tem conta?{' '}
                 <span
-                  onClick={toggleVariant}
                   className="cursor-pointer text-base font-medium text-emerald-600"
+                  onClick={() => {
+                    router.push('/auth/register')
+                  }}
                 >
-                  {variant === 'login' ? 'Crie uma conta' : 'Entrar'}
+                  Crie sua conta
                 </span>
               </p>
             </div>

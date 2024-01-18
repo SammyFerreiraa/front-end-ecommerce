@@ -3,6 +3,7 @@
 import { MaxWidthWrapper } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 const Home = () => {
@@ -10,6 +11,8 @@ const Home = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+
+  const router = useRouter()
 
   return (
     <MaxWidthWrapper>
@@ -115,7 +118,10 @@ const Home = () => {
             <div className="w-full text-center">
               <p className="text-base font-medium text-gray-900">
                 Já tem conta?{' '}
-                <span className="cursor-pointer text-base font-medium text-emerald-600">
+                <span
+                  className="cursor-pointer text-base font-medium text-emerald-600"
+                  onClick={() => router.push('/auth')}
+                >
                   Entrar
                 </span>
               </p>
