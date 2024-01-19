@@ -3,17 +3,39 @@
 import { MaxWidthWrapper } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { schemaFormRegister } from '@/schemas'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { formRegisterProps } from '@/@types'
 
 const Home = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-
   const router = useRouter()
 
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<formRegisterProps>({
+    criteriaMode: 'all',
+    mode: 'all',
+    resolver: zodResolver(schemaFormRegister),
+    defaultValues: {
+      credentials: {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      },
+    },
+  })
+
+  const handleFormSubmit = (data: formRegisterProps) => {
+    console.log(data)
+  }
+
+  console.log(errors)
   return (
     <MaxWidthWrapper>
       <div className="flex items-center justify-center px-6 py-12">
@@ -28,57 +50,60 @@ const Home = () => {
             </div>
 
             {/* Formulário */}
-            <form className="mb-6 flex flex-col gap-5">
+            <form
+              id="register"
+              className="mb-6 flex flex-col gap-5"
+              onSubmit={handleSubmit(handleFormSubmit)}
+            >
               <div className="flex flex-col gap-3">
                 <label
-                  htmlFor="name"
                   className="text-sm font-normal text-gray-900"
+                  htmlFor="credentials.name"
                 >
                   Nome
                 </label>
                 <Input
+                  {...register('credentials.name')}
                   type="text"
-                  value={name}
+                  name="credentials.name"
                   placeholder="Seu Nome"
-                  onChange={(e) => setName(e.target.value)}
-                  name="name"
-                  id="name"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
                 />
+                {errors.credentials?.name?.message && (
+                  <p className="text-red-500">
+                    {errors.credentials?.name?.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col gap-3">
                 <label
-                  htmlFor="email"
                   className="text-sm font-normal text-gray-900"
+                  htmlFor="credentials.email"
                 >
                   Email
                 </label>
                 <Input
+                  {...register('credentials.email')}
                   type="text"
-                  value={email}
+                  name="credentials.email"
                   placeholder="exemplo@gmail.com"
-                  onChange={(e) => setEmail(e.target.value)}
-                  name="email"
-                  id="email"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
                   autoComplete="off"
                 />
               </div>
               <div className="flex flex-col gap-3">
                 <label
-                  htmlFor="email"
                   className="text-sm font-normal text-gray-900"
+                  htmlFor="credentials.password"
                 >
                   Senha
                 </label>
                 <Input
+                  {...register('credentials.password')}
                   type="password"
-                  value={password}
+                  name="credentials.password"
                   placeholder="0123456789"
-                  onChange={(e) => setPassword(e.target.value)}
-                  name="password"
-                  id="password"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
                   autoComplete="off"
                 />
@@ -86,25 +111,26 @@ const Home = () => {
 
               <div className="flex flex-col gap-3">
                 <label
-                  htmlFor="confirmPassword"
+                  htmlFor="credentials.confirmPassword"
                   className="text-sm font-normal text-gray-900"
                 >
                   Confirmar Senha
                 </label>
                 <Input
-                  type="text"
-                  value={confirmPassword}
+                  {...register('credentials.confirmPassword')}
+                  type="password"
+                  name="credentials.confirmPassword"
                   placeholder="0123456789"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  name="confirmPassword"
-                  id="confirmPassword"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
                   autoComplete="off"
                 />
               </div>
             </form>
 
-            <Button className="mb-6 h-auto w-full bg-blue-500 px-8 py-3 hover:bg-blue-600">
+            <Button
+              className="mb-6 h-auto w-full bg-blue-500 px-8 py-3 hover:bg-blue-600"
+              form="register"
+            >
               Cadastrar
             </Button>
             <Button className=" mb-10 flex h-auto w-full flex-row gap-3 bg-gray-900 px-8 py-3 hover:bg-gray-950">
