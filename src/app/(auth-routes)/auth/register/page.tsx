@@ -67,10 +67,12 @@ const Home = () => {
                   type="text"
                   name="credentials.name"
                   placeholder="Seu Nome"
-                  className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
+                  className={`border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500 ${
+                    errors.credentials?.name ? 'border-red-500' : ''
+                  }`}
                 />
                 {errors.credentials?.name?.message && (
-                  <p className="text-red-500">
+                  <p className="text-xs text-red-500 ">
                     {errors.credentials?.name?.message}
                   </p>
                 )}
@@ -88,9 +90,16 @@ const Home = () => {
                   type="text"
                   name="credentials.email"
                   placeholder="exemplo@gmail.com"
-                  className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
+                  className={`border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500 ${
+                    errors.credentials?.email ? 'border-red-500' : ''
+                  }`}
                   autoComplete="off"
                 />
+                {errors.credentials?.email?.message && (
+                  <p className="text-xs text-red-500 ">
+                    {errors.credentials?.email?.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-3">
                 <label
@@ -104,9 +113,16 @@ const Home = () => {
                   type="password"
                   name="credentials.password"
                   placeholder="0123456789"
-                  className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
+                  className={`border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500 ${
+                    errors.credentials?.password ? 'border-red-500' : ''
+                  }`}
                   autoComplete="off"
                 />
+                {errors.credentials?.password?.message && (
+                  <p className="text-xs text-red-500 ">
+                    {errors.credentials?.password?.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col gap-3">
@@ -121,9 +137,16 @@ const Home = () => {
                   type="password"
                   name="credentials.confirmPassword"
                   placeholder="0123456789"
-                  className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
+                  className={`border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500 ${
+                    errors.credentials?.confirmPassword ? 'border-red-500' : ''
+                  }`}
                   autoComplete="off"
                 />
+                {errors.credentials?.confirmPassword?.message && (
+                  <p className="text-xs text-red-500 ">
+                    {errors.credentials?.confirmPassword?.message}
+                  </p>
+                )}
               </div>
             </form>
 
