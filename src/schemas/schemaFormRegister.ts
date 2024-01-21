@@ -19,15 +19,7 @@ export const schemaFormRegister = z.object({
             message: 'O email deve ter o domínio @gmail.com',
           },
         ),
-      password: z
-        .string()
-        .min(8, 'A senha deve ter pelo menos 8 caracteres')
-        .refine((value) => /[A-Z]/.test(value), {
-          message: 'A senha deve conter pelo menos uma letra maiúscula',
-        })
-        .refine((value) => /[^a-zA-Z0-9]/.test(value), {
-          message: 'A senha deve conter pelo menos um caractere especial',
-        }),
+      password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres'),
       confirmPassword: z.string(),
     })
     .refine((fields) => fields.password === fields.confirmPassword, {
