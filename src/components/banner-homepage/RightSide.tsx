@@ -29,7 +29,7 @@ const RightSide = ({ name }: RightSideProps) => {
             </Button>
             <Button
               onClick={() => {
-                window.location.href = '/auth'
+                window.location.href = '/auth/register'
               }}
               className="w-full rounded-md bg-white py-2 text-blue-600 hover:bg-blue-600  hover:text-white"
             >

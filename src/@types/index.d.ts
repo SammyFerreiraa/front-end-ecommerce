@@ -1,3 +1,6 @@
+import { schemaFormLogin, schemaFormRegister } from '@/schemas'
+import { z } from 'zod'
+
 export type MaxWidthWrapperProps = {
   className?: string
   children: React.ReactNode
@@ -71,3 +74,14 @@ declare module 'next-auth' {
     user: userProps
   }
 }
+
+type errorProps = {
+  response: {
+    data: {
+      message: string
+    }
+  }
+}
+
+export type formLoginProps = z.infer<typeof schemaFormLogin>
+export type formRegisterProps = z.infer<typeof schemaFormRegister>
