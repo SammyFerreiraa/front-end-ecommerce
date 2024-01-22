@@ -9,6 +9,16 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { formRegisterProps } from '@/@types'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+
+type errorProps = {
+  response: {
+    data: {
+      message: string
+    }
+  }
+}
 
 const Home = () => {
   const router = useRouter()
@@ -32,10 +42,32 @@ const Home = () => {
   })
 
   const handleFormSubmit = (data: formRegisterProps) => {
-    console.log(data)
+    const register = async () => {
+      try {
+        await axios
+          .post('http://localhost:3000/users', {
+            name: data.credentials.name,
+            email: data.credentials.email,
+            password: data.credentials.password,
+          })
+          .then((res) => {
+            if (res.status === 201) {
+              toast.success('Conta criada com sucesso')
+              router.push('/auth')
+            }
+            console.log(res)
+          })
+      } catch (error) {
+        if (
+          (error as errorProps).response.data.message === 'Email already exists'
+        ) {
+          toast.error('Email já cadastrado')
+        }
+      }
+    }
+    register()
   }
 
-  console.log(errors)
   return (
     <MaxWidthWrapper>
       <div className="flex items-center justify-center px-6 py-12">
