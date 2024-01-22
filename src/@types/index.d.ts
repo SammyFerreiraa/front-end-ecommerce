@@ -75,5 +75,13 @@ declare module 'next-auth' {
   }
 }
 
+type errorProps = {
+  response: {
+    data: {
+      message: string
+    }
+  }
+}
+
 export type formLoginProps = z.infer<typeof schemaFormLogin>
 export type formRegisterProps = z.infer<typeof schemaFormRegister>

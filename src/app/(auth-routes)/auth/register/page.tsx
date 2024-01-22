@@ -8,17 +8,9 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { formRegisterProps } from '@/@types'
+import { formRegisterProps, errorProps } from '@/@types'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-
-type errorProps = {
-  response: {
-    data: {
-      message: string
-    }
-  }
-}
 
 const Home = () => {
   const router = useRouter()
