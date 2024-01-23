@@ -4,7 +4,7 @@ import { MaxWidthWrapper } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { useLoginUser } from '@/hooks/useLoginUser'
+import { useLoginUser } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
