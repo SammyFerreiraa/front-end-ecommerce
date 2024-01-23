@@ -39,7 +39,6 @@ export const useRegisterUser = () => {
               toast.success('Conta criada com sucesso')
               router.push('/auth')
             }
-            console.log(res)
           })
       } catch (error) {
         if (
