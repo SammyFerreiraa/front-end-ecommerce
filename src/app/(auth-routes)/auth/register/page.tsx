@@ -3,62 +3,13 @@
 import { MaxWidthWrapper } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { schemaFormRegister } from '@/schemas'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { formRegisterProps, errorProps } from '@/@types'
-import axios from 'axios'
-import { toast } from 'react-toastify'
+import { useRegisterUser } from '@/hooks'
 
 const Home = () => {
   const router = useRouter()
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<formRegisterProps>({
-    criteriaMode: 'all',
-    mode: 'all',
-    resolver: zodResolver(schemaFormRegister),
-    defaultValues: {
-      credentials: {
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-      },
-    },
-  })
-
-  const handleFormSubmit = (data: formRegisterProps) => {
-    const register = async () => {
-      try {
-        await axios
-          .post('http://localhost:3000/users', {
-            name: data.credentials.name,
-            email: data.credentials.email,
-            password: data.credentials.password,
-          })
-          .then((res) => {
-            if (res.status === 201) {
-              toast.success('Conta criada com sucesso')
-              router.push('/auth')
-            }
-            console.log(res)
-          })
-      } catch (error) {
-        if (
-          (error as errorProps).response.data.message === 'Email already exists'
-        ) {
-          toast.error('Email já cadastrado')
-        }
-      }
-    }
-    register()
-  }
+  const { register, handleSubmit, errors, handleFormSubmit } = useRegisterUser()
 
   return (
     <MaxWidthWrapper>
