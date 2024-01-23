@@ -42,7 +42,8 @@ export const useRegisterUser = () => {
           })
       } catch (error) {
         if (
-          (error as errorProps).response.data.message === 'Email already exists'
+          (error as errorProps).response?.data?.message ===
+          'Email already exists'
         ) {
           toast.error('Email já cadastrado')
         }
