@@ -45,6 +45,7 @@ const Home = () => {
                   className={`border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500 ${
                     errors.credentials?.name ? 'border-red-500' : ''
                   }`}
+                  autoComplete="off"
                 />
                 {errors.credentials?.name?.message && (
                   <p className="text-xs text-red-500 ">
