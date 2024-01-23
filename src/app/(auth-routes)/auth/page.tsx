@@ -4,14 +4,13 @@ import { MaxWidthWrapper } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
+import { useLoginUser } from '@/hooks/useLoginUser'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React from 'react'
 
 const Home = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
   const router = useRouter()
+  const { register, handleFormSubmit, handleSubmit } = useLoginUser()
 
   return (
     <MaxWidthWrapper>
@@ -29,39 +28,39 @@ const Home = () => {
             </div>
 
             {/* Formulário */}
-            <form className="mb-6 flex flex-col gap-5">
+            <form
+              className="mb-6 flex flex-col gap-5"
+              id="login"
+              onSubmit={handleSubmit(handleFormSubmit)}
+            >
               <div className="flex flex-col gap-3">
                 <label
-                  htmlFor="email"
+                  htmlFor="credentials.email"
                   className="text-sm font-normal text-gray-900"
                 >
                   Email
                 </label>
                 <Input
+                  {...register('credentials.email')}
                   type="text"
-                  value={email}
                   placeholder="exemplo@gmail.com"
-                  onChange={(e) => setEmail(e.target.value)}
-                  name="email"
-                  id="email"
+                  name="credentials.email"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
                   autoComplete="off"
                 />
               </div>
               <div className="flex flex-col gap-3">
                 <label
-                  htmlFor="email"
+                  htmlFor="credentials.email"
                   className="text-sm font-normal text-gray-900"
                 >
                   Senha
                 </label>
                 <Input
+                  {...register('credentials.password')}
                   type="password"
-                  value={password}
                   placeholder="0123456789"
-                  onChange={(e) => setPassword(e.target.value)}
-                  name="password"
-                  id="password"
+                  name="credentials.password"
                   className="border-gray-200 bg-slate-50 p-4 placeholder:text-neutral-500"
                   autoComplete="off"
                 />
@@ -78,7 +77,10 @@ const Home = () => {
                 Esqueceu sua senha?
               </p>
             </div>
-            <Button className="mb-6 h-auto w-full bg-blue-500 px-8 py-3 hover:bg-blue-600">
+            <Button
+              className="mb-6 h-auto w-full bg-blue-500 px-8 py-3 hover:bg-blue-600"
+              form="login"
+            >
               Entrar
             </Button>
             <Button className=" mb-10 flex h-auto w-full flex-row gap-3 bg-gray-900 px-8 py-3 hover:bg-gray-950">
