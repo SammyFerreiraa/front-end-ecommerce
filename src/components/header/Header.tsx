@@ -127,7 +127,9 @@ const Header = () => {
       <div
         className={`mb-5 px-2 md:hidden ${pathname === '/cart' && 'hidden'}  ${
           pathname === '/favorites' && 'hidden'
-        } ${pathname === '/auth' && 'hidden'}`}
+        } ${pathname === '/auth' && 'hidden'} ${
+          pathname === '/auth/register' && 'hidden'
+        }`}
       >
         <form
           className="flex h-10 w-full flex-row items-center gap-2 rounded-md bg-gray-100 pl-2"
