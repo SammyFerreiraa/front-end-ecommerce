@@ -21,7 +21,8 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      await axios.get('http://localhost:3000/products').then((response) => {
+      const url = process.env.NEXT_PUBLIC_PRODUCTS || ''
+      await axios.get(url).then((response) => {
         setProducts(response.data)
       })
     }

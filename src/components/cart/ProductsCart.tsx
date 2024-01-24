@@ -51,8 +51,9 @@ const ProductsCart = () => {
     const fetchData = async () => {
       try {
         if (!session?.token) return
+        const urlProfile = process.env.NEXT_PUBLIC_PROFILE || ''
         await axios
-          .get('http://localhost:3000/profile', {
+          .get(urlProfile, {
             headers: {
               Authorization: `Bearer ${session?.token}`,
             },

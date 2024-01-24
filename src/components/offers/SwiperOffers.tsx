@@ -21,8 +21,9 @@ const SwiperOffers = () => {
   ])
 
   useEffect(() => {
+    const urlProducts = process.env.NEXT_PUBLIC_PRODUCTS || ''
     const fetchData = async () => {
-      const res = await axios.get('http://localhost:3000/products')
+      const res = await axios.get(urlProducts)
       const data = res.data
       await setProducts(data)
     }

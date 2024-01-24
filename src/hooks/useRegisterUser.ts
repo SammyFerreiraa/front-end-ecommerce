@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 export const useRegisterUser = () => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL || ''
+
   const {
     handleSubmit,
     register,
@@ -29,7 +31,7 @@ export const useRegisterUser = () => {
     const register = async () => {
       try {
         await axios
-          .post('http://localhost:3000/users', {
+          .post(`${url}/users`, {
             name: data.credentials.name,
             email: data.credentials.email,
             password: data.credentials.password,

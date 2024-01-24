@@ -26,6 +26,8 @@ const SavedForLater = () => {
     state.setEmpty,
   ])
 
+  const url = process.env.NEXT_PUBLIC_BASE_URL || ''
+
   const removeToSaved = (code: string) => {
     const newFavorites = favorites.products.filter(
       (product) => product.code !== code,
@@ -38,7 +40,8 @@ const SavedForLater = () => {
 
     if (!session?.token) return
     const req = async () => {
-      await axios.delete(`http://localhost:3000/favorites`, {
+      const urlFavorites = process.env.NEXT_PUBLIC_FAVORITES || ''
+      await axios.delete(urlFavorites, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
         },
@@ -72,7 +75,7 @@ const SavedForLater = () => {
     if (!session?.token) return
     const req = async () => {
       await axios.post(
-        `http://localhost:3000/cart`,
+        `${url}/cart`,
         {
           productCode: code,
         },

@@ -50,18 +50,17 @@ const Home = ({ params }: { params: { code: string } }) => {
     state.setCart,
     state.removeProduct,
   ])
+  const url = process.env.NEXT_PUBLIC_BASE_URL || ''
 
   useEffect(() => {
     const fetchProduct = async () => {
-      await axios
-        .post('http://localhost:3000/products', { code })
-        .then((response) => {
-          setProduct(response.data)
-        })
+      await axios.post(`${url}/products`, { code }).then((response) => {
+        setProduct(response.data)
+      })
 
       if (!product.category) return
       await axios
-        .post('http://localhost:3000/category', {
+        .post(`${url}/category`, {
           category: product.category,
         })
         .then((res) =>
@@ -76,7 +75,7 @@ const Home = ({ params }: { params: { code: string } }) => {
     if (cart.products.some((item) => item.code === code)) {
       setInCart(true)
     }
-  }, [code, product.category, favorites.products, cart.products])
+  }, [code, product.category, favorites.products, cart.products, url])
 
   const removeToFavorites = (code: string) => {
     const newFavorites = favorites.products.filter(
@@ -89,7 +88,8 @@ const Home = ({ params }: { params: { code: string } }) => {
 
     if (!session?.token) return
     const req = async () => {
-      await axios.delete(`http://localhost:3000/favorites`, {
+      const urlFavorites = process.env.NEXT_PUBLIC_FAVORITES || ''
+      await axios.delete(urlFavorites, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
         },
@@ -111,7 +111,7 @@ const Home = ({ params }: { params: { code: string } }) => {
     if (!session?.token) return
     const req = async () => {
       await axios.post(
-        'http://localhost:3000/favorites',
+        `${url}/favorites`,
         {
           productCode: product.code,
         },
@@ -136,7 +136,7 @@ const Home = ({ params }: { params: { code: string } }) => {
     if (!session?.token) return
     const req = async () => {
       await axios.post(
-        `http://localhost:3000/cart`,
+        `${url}/cart`,
         {
           productCode: code,
         },
@@ -157,7 +157,7 @@ const Home = ({ params }: { params: { code: string } }) => {
     if (cart.products.length === 1) setCartEmpty(true)
     if (!session?.token) return
     const req = async () => {
-      await axios.delete(`http://localhost:3000/cart/remove/item`, {
+      await axios.delete(`${url}/cart/remove/item`, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
         },

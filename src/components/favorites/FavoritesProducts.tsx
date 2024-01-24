@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 const FavoritesProducts = () => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL || ''
   const router = useRouter()
   const { data: session } = useSession()
   const [cart, setCart] = useCart((state) => [state.cart, state.setCart])
@@ -28,8 +29,9 @@ const FavoritesProducts = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       if (!session?.token) return
+      const urlProfile = process.env.NEXT_PUBLIC_PROFILE || ''
       await axios
-        .get('http://localhost:3000/profile', {
+        .get(urlProfile, {
           headers: {
             Authorization: `Bearer ${session?.token}`,
           },
@@ -57,7 +59,7 @@ const FavoritesProducts = () => {
 
     if (!session?.token) return
     const req = async () => {
-      await axios.delete(`http://localhost:3000/favorites`, {
+      await axios.delete(`${url}/favorites`, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
         },
@@ -91,7 +93,7 @@ const FavoritesProducts = () => {
     if (!session?.token) return
     const req = async () => {
       await axios.post(
-        `http://localhost:3000/cart`,
+        `${url}/cart`,
         {
           productCode: code,
         },

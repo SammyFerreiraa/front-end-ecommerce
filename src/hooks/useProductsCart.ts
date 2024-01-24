@@ -18,13 +18,14 @@ export const useProductsCart = (
   addProduct: (product: ProductProps) => void,
   setFavoritesEmpty: (favoritesEmpty: boolean) => void,
 ) => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL || ''
   // mudar quantidade de um item do carrinho
   const changeQuantity = (productCode: string, quantity: number) => {
     setQuantity(productCode, quantity)
     if (!token) return
     const req = async () => {
       await axios.post(
-        `http://localhost:3000/cart/update/quantity`,
+        `${url}/cart/update/quantity`,
         {
           quantity,
           productCode,
@@ -49,7 +50,7 @@ export const useProductsCart = (
     })
     if (!token) return
     const req = async () => {
-      await axios.delete(`http://localhost:3000/cart/remove/item`, {
+      await axios.delete(`${url}/cart/remove/item`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +75,7 @@ export const useProductsCart = (
 
     if (!token) return
     const req = async () => {
-      await axios.delete(`http://localhost:3000/cart/remove`, {
+      await axios.delete(`${url}/cart/remove`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -99,7 +100,7 @@ export const useProductsCart = (
 
       const req = async () => {
         await axios.post(
-          `http://localhost:3000/cart/update/quantity`,
+          `${url}/cart/update/quantity`,
           {
             quantity:
               (cart.products.find((p) => p.code === productCode)?.quantity ??
@@ -130,7 +131,7 @@ export const useProductsCart = (
     })
 
     const req = async () => {
-      await axios.delete(`http://localhost:3000/cart`, {
+      await axios.delete(`${url}/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -167,7 +168,7 @@ export const useProductsCart = (
     if (!token) return
     const req = async () => {
       await axios.post(
-        `http://localhost:3000/favorites`,
+        `${url}/favorites`,
         {
           favoriteId: favorites.id,
           productCode: code,

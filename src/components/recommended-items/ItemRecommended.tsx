@@ -30,8 +30,9 @@ const ItemRecommended = ({
     })
 
     const req = async () => {
+      const url = process.env.NEXT_PUBLIC_FAVORITES || ''
       await axios.post(
-        'http://localhost:3000/favorites',
+        url,
         {
           productCode: product.code,
         },
@@ -45,8 +46,9 @@ const ItemRecommended = ({
     removeProduct(product.code)
     toast.info('Removido dos favoritos')
 
+    const urlFavorites = process.env.NEXT_PUBLIC_FAVORITES || ''
     const req = async () => {
-      await axios.delete('http://localhost:3000/favorites', {
+      await axios.delete(urlFavorites, {
         headers: {
           Authorization: `Bearer ${session?.token}`,
         },

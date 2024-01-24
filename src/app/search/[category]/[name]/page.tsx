@@ -14,8 +14,9 @@ const Home = ({ params }: { params: { category: string; name: string } }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      const urlCategory = process.env.NEXT_PUBLIC_CATEGORY || ''
       await axios
-        .post('http://localhost:3000/category', {
+        .post(urlCategory, {
           category,
         })
         .then((response) => {
