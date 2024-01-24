@@ -1,6 +1,6 @@
 import React from 'react'
 import { getServerSession } from 'next-auth'
-import { nextAuthOption } from '@/app/api/auth/[...nextauth]/route'
+import { nextAuthOption } from '@/app/api/auth/[...nextauth]/auth'
 import RightSide from './RightSide'
 
 const HomepageBanner = async () => {
